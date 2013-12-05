@@ -17,7 +17,7 @@ namespace Pixie1.Actors
         public RandomWanderBehavior Wandering;
 
         protected string[] attackString = new string[] { "Take this, golden villain!", "We hurt him!", "He bleeds!", "Our swords struck true!",
-            "He bleeds!", "To the grave, golden traitor!", "Die, golden scum!" , "He stumbles!"};
+            "He's dying!", "To the grave, traitor!", "Die, golden scum!" , "He stumbles!"};
 
         public static RedGuard Create()
         {
@@ -94,7 +94,7 @@ namespace Pixie1.Actors
                 {
                     if (Level.Current.Subtitles.Children.Count <= 4)
                     {
-                        Level.Current.Subtitles.Show(3, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
+                        Level.Current.Subtitles.Show(3, "(Red:) " + attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
                         Level.Current.pixie.Health -= RandomMath.RandomBetween(1f, 3f);
                     }
                 }
