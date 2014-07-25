@@ -43,7 +43,7 @@ namespace Pixie1
                 return BackgroundColor;
             }
             Color[] data = new Color[1];
-            Texture.GetData<Color>(0, new Rectangle((int)Math.Round(pos.X), (int)Math.Round(pos.Y), 1, 1), data, 0, 1);
+            //XYZTexture.GetData<Color>(0, new Rectangle((int)Math.Round(pos.X), (int)Math.Round(pos.Y), 1, 1), data, 0, 1);
             return data[0];
         }
 

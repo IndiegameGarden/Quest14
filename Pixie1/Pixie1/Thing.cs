@@ -412,7 +412,7 @@ namespace Pixie1
                 return true;
             int N = bgSampleRect.Width * bgSampleRect.Height;
             Color[] bgTextureData = new Color[N];
-            bg.Texture.GetData<Color>(0, bgSampleRect, bgTextureData, 0, N);
+            //XYZbg.Texture.GetData<Color>(0, bgSampleRect, bgTextureData, 0, N);
             return IntersectPixelsBg(thingRect, textureData, bgSampleRect, bgTextureData);
         }
 
