@@ -42,7 +42,6 @@ namespace Pixie1
             {
                 return BackgroundColor;
             }
-            Color[] data = new Color[1];
             int x = (int)Math.Round(pos.X);
             int y = (int)Math.Round(pos.Y);
             return textureData[x + y * Texture.Width];

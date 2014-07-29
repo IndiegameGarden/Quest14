@@ -62,12 +62,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ductia.ogg">
-      <Name>ductia</Name>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Level1.png">
       <Name>Level1</Name>
       <Importer>TextureImporter</Importer>
@@ -135,6 +129,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="quest14_medley.ogg">
+      <Name>quest14_medley</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
