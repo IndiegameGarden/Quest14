@@ -162,13 +162,12 @@ namespace Pixie1.Levels
             t.AddText("The princess was taken into Red's Keep.", 5f);
             t.AddText("Get her out, valiant knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows / WASD = move, SPACE = Companion's attack, X = Use Spell", 5f);
+            t.AddText("Arrows / WASD = move, SPACE = Companion's attack, X = Use Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by Indiegame Garden (IndiegameGarden.com)", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
-            t.AddText("Music by you-may-know-who (guess!)", 4f);
+            t.AddText("Music by Friar John the Luitist", 4f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 4f);
-            t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013 (fmod.org)", 4f);
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
