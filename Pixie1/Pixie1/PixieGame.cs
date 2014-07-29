@@ -34,7 +34,10 @@ namespace Pixie1
         {
             instance = this;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = false;// true;
+            graphics.IsFullScreen = false;
+            myWindowWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            myWindowHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            Window.IsBorderless = true;
             graphics.PreferredBackBufferHeight = myWindowHeight;
             graphics.PreferredBackBufferWidth = myWindowWidth;
             Content.RootDirectory = "Content";
