@@ -53,13 +53,24 @@ namespace Pixie1.Behaviors
             if (Avoidance)
                 dif = -dif;
 
-            // choose one direction semi-randomly, if diagonals would be required
+            // choose one direction 1) based on whats free, then 2) semi-randomly, if diagonals would be required
             if (dif.X != 0f && dif.Y != 0f)
             {
+                // 1) whats-free
+                bool isXfree = !ParentThing.CollidesWithSomething(new Vector2(dif.X, 0f));
+                bool isYfree = !ParentThing.CollidesWithSomething(new Vector2(0f, dif.Y));
+
+                // 2) semi-random
                 float r = RandomMath.RandomUnit();
                 // the larger dif.X wrt dif.Y, the smaller the probability of moving in the Y direction
-                float thres = Math.Abs(dif.X) / (Math.Abs(dif.X) + Math.Abs(dif.Y));
-                if (r > thres)
+                float thres = 0.5f; // Math.Abs(dif.X) / (Math.Abs(dif.X) + Math.Abs(dif.Y));
+                if (r > thres && isYfree)
+                    dif.X = 0f;
+                else if (isXfree)
+                    dif.Y = 0f;
+                else if (isYfree)
+                    dif.X = 0f;
+                else if (r > thres)
                     dif.X = 0f;
                 else
                     dif.Y = 0f;
