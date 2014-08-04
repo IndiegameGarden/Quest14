@@ -24,8 +24,8 @@ namespace Pixie1
         public Gamelet TreeRoot;
         private static PixieGame instance = null;
         GraphicsDeviceManager graphics;
-        int myWindowWidth = 1024;
-        int myWindowHeight = 768; 
+        int myWindowWidth;
+        int myWindowHeight; 
         PixieScreenlet mainScreenlet;
         MusicEngine musicEngine;
         Level level;

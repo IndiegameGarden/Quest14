@@ -13,6 +13,7 @@ namespace Pixie1.Behaviors
         public float timePeriodR, timePeriodG, timePeriodB, timePeriodA;
         public Color minColor;
         public Color maxColor;
+        public float randomOffset = RandomMath.RandomBetween(0f, 10f);
 
         public ColorCycleBehavior(float timePeriod)
         {
@@ -25,7 +26,7 @@ namespace Pixie1.Behaviors
 
         protected override void OnUpdate(ref UpdateParams p)
         {
-            float t = 2 * (SimTime % timePeriod); // TODO SimTime is not the time related to the Draw!
+            float t = 2 * ((SimTime+randomOffset) % timePeriod); // TODO SimTime is not the time related to the Draw!
             if (t > timePeriod ) // gen sawtooth wave
                 t = 2*timePeriod - t;
             Color col = new Color( (int)  ((t / timePeriodR) * (maxColor.R - minColor.R) + minColor.R),

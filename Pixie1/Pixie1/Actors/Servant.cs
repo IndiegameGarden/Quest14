@@ -9,7 +9,8 @@ namespace Pixie1.Actors
 {
     public class Servant: Thing
     {
-        public ChaseBehavior Avoiding;
+        public ChaseBehavior AvoidingPixie;
+        public ChaseBehavior AvoidingCompanions;
         public RandomWanderBehavior Wandering;
         public ReverseControlBehavior Reverse;
 
@@ -26,17 +27,17 @@ namespace Pixie1.Actors
             DrawInfo.DrawColor = Color.Yellow;
 
             // avoid other things
-            Avoiding = new ChaseBehavior(typeof(Companion));
-            Avoiding.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            Avoiding.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
-            Add(Avoiding);
+            AvoidingCompanions = new ChaseBehavior(typeof(Companion));
+            AvoidingCompanions.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
+            AvoidingCompanions.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            Add(AvoidingCompanions);
 
             // avoid other things
-            Avoiding = new ChaseBehavior(typeof(Pixie));
-            Avoiding.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            Avoiding.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            AvoidingPixie = new ChaseBehavior(typeof(Pixie));
+            AvoidingPixie.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
+            AvoidingPixie.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
             //Avoiding.Avoidance = true;
-            Add(Avoiding);
+            Add(AvoidingPixie);
 
             Wandering = new RandomWanderBehavior(9.7f, 14.3f);
             Wandering.MoveSpeed = 0.3f;

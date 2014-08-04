@@ -20,6 +20,8 @@ namespace Pixie1.Levels
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
 
+        int[] CompanionPos = new int[]{22,58, 28,58, 33,58, 36,61 , 36,63, 34,72, 31,72, 28,72, 25,72, 22,72, 20,70, 20,67, 20,65, 20,60};
+
         int numberOfZoomOuts = 0;        
 
         public QuestLevel()
@@ -28,7 +30,7 @@ namespace Pixie1.Levels
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(42f, 65f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
@@ -74,7 +76,7 @@ namespace Pixie1.Levels
                 FindWalkableGround(bp);
             }
 
-            for (int i = 0; i < 40; i++)
+            for (int i = 0; i < 38; i++)
             {
                 Servant s = Servant.Create();
                 s.PositionAndTarget = new Vector2(RandomMath.RandomBetween(140f, 720f), RandomMath.RandomBetween(9f, 290f));
@@ -82,10 +84,21 @@ namespace Pixie1.Levels
                 FindWalkableGround(s);
             }
 
+            // servants at local hero's castle
+            for (int i = 0; i < 8; i++)
+            {
+                Servant s = Servant.Create();
+                s.AvoidingCompanions.ChaseRange = 4f;
+                s.AvoidingPixie.ChaseRange = 4f;
+                s.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f, 20f), RandomMath.RandomBetween(32f, 90f));
+                Add(s);
+                FindWalkableGround(s);
+            }
+
             for (int i = 0; i < 14; i++) // XIV companions!
             {
-                Companion cp = Companion.Create(); // Cloaky();
-                cp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
+                Companion cp = Companion.Create(); 
+                cp.PositionAndTarget = new Vector2(CompanionPos[2*i],CompanionPos[2*i+1]);
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(cp);
                 pixie.Companions.Add(cp);
