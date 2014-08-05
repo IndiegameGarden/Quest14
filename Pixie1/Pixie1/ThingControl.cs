@@ -50,14 +50,10 @@ namespace Pixie1
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
+
             IsTargetMoveDefined = false;
             TargetMove = Vector2.Zero;
-
-            wTime += p.Dt;
-            if (wTime >= 0.2f / MoveSpeed)
-            {
-                wTime = 0f;
-            }
+            wTime -= p.Dt;
         }
 
         /// <summary>
@@ -66,9 +62,10 @@ namespace Pixie1
         /// </summary>
         protected void AllowNextMove()
         {
-            if (wTime == 0f)
-            {
+            if (wTime <= 0f)
+            {                
                 OnNextMove();
+                wTime = 0.2f / MoveSpeed;
             }
         }
 
