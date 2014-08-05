@@ -138,7 +138,7 @@ namespace Pixie1
             SubtitleText t = new SubtitleText();
             t.AddText("BADLY WOUNDED, YOU DIE.", 7f);
             t.AddText("Galad the Golden is no more.", 7f);
-            t.AddText("The princess remains captive\nfor all her life.", 7f);
+            t.AddText("Pink Arthur remains captive\nfor all his life.", 7f);
             Subtitles.Show(9,  t);
             pixie.PositionAndTarget = new Vector2(-200f,240f);
             isBackgroundScrollingOn = false;
@@ -150,7 +150,8 @@ namespace Pixie1
             {
                 SubtitleText t = new SubtitleText();
                 t.AddText("YOU WIN!", 5f);
-                t.AddText("The princess\nis rescued.", 4f);
+                t.AddText("Pink Arthur\nis rescued.", 4f);
+                t.AddText("He rules for\nmany prosperous years.", 4f);
                 t.AddText("", 2f);
                 t.AddText("** THE END **", 13f);
                 float playTime = (float)Math.Round(SimTime);
@@ -166,8 +167,8 @@ namespace Pixie1
             {
                 hasFoundPrincess = true;
                 SubtitleText t = new SubtitleText();
-                t.AddText("Princess! Here you are.", 4f);
-                t.AddText("You look more fair than in any tale.", 4f);
+                t.AddText("My King! Here you are.", 4f);
+                t.AddText("We have come to rescue you.", 4f);
                 t.AddText("Follow me, out of this\ncursed place.", 7f);
                 Subtitles.Show(8, t);
             }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Quest for the Pixel Princess XIV")]
-[assembly: AssemblyProduct("You, Golden Knight, must rescue the Princess.")]
-[assembly: AssemblyDescription("You, Golden Knight, must rescue the Princess.")]
+[assembly: AssemblyTitle("Knights of the Square Table")]
+[assembly: AssemblyProduct("You, Galad, must rescue Pink Arthur.")]
+[assembly: AssemblyDescription("You, Galad, must rescue Pink Arthur.")]
 [assembly: AssemblyCompany("IndiegameGarden.com")]
-[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2013")]
+[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2013-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]

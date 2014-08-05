@@ -30,7 +30,7 @@ namespace Pixie1.Levels
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(42f, 65f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(36f, 65f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
@@ -160,26 +160,26 @@ namespace Pixie1.Levels
             Add(p);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("COMPANIONS!", 4f);
-            t.AddText("Follow me! Together, we will rescue\nthe Princess!", 4f);            
-            t.AddText("Squash those Red Guards...!", 4f);
+            t.AddText("VALIANT KNIGHTS!", 4f);
+            t.AddText("Follow me! Together, we will rescue\nour King!", 4f);            
+            t.AddText("For Justice! For Honor!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
             //t.DrawInfo.DrawColor = Color.LightCoral;
 
             t = new SubtitleText();
-            t.AddText("Quest for the Pixel Princess XIV", 5f);
-            t.AddText("You, Galad the Golden, must rescue the Pink Princess once more...", 5f);
+            t.AddText("~~~ Knights of the Square Table ~~~", 5f);
+            t.AddText("You, Galad the Golden, must rescue Pink Arthur...", 5f);
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
-            t.AddText("The Fourteen Cobalt Companions have come to your aid!", 5f);
-            t.AddText("The princess was taken into Red's Keep.", 5f);
-            t.AddText("Get her out, valiant knight!", 5f);
+            t.AddText("The Fourteen Kobalt Knights will be your aid!", 5f);
+            t.AddText("Arthur was taken deep into Red's Keep.", 5f);
+            t.AddText("Get him out, valiant knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows / WASD = move, SPACE = Companion's attack, X = Use Spell", 7f);
+            t.AddText("Arrows / WASD = move, SPACE = Knights's Attack, X = Use Spell", 7f);
             t.AddText("", 1f);
-            t.AddText("Coding & art by Indiegame Garden (IndiegameGarden.com)", 4f);
+            t.AddText("Coding & art by IndiegameGarden.com", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
-            t.AddText("Music by Friar John the Luitist", 4f);
+            t.AddText("Music by Friar John the Lutist", 4f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 4f);
             
             Parent.Add(t);
@@ -187,7 +187,7 @@ namespace Pixie1.Levels
             t.Motion.Scale = 0.5f ;
             t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 13f;
+            t.StartTime = 14f;
         }
 
         protected override bool ScreenBorderHit()

@@ -14,10 +14,11 @@ namespace Pixie1.Actors
     {
         public SubsumptionBehavior RootBehavior;
         public ChaseBehavior  ChasingRedGuard, ChasingHero;
-        public CombatBehavior Combat;     
+        public CombatBehavior Combat;
+        public AlwaysTurnRightBehavior WallFollowing;
         public RandomWanderBehavior Wandering;
         public AttackBehavior Attacking;
-        public static float TIME_START_MOVING = 15.0f;
+        public static float TIME_START_MOVING = 12.6f;
 
         public static Companion Create()
         {
@@ -29,7 +30,7 @@ namespace Pixie1.Actors
         {
             IsCollisionFree = false;
             
-            SetColors(4f, new Color(38, 30, 240), new Color(150, 150, 255));
+            SetColors(4f, new Color(28, 20, 230), new Color(70, 70, 255));
 
             Pushing.Force = RandomMath.RandomBetween(1f, 1.5f);
 
@@ -54,6 +55,12 @@ namespace Pixie1.Actors
             Attacking = new AttackBehavior(Level.Current.pixie);
             Attacking.AttackDuration = RandomMath.RandomBetween(1.5f, 2.8f);
             RootBehavior.Add(Attacking);
+
+            /*
+            WallFollowing = new AlwaysTurnRightBehavior();
+            WallFollowing.MoveSpeed = ChasingHero.MoveSpeed;
+            RootBehavior.Add(WallFollowing);
+            */
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);

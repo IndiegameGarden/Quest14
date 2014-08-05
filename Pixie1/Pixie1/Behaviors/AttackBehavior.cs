@@ -18,7 +18,7 @@ namespace Pixie1.Behaviors
         protected string[] attackString = new string[] { "Attack!", "Forward, men!", "Go!", "Companions!", "To arms!", "Attack!", 
             "Kill them!", "Cover me!", "Engage!", "Forward, companions!", "", "ATTACK!!", "Get me his head!", "Swords!", "Drive them back!",
             "Begone, thou knave!", "Red traitors, die!", "Easy... not too fast.", "Strike now!", "STRIKE!" ,
-            "A thousand battles,\na thousand victories!", "ATTAAAAAACK!", "We shall prevail!", "Princess, all to your service!",
+            "A thousand battles,\na thousand victories!", "ATTAAAAAACK!", "We shall prevail!", "Arthur, to your service!",
             "Squash the red vermin.", "Blue and Gold! For honor!", "For honor! For justice!"};
 
         public AttackBehavior(Thing leader)
