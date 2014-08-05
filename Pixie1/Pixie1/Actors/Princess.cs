@@ -54,7 +54,7 @@ namespace Pixie1.Actors
             }
 
             // check win position
-            if (Position.X <= 54f)
+            if (Position.X <= 52f && Position.Y <= 74f)
             {
                 Level.Current.WinLevel();
             }
