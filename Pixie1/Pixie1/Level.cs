@@ -150,7 +150,7 @@ namespace Pixie1
             {
                 SubtitleText t = new SubtitleText();
                 t.AddText("YOU WIN!", 5f);
-                t.AddText("Pink Arthur\nis rescued.", 4f);
+                t.AddText("Pink Arthur is rescued.", 4f);
                 t.AddText("He rules for\nmany prosperous years.", 4f);
                 t.AddText("", 2f);
                 t.AddText("** THE END **", 13f);
