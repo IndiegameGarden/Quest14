@@ -32,25 +32,27 @@ namespace Pixie1
             float dx = 0f, dy = 0f;
 
             KeyboardState kb = Keyboard.GetState();
-            if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W))
+            GamePadState gp = GamePad.GetState(0);
+
+            if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W) || gp.IsButtonDown(Buttons.DPadUp))
             {
                 if (pressTime == 0f)
                     dy = -1.0f;
                 pressTime += p.Dt;
             }
-            else if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S))
+            else if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S) || gp.IsButtonDown(Buttons.DPadDown))
             {
                 if (pressTime == 0f)
                     dy = +1.0f;
                 pressTime += p.Dt;
             }
-            else if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A))
+            else if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A) || gp.IsButtonDown(Buttons.DPadLeft))
             {
                 if (pressTime == 0f)
                     dx = -1.0f;
                 pressTime += p.Dt;
             }
-            else if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D))
+            else if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D) || gp.IsButtonDown(Buttons.DPadRight))
             {
                 if (pressTime == 0f)
                     dx = +1.0f;
@@ -64,14 +66,15 @@ namespace Pixie1
             KeyboardState kbstate = Keyboard.GetState();
 
             // trigger attack
-            if (kbstate.IsKeyDown(Keys.Space))
+            if (kbstate.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A))
             {
                 pixie.LeadAttack();
             }
 
             // trigger Toy
             bool isTriggerKeyPressed = kbstate.IsKeyDown(Keys.X) ||
-                                    kbstate.IsKeyDown(Keys.LeftControl);
+                                    kbstate.IsKeyDown(Keys.LeftControl) || 
+                                    gp.IsButtonDown(Buttons.B);
             Toy t = ParentThing.ToyActive; 
             if (!isTriggerPressed && isTriggerKeyPressed)
             {

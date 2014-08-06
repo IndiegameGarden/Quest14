@@ -183,7 +183,8 @@ namespace Pixie1.Levels
             t.AddText("Arthur was taken deep into Red's Keep.", 5f);
             t.AddText("Get him out and take him back,\nvaliant knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows or WASD = move // SPACE = Knights's Attack // X = Use Spell", 7f);
+            t.AddText("Arrows, WASD = move // SPACE = Knights's Attack // X = Use Spell", 7f);
+            t.AddText("Gamepad = move // Button-A = Knights's Attack // Button-B = Use Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by IndiegameGarden.com", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
@@ -195,7 +196,7 @@ namespace Pixie1.Levels
             t.Motion.Scale = 0.5f ;
             t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 14f+7f;
+            t.StartTime = 14f + 7f;
         }
 
         protected override bool ScreenBorderHit()
