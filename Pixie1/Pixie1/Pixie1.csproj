@@ -132,6 +132,7 @@
     <Compile Include="LevelBackground.cs" />
     <Compile Include="RandomMath.cs" />
     <Compile Include="Toys\BombToy.cs" />
+    <Compile Include="Toys\MerlinTestToy.cs" />
     <Compile Include="Toys\InvisibilityToy.cs" />
     <Compile Include="Toys\PaintToy.cs" />
     <Compile Include="Toys\ShowMessageToy.cs" />

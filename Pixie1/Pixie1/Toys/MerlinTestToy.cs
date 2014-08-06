@@ -7,33 +7,35 @@ using Microsoft.Xna.Framework;
 namespace Pixie1.Toys
 {
     /// <summary>
-    /// makes you invisible (this can trigger a chasing Thing to lose its trail)
+    /// to test spell usage with key in castle
     /// </summary>
-    public class InvisibilityToy: Toy
+    public class MerlinTestToy: Toy
     {
-        public InvisibilityToy(): base()
+        public MerlinTestToy()
+            : base()
         {
-            UseTimeMax = 16f;
-            SetColors(1.9f, Color.LightSkyBlue, new Color(1f,1f,1f,0f));
+            UseTimeMax = 10f;
+            UsedUponPickup = false;
+            SetColors(1.9f, Color.LightSkyBlue, new Color(0.9f,0.4f,1f,0f));
         }
 
         public override string ToyName()
         {
-            return "Cloak of Transpaerance";
+            return "Merlin's Seeds of Stealth\n(press X to swallow!)";
         }
 
         public override void StartUsing()
         {
             base.StartUsing();
             ParentThing.Visible = false;
-            Level.Current.Subtitles.Show(2, "Hey! Where am I now?", 3f);
+            Level.Current.Subtitles.Show(2, "Wonders! My body faded away...", 3f);
         }
 
         public override void StopUsing()
         {
             base.StopUsing();
             ParentThing.Visible = true;
-            Level.Current.Subtitles.Show(0, "...and I'm back!", 3f);
+            Level.Current.Subtitles.Show(0, "My body is back again!", 3f);
         }
     }
 }

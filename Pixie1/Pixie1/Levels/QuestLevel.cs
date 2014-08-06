@@ -125,6 +125,7 @@ namespace Pixie1.Levels
         {
             base.InitToys();
 
+            InitToy(new MerlinTestToy(), 51, 82);
             InitToy(new ZoomOutToy(), 80, 144);
             InitToy(new ZoomOutToy(), 211,140);
             InitToy(new ZoomOutToy(), 413,173);
@@ -168,8 +169,8 @@ namespace Pixie1.Levels
 
             SubtitleText t = new SubtitleText();
             t.AddText("HONORABLE KNIGHTS!", 4f);
-            t.AddText("Follow me! Together, we will rescue\nour King!", 4f);            
-            t.AddText("For Justice! For Honor!", 4f);
+            t.AddText("Follow me! Together, we will rescue\nArthur, our King!", 4f);            
+            t.AddText("For Justice! For Honor! For the King!", 4f);
             Subtitles.Show(0, t);
             t.StartTime = 1f;
             //t.DrawInfo.DrawColor = Color.LightCoral;
@@ -180,7 +181,7 @@ namespace Pixie1.Levels
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
             t.AddText("The Fourteen Kobalt Knights will aid you!", 5f);
             t.AddText("Arthur was taken deep into Red's Keep.", 5f);
-            t.AddText("Get him out, valiant knight!", 5f);
+            t.AddText("Get him out and take him back,\nvaliant knight!", 5f);
             t.AddText("", 1f);
             t.AddText("Arrows or WASD = move // SPACE = Knights's Attack // X = Use Spell", 7f);
             t.AddText("", 1f);
