@@ -21,7 +21,7 @@ namespace Pixie1.Actors
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = Color.Pink;
-            Following = new ChaseBehavior(Level.Current.pixie);
+            Following = new ChaseBehavior(Level.Current.hero);
             Following.Active = false;
             Following.SatisfiedRange = 3f;
             Following.ChaseRange = 20f;
@@ -44,7 +44,7 @@ namespace Pixie1.Actors
             }
 
             // check when to start following our rescuer
-            float dist = (Level.Current.pixie.Position - Position).Length();
+            float dist = (Level.Current.hero.Position - Position).Length();
             if (dist < 1.5f)
             {
                 Level.Current.FoundPinkArthur();

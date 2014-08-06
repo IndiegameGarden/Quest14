@@ -16,7 +16,7 @@ namespace Pixie1.Actors
             PositionAndTarget = new Microsoft.Xna.Framework.Vector2(520f, 290f);
 
             // chase hero
-            Chasing = new ChaseBehavior(Level.Current.pixie);
+            Chasing = new ChaseBehavior(Level.Current.hero);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.18f, 0.22f);
             Chasing.ChaseRange = 26f; // RandomMath.RandomBetween(12f, 40f);
             Add(Chasing);
@@ -28,7 +28,7 @@ namespace Pixie1.Actors
         protected override void OnUpdate(ref TTengine.Core.UpdateParams p)
         {
             base.OnUpdate(ref p);
-            Hero hero = Level.Current.pixie;
+            Hero hero = Level.Current.hero;
             Vector2 dif = (hero.Position - Position);
             if (dif.Length() < 8.5f)
             {

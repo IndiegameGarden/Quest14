@@ -30,7 +30,7 @@ namespace Pixie1.Toys
             Motion m = Level.Current.Motion;
             m.ZoomTarget *= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
-            m.ZoomCenterTarget = Level.Current.pixie.Motion;
+            m.ZoomCenterTarget = Level.Current.hero.Motion;
             Level.Current.Subtitles.Show(1, "(gulk, gulk)", 3f);
         }
 
@@ -40,7 +40,7 @@ namespace Pixie1.Toys
             Motion m = Level.Current.Motion;
             m.ZoomTarget /= zoomFactor;
             m.ZoomSpeed = zoomSpeed;
-            m.ZoomCenterTarget = Level.Current.pixie.Motion;
+            m.ZoomCenterTarget = Level.Current.hero.Motion;
             //Level.Current.Subtitles.Show(0, "The Potion", 3f);
         }
 

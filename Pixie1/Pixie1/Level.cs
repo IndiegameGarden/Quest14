@@ -27,7 +27,7 @@ namespace Pixie1
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
         public int DefaultPassableIntensityThreshold = 280;
-        public Vector2 PIXIE_STARTING_POS = Vector2.Zero; // in pixels        
+        public Vector2 HERO_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 
         // specific crap FIXME
@@ -74,7 +74,7 @@ namespace Pixie1
         /// <summary>
         /// our heroine Pixie
         /// </summary>
-        public Hero pixie;
+        public Hero hero;
         public Boss boss;
 
         public SubtitleManager Subtitles;
@@ -110,13 +110,13 @@ namespace Pixie1
         /// </summary>
         protected virtual void InitPixie()
         {
-            pixie = new Hero();      
-            pixie.PositionAndTarget = PIXIE_STARTING_POS;
-            pixie.TargetSpeed = PIXIE_TARGETSPEED;
-            Add(pixie);
+            hero = new Hero();      
+            hero.PositionAndTarget = HERO_STARTING_POS;
+            hero.TargetSpeed = PIXIE_TARGETSPEED;
+            Add(hero);
 
             keyControl = new PixieKeyControl();
-            pixie.Add(keyControl);
+            hero.Add(keyControl);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Pixie1
             t.AddText("Galad the Golden is no more.", 7f);
             t.AddText("Pink Arthur remains captive\nfor all his life.", 7f);
             Subtitles.Show(9,  t);
-            pixie.PositionAndTarget = new Vector2(-200f,240f);
+            hero.PositionAndTarget = new Vector2(-200f,240f);
             isBackgroundScrollingOn = false;
         }
 
@@ -222,13 +222,13 @@ namespace Pixie1
         protected virtual void ScrollBackground(ref UpdateParams p)
         {
             // scrolling background at borders
-            Vector2 pixiePos = pixie.Motion.PositionAbs;
+            Vector2 pixiePos = hero.Motion.PositionAbs;
 
             if (pixiePos.X < BOUND_X || pixiePos.X > (Screen.Width - BOUND_X) ||
                 pixiePos.Y < BOUND_Y || pixiePos.Y > (Screen.Height - BOUND_Y))
             {
                 if (ScreenBorderHit())
-                    Background.Target = pixie.Position;
+                    Background.Target = hero.Position;
             }
         }
 

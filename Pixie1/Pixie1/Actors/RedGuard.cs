@@ -21,12 +21,12 @@ namespace Pixie1.Actors
 
         public static RedGuard Create()
         {
-            return new RedGuard(Level.Current.pixie);
+            return new RedGuard(Level.Current.hero);
         }
 
         public static RedGuard CreateCloaky()
         {
-            RedGuard p = new RedGuard(Level.Current.pixie);
+            RedGuard p = new RedGuard(Level.Current.hero);
             p.IsCloaky = true;
             return p;
         }
@@ -90,12 +90,12 @@ namespace Pixie1.Actors
 
             if (TargetMove.LengthSquared() > 0)
             {
-                if (CollidesWhenThisMoves(Level.Current.pixie, TargetMove))
+                if (CollidesWhenThisMoves(Level.Current.hero, TargetMove))
                 {
                     if (Level.Current.Subtitles.Children.Count <= 4)
                     {
                         Level.Current.Subtitles.Show(3, "(Red:) " + attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
-                        Level.Current.pixie.Health -= RandomMath.RandomBetween(1f, 3f);
+                        Level.Current.hero.Health -= RandomMath.RandomBetween(1f, 3f);
                     }
                 }
             }

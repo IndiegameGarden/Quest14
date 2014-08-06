@@ -41,7 +41,7 @@ namespace Pixie1.Actors
             Combat = new CombatBehavior(typeof(RedGuard));
             ComplexBehavior.Add(Combat);
 
-            ChasingHero = new ChaseBehavior(Level.Current.pixie);
+            ChasingHero = new ChaseBehavior(Level.Current.hero);
             ChasingHero.ChaseRange = 370f;
             ChasingHero.SatisfiedRange = 6f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
@@ -52,7 +52,7 @@ namespace Pixie1.Actors
             ChasingRedGuard.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
             ComplexBehavior.Add(ChasingRedGuard);
 
-            Attacking = new AttackBehavior(Level.Current.pixie);
+            Attacking = new AttackBehavior(Level.Current.hero);
             Attacking.AttackDuration = RandomMath.RandomBetween(1.5f, 2.8f);
             ComplexBehavior.Add(Attacking);
 

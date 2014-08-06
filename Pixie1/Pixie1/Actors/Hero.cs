@@ -13,7 +13,10 @@ namespace Pixie1.Actors
 
         public List<Knight> Knights = new List<Knight>();
 
-        protected float health = 10f;
+        //public Vector2[] PositionLog = new Vector2[1000];
+        //public int PositionLogIndex = 0;
+
+        protected float health = 12f;
 
         public Hero()
             : base("pixie")
