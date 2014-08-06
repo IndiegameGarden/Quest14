@@ -11,7 +11,7 @@ namespace Pixie1
     {
         float pressTime = 0f;
         bool isTriggerPressed = false;
-        Pixie pixie = null;
+        Hero pixie = null;
 
         public PixieKeyControl()
             : base()
@@ -22,7 +22,7 @@ namespace Pixie1
         protected override void OnNewParent()
         {
             base.OnNewParent();
-            pixie = ParentThing as Pixie; // TODO hardwired
+            pixie = ParentThing as Hero; // TODO hardwired
         }
 
         protected override void OnUpdate(ref UpdateParams p)

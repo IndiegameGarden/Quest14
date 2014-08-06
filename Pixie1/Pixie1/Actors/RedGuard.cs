@@ -43,7 +43,7 @@ namespace Pixie1.Actors
             Add(sub);
 
             // chase companions that are very close
-            ChasingComp = new ChaseBehavior(typeof(Companion));
+            ChasingComp = new ChaseBehavior(typeof(Knight));
             ChasingComp.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             ChasingComp.ChaseRange = 1.5f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(ChasingComp);

@@ -8,29 +8,19 @@ using Pixie1.Behaviors;
 
 namespace Pixie1.Actors
 {
-    public class Pixie: Thing
+    public class Hero: Thing
     {
 
-        public List<Companion> Companions = new List<Companion>();
+        public List<Knight> Knights = new List<Knight>();
 
         protected float health = 10f;
 
-        public Pixie()
+        public Hero()
             : base("pixie")
         {            
             IsCollisionFree = false;
             SetColors(4f, Color.DarkGoldenrod, new Color(230, 210, 10));
             Velocity = 1.5f;
-
-            //SubsumptionBehavior sub = new SubsumptionBehavior();
-            //Add(sub);
-
-            /*
-            ChaseBehavior avoidBoss = new ChaseBehavior(Level.Current.boss);
-            avoidBoss.ChaseRange = 7f;
-            avoidBoss.Avoidance = true;
-            Add(avoidBoss);
-             */
 
             Pushing.Force = 10f; // force higher than companions.
 
@@ -53,7 +43,7 @@ namespace Pixie1.Actors
 
         public void LeadAttack()
         {
-            foreach (Companion c in Companions)
+            foreach (Knight c in Knights)
                 c.Attacking.TriggerAttack();
         }
 

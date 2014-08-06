@@ -8,11 +8,11 @@ using Pixie1.Behaviors;
 namespace Pixie1.Actors
 {
     /**
-     * companion of the hero that helps him
+     * knight that helps the hero
      */
-    public class Companion: Thing
+    public class Knight: Thing
     {
-        public SubsumptionBehavior RootBehavior;
+        public SubsumptionBehavior ComplexBehavior;
         public ChaseBehavior  ChasingRedGuard, ChasingHero;
         public CombatBehavior Combat;
         public AlwaysTurnRightBehavior WallFollowing;
@@ -20,12 +20,12 @@ namespace Pixie1.Actors
         public AttackBehavior Attacking;
         public static float TIME_START_MOVING = 12.6f;
 
-        public static Companion Create()
+        public static Knight Create()
         {
-            return new Companion();
+            return new Knight();
         }
         
-        public Companion()
+        public Knight()
             : base("pixie")
         {
             IsCollisionFree = false;
@@ -34,27 +34,27 @@ namespace Pixie1.Actors
 
             Pushing.Force = RandomMath.RandomBetween(1f, 1.5f);
 
-            RootBehavior = new SubsumptionBehavior();
-            RootBehavior.Active = false;
-            Add(RootBehavior);
+            ComplexBehavior = new SubsumptionBehavior();
+            ComplexBehavior.Active = false;
+            Add(ComplexBehavior);
 
             Combat = new CombatBehavior(typeof(RedGuard));
-            RootBehavior.Add(Combat);
+            ComplexBehavior.Add(Combat);
 
             ChasingHero = new ChaseBehavior(Level.Current.pixie);
             ChasingHero.ChaseRange = 370f;
             ChasingHero.SatisfiedRange = 6f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
-            RootBehavior.Add(ChasingHero);
+            ComplexBehavior.Add(ChasingHero);
 
             ChasingRedGuard = new ChaseBehavior(typeof(RedGuard));
             ChasingRedGuard.ChaseRange = 20f;
             ChasingRedGuard.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
-            RootBehavior.Add(ChasingRedGuard);
+            ComplexBehavior.Add(ChasingRedGuard);
 
             Attacking = new AttackBehavior(Level.Current.pixie);
             Attacking.AttackDuration = RandomMath.RandomBetween(1.5f, 2.8f);
-            RootBehavior.Add(Attacking);
+            ComplexBehavior.Add(Attacking);
 
             /*
             WallFollowing = new AlwaysTurnRightBehavior();
@@ -64,15 +64,15 @@ namespace Pixie1.Actors
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);
-            RootBehavior.Add(Wandering);
+            ComplexBehavior.Add(Wandering);
             
         }
 
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
-            if (RootBehavior.Active == false && SimTime > TIME_START_MOVING)
-                RootBehavior.Active = true;
+            if (ComplexBehavior.Active == false && SimTime > TIME_START_MOVING)
+                ComplexBehavior.Active = true;
         }
     }
 }

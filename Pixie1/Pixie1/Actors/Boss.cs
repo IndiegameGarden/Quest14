@@ -28,7 +28,7 @@ namespace Pixie1.Actors
         protected override void OnUpdate(ref TTengine.Core.UpdateParams p)
         {
             base.OnUpdate(ref p);
-            Pixie hero = Level.Current.pixie;
+            Hero hero = Level.Current.pixie;
             Vector2 dif = (hero.Position - Position);
             if (dif.Length() < 8.5f)
             {

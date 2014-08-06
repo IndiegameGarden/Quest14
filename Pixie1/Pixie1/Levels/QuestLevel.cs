@@ -15,12 +15,12 @@ namespace Pixie1.Levels
     /// </summary>
     public class QuestLevel : Level
     {
-        Vector2 PRINCESS_POSITION = new Vector2(557f, 281f);
+        Vector2 PINKARTHUR_POSITION = new Vector2(557f, 281f);
 
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
 
-        int[] CompanionPos = new int[]{22,58, 28,58, 33,58, 36,61 , 36,63, 34,72, 31,72, 28,72, 25,72, 22,72, 20,70, 20,67, 20,65, 20,60};
+        int[] KnightsStartingPositions = new int[]{22,58, 28,58, 33,58, 36,61 , 36,63, 34,72, 31,72, 28,72, 25,72, 22,72, 20,70, 20,67, 20,65, 20,60};
 
         int numberOfZoomOuts = 0;        
 
@@ -88,8 +88,8 @@ namespace Pixie1.Levels
             for (int i = 0; i < 8; i++)
             {
                 Servant s = Servant.Create();
-                s.AvoidingCompanions.ChaseRange = 4f;
-                s.AvoidingPixie.ChaseRange = 4f;
+                s.AvoidingKnights.ChaseRange = 4f;
+                s.AvoidingHero.ChaseRange = 4f;
                 s.PositionAndTarget = new Vector2(RandomMath.RandomBetween(0f, 20f), RandomMath.RandomBetween(32f, 90f));
                 Add(s);
                 FindWalkableGround(s);
@@ -97,11 +97,11 @@ namespace Pixie1.Levels
 
             for (int i = 0; i < 14; i++) // XIV companions!
             {
-                Companion cp = Companion.Create(); 
-                cp.PositionAndTarget = new Vector2(CompanionPos[2*i],CompanionPos[2*i+1]);
+                Knight cp = Knight.Create(); 
+                cp.PositionAndTarget = new Vector2(KnightsStartingPositions[2*i],KnightsStartingPositions[2*i+1]);
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(cp);
-                pixie.Companions.Add(cp);
+                pixie.Knights.Add(cp);
                 FindWalkableGround(cp);
             }
 
@@ -154,9 +154,9 @@ namespace Pixie1.Levels
             Add(Music);
             Add(Sound);
 
-            // princess
-            Princess p = new Princess();
-            p.PositionAndTarget = PRINCESS_POSITION;
+            // pink arthur
+            PinkArthur p = new PinkArthur();
+            p.PositionAndTarget = PINKARTHUR_POSITION;
             //p.PositionAndTarget = new Vector2(90f,158f); // debug
             Add(p);
 

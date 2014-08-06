@@ -9,8 +9,8 @@ namespace Pixie1.Actors
 {
     public class Servant: Thing
     {
-        public ChaseBehavior AvoidingPixie;
-        public ChaseBehavior AvoidingCompanions;
+        public ChaseBehavior AvoidingHero;
+        public ChaseBehavior AvoidingKnights;
         public RandomWanderBehavior Wandering;
         public ReverseControlBehavior Reverse;
 
@@ -27,17 +27,17 @@ namespace Pixie1.Actors
             DrawInfo.DrawColor = Color.Yellow;
 
             // avoid other things
-            AvoidingCompanions = new ChaseBehavior(typeof(Companion));
-            AvoidingCompanions.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            AvoidingCompanions.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
-            Add(AvoidingCompanions);
+            AvoidingKnights = new ChaseBehavior(typeof(Knight));
+            AvoidingKnights.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
+            AvoidingKnights.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            Add(AvoidingKnights);
 
             // avoid other things
-            AvoidingPixie = new ChaseBehavior(typeof(Pixie));
-            AvoidingPixie.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            AvoidingPixie.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            AvoidingHero = new ChaseBehavior(typeof(Hero));
+            AvoidingHero.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
+            AvoidingHero.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
             //Avoiding.Avoidance = true;
-            Add(AvoidingPixie);
+            Add(AvoidingHero);
 
             Wandering = new RandomWanderBehavior(9.7f, 14.3f);
             Wandering.MoveSpeed = 0.3f;

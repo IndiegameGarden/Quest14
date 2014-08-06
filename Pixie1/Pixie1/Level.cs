@@ -31,7 +31,7 @@ namespace Pixie1
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
 
         // specific crap FIXME
-        public bool hasFoundPrincess = false;
+        public bool hasFoundPinkArthur = false;
         public bool hasWon = false;
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Pixie1
         /// <summary>
         /// our heroine Pixie
         /// </summary>
-        public Pixie pixie;
+        public Hero pixie;
         public Boss boss;
 
         public SubtitleManager Subtitles;
@@ -110,7 +110,7 @@ namespace Pixie1
         /// </summary>
         protected virtual void InitPixie()
         {
-            pixie = new Pixie();      
+            pixie = new Hero();      
             pixie.PositionAndTarget = PIXIE_STARTING_POS;
             pixie.TargetSpeed = PIXIE_TARGETSPEED;
             Add(pixie);
@@ -161,11 +161,11 @@ namespace Pixie1
             }
         }
 
-        public void FoundPrincess()
+        public void FoundPinkArthur()
         {
-            if (!hasFoundPrincess)
+            if (!hasFoundPinkArthur)
             {
-                hasFoundPrincess = true;
+                hasFoundPinkArthur = true;
                 SubtitleText t = new SubtitleText();
                 t.AddText("My King! Here you are.", 4f);
                 t.AddText("We have come to rescue you.", 4f);

@@ -41,7 +41,7 @@ namespace Pixie1.Behaviors
             base.OnUpdate(ref p);
             if (IsAttacking)
             {
-                (ParentThing as Companion).ChasingHero.SatisfiedRange = 11f; // more range allowed during attack
+                (ParentThing as Knight).ChasingHero.SatisfiedRange = 11f; // more range allowed during attack
                 CurrentAttackDuration += p.Dt;
                 if (CurrentAttackDuration > AttackDuration)
                 {
@@ -52,7 +52,7 @@ namespace Pixie1.Behaviors
             }
             else
             {
-                (ParentThing as Companion).ChasingHero.SatisfiedRange = 6f; // more range allowed during attack
+                (ParentThing as Knight).ChasingHero.SatisfiedRange = 6f; // more range allowed during attack
             }
         }
 

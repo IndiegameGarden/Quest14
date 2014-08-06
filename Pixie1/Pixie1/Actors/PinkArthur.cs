@@ -9,14 +9,14 @@ using Pixie1.Behaviors;
 namespace Pixie1.Actors
 {
     /**
-     * the pixel princess
+     * pink arthur, the king to be rescued
      */
-    public class Princess: Thing
+    public class PinkArthur: Thing
     {
         public bool isFollowHero = false;
         public ChaseBehavior Following;
 
-        public Princess()
+        public PinkArthur()
             : base("pixie")
         {            
             IsCollisionFree = false;
@@ -47,7 +47,7 @@ namespace Pixie1.Actors
             float dist = (Level.Current.pixie.Position - Position).Length();
             if (dist < 1.5f)
             {
-                Level.Current.FoundPrincess();
+                Level.Current.FoundPinkArthur();
                 // start following hero
                 if (!isFollowHero)
                     isFollowHero = true;
