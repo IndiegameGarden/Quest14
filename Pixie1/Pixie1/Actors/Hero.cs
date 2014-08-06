@@ -13,8 +13,9 @@ namespace Pixie1.Actors
 
         public List<Knight> Knights = new List<Knight>();
 
-        //public Vector2[] PositionLog = new Vector2[1000];
-        //public int PositionLogIndex = 0;
+        public const int LOG_LENGTH = 1024;
+        public Vector2[] PositionLog = new Vector2[LOG_LENGTH];
+        public int PositionLogIndex = 0;
 
         protected float health = 12f;
 
@@ -58,6 +59,13 @@ namespace Pixie1.Actors
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
+
+            // keep pos log
+            if (this.Position != PositionLog[PositionLogIndex])
+            {
+                PositionLogIndex = (PositionLogIndex+1) % LOG_LENGTH;
+                PositionLog[PositionLogIndex] = this.Position;
+            }
         }
 
     }
