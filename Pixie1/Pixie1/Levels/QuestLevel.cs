@@ -36,7 +36,7 @@ namespace Pixie1.Levels
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // debug
             //BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
-            BG_STARTING_POS = PIXIE_STARTING_POS + new Vector2(-12f,0f); 
+            BG_STARTING_POS = PIXIE_STARTING_POS; // +new Vector2(-12f, 0f); 
             //BG_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // debug, close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); // debug

@@ -14,7 +14,7 @@ namespace Pixie1
      */
     public class GameSound: Gamelet
     {
-        float vol = 1.0f;
+        float vol = 0.5f;
         SoundEvent soundScript = new SoundEvent();
         RenderParams rp = new RenderParams();
         SoundEvent[] soundsBank = new SoundEvent[20];

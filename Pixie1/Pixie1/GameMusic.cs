@@ -11,20 +11,19 @@ namespace Pixie1
 {
     public class GameMusic: Gamelet
     {
-        float vol = 2f;
+        float vol = 1.5f;
         SoundEvent soundScript;
         RenderParams rp = new RenderParams();
 
         public GameMusic()
         {
-            //track = TTengineMaster.ActiveGame.Content.Load<Song>("A01");
             soundScript = new SoundEvent("GameMusic");
             SampleSoundEvent ev1 = new SampleSoundEvent("quest14_medley.ogg"); 
-            soundScript.AddEvent(2, ev1);
-            soundScript.AddEvent(166, ev1);
-            soundScript.AddEvent(332, ev1);
-            soundScript.AddEvent(498, ev1);
-            soundScript.AddEvent(664, ev1);
+            soundScript.AddEvent(1, ev1);
+            soundScript.AddEvent(1 * 630, ev1);
+            soundScript.AddEvent(2 * 630, ev1);
+            soundScript.AddEvent(3 * 630, ev1);
+            soundScript.AddEvent(4 * 630, ev1);
         }
 
         public float Volume
