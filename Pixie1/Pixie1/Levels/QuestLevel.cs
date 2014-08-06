@@ -159,8 +159,15 @@ namespace Pixie1.Levels
             //p.PositionAndTarget = new Vector2(90f,158f); // debug
             Add(p);
 
+            // graphic title/logo
+            Spritelet logo = new Spritelet("title-logo.png");
+            logo.Duration = 7f;
+            logo.StartTime = 13f;
+            logo.Motion.Position = new Vector2(Screen.Center.X, Screen.Center.Y - 0.2f);
+            Parent.Add(logo);
+
             SubtitleText t = new SubtitleText();
-            t.AddText("VALIANT KNIGHTS!", 4f);
+            t.AddText("HONORABLE KNIGHTS!", 4f);
             t.AddText("Follow me! Together, we will rescue\nour King!", 4f);            
             t.AddText("For Justice! For Honor!", 4f);
             Subtitles.Show(0, t);
@@ -168,14 +175,14 @@ namespace Pixie1.Levels
             //t.DrawInfo.DrawColor = Color.LightCoral;
 
             t = new SubtitleText();
-            t.AddText("~~~ Knights of the Square Table ~~~", 5f);
-            t.AddText("You, Galad the Golden, must rescue Pink Arthur...", 5f);
+            //t.AddText("~~~ The King of Pixelot ~~~", 5f);
+            t.AddText("Galad the Golden, you must rescue Pink Arthur...", 5f);
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
-            t.AddText("The Fourteen Kobalt Knights will be your aid!", 5f);
+            t.AddText("The Fourteen Kobalt Knights will aid you!", 5f);
             t.AddText("Arthur was taken deep into Red's Keep.", 5f);
             t.AddText("Get him out, valiant knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows / WASD = move, SPACE = Knights's Attack, X = Use Spell", 7f);
+            t.AddText("Arrows or WASD = move // SPACE = Knights's Attack // X = Use Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by IndiegameGarden.com", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
@@ -187,7 +194,7 @@ namespace Pixie1.Levels
             t.Motion.Scale = 0.5f ;
             t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 14f;
+            t.StartTime = 14f+7f;
         }
 
         protected override bool ScreenBorderHit()

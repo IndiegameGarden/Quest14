@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Knights of the Square Table")]
-[assembly: AssemblyProduct("You, Galad, must rescue Pink Arthur.")]
-[assembly: AssemblyDescription("You, Galad, must rescue Pink Arthur.")]
+[assembly: AssemblyTitle("The King of Pixelot")]
+[assembly: AssemblyProduct("Galad must rescue his king, Pink Arthur.")]
+[assembly: AssemblyDescription("Galad must rescue his king, Pink Arthur.")]
 [assembly: AssemblyCompany("IndiegameGarden.com")]
 [assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2013-2014")]
 [assembly: AssemblyTrademark("")]
