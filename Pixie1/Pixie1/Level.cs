@@ -111,7 +111,7 @@ namespace Pixie1
         protected virtual void InitPixie()
         {
             hero = new Hero();      
-            hero.PositionAndTarget = HERO_STARTING_POS;
+            hero.SetStartingPos(HERO_STARTING_POS);
             hero.TargetSpeed = PIXIE_TARGETSPEED;
             Add(hero);
 

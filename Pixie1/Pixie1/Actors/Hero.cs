@@ -13,9 +13,9 @@ namespace Pixie1.Actors
 
         public List<Knight> Knights = new List<Knight>();
 
-        public const int LOG_LENGTH = 1024;
-        public Vector2[] PositionLog = new Vector2[LOG_LENGTH];
-        public int PositionLogIndex = 0;
+        public const int LOG_LENGTH = 128;
+        public static Vector2[] PositionLog = new Vector2[LOG_LENGTH];
+        public static int PositionLogIndex = 0, PrevPositionLogIndex = LOG_LENGTH - 1;
 
         protected float health = 12f;
 
@@ -28,6 +28,17 @@ namespace Pixie1.Actors
 
             Pushing.Force = 10f; // force higher than companions.
 
+        }
+
+        /// <summary>
+        /// Sets Hero's starting Target/Position and pre-inits the PositionLog with that value.
+        /// </summary>
+        /// <param name="pos"></param>
+        public void SetStartingPos(Vector2 pos)
+        {
+            PositionAndTarget = pos;
+            for (int i = 0; i < LOG_LENGTH; i++)
+                PositionLog[i] = pos;
         }
 
         public float Health
@@ -61,10 +72,24 @@ namespace Pixie1.Actors
             base.OnUpdate(ref p);
 
             // keep pos log
-            if (this.Position != PositionLog[PositionLogIndex])
+            if (this.Target != PositionLog[PositionLogIndex])
             {
-                PositionLogIndex = (PositionLogIndex+1) % LOG_LENGTH;
-                PositionLog[PositionLogIndex] = this.Position;
+                // check if new pos is a straight-line extension of previous move...
+                Vector2 vMove = this.Target - PositionLog[PositionLogIndex];
+                Vector2 vMovePrev = PositionLog[PositionLogIndex] - PositionLog[PrevPositionLogIndex];
+                vMove.Normalize();
+                vMovePrev.Normalize();
+                if (vMove.Equals(vMovePrev))
+                {
+                    //... it is, so just adjust current entry. Kind of compression of data = leaving out inbetween entries.
+                    PositionLog[PositionLogIndex] = this.Target;
+                }
+                else
+                {   // otherwise, update pos log normally
+                    PrevPositionLogIndex = PositionLogIndex;
+                    PositionLogIndex = (PositionLogIndex + 1) % LOG_LENGTH;
+                    PositionLog[PositionLogIndex] = this.Target;
+                }
             }
         }
 

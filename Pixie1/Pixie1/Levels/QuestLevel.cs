@@ -67,7 +67,7 @@ namespace Pixie1.Levels
             boss = new Boss();
             Add(boss);
 
-            for (int i = 0; i < 249; i++)
+            for (int i = 0; i < 243; i++)
             {
                 RedGuard bp = RedGuard.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
@@ -85,7 +85,7 @@ namespace Pixie1.Levels
             }
 
             // servants at local hero's castle
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Servant s = Servant.Create();
                 s.AvoidingKnights.ChaseRange = 4f;

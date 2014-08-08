@@ -101,6 +101,7 @@
     <Compile Include="Actors\Servant.cs" />
     <Compile Include="Actors\PinkArthur.cs" />
     <Compile Include="Behaviors\AttackBehavior.cs" />
+    <Compile Include="Behaviors\TrailHeroBehavior.cs" />
     <Compile Include="Behaviors\CombatBehavior.cs" />
     <Compile Include="Behaviors\PushBehavior.cs" />
     <Compile Include="GameSound.cs" />
