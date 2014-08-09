@@ -13,9 +13,9 @@ namespace Pixie1.Actors
 
         public List<Knight> Knights = new List<Knight>();
 
-        public const int LOG_LENGTH = 128;
+        public const int LOG_LENGTH = 1024;
         public static Vector2[] PositionLog = new Vector2[LOG_LENGTH];
-        public static int PositionLogIndex = 0, PrevPositionLogIndex = LOG_LENGTH - 1;
+        public static uint PositionLogIndex = 0;
 
         protected float health = 12f;
 
@@ -72,26 +72,33 @@ namespace Pixie1.Actors
             base.OnUpdate(ref p);
 
             // keep pos log
-            if (this.Target != PositionLog[PositionLogIndex])
+            if (this.Target != PositionLog[CalcPositionLogIndex(0)])
             {
                 // check if new pos is a straight-line extension of previous move...
-                Vector2 vMove = this.Target - PositionLog[PositionLogIndex];
-                Vector2 vMovePrev = PositionLog[PositionLogIndex] - PositionLog[PrevPositionLogIndex];
+                Vector2 vLog = PositionLog[CalcPositionLogIndex(0)];
+                Vector2 vMove = this.Target - vLog;
+                Vector2 vMovePrev = vLog - PositionLog[CalcPositionLogIndex(-1)];
                 vMove.Normalize();
-                vMovePrev.Normalize();
+                if(vMovePrev.Length()>0f)
+                    vMovePrev.Normalize();
                 if (vMove.Equals(vMovePrev))
                 {
                     //... it is, so just adjust current entry. Kind of compression of data = leaving out inbetween entries.
-                    PositionLog[PositionLogIndex] = this.Target;
+                    PositionLog[CalcPositionLogIndex(0)] = this.Target;
                 }
                 else
                 {   // otherwise, update pos log normally
-                    PrevPositionLogIndex = PositionLogIndex;
-                    PositionLogIndex = (PositionLogIndex + 1) % LOG_LENGTH;
-                    PositionLog[PositionLogIndex] = this.Target;
+                    PositionLogIndex = CalcPositionLogIndex(+1);
+                    PositionLog[CalcPositionLogIndex(0)] = this.Target;
                 }
             }
         }
 
+        public static uint CalcPositionLogIndex(int addValue)
+        {
+            if (-addValue > PositionLogIndex)
+                return 0;
+            return ((uint)(PositionLogIndex + addValue)) % LOG_LENGTH;
+        }
     }
 }
