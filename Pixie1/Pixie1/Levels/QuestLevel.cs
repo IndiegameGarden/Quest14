@@ -67,7 +67,7 @@ namespace Pixie1.Levels
             boss = new Boss();
             Add(boss);
 
-            for (int i = 0; i < 243; i++)
+            for (int i = 0; i < 203; i++)
             {
                 RedGuard bp = RedGuard.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
@@ -76,7 +76,7 @@ namespace Pixie1.Levels
                 FindWalkableGround(bp);
             }
 
-            for (int i = 0; i < 38; i++)
+            for (int i = 0; i < 18; i++)
             {
                 Servant s = Servant.Create();
                 s.PositionAndTarget = new Vector2(RandomMath.RandomBetween(140f, 720f), RandomMath.RandomBetween(9f, 290f));
@@ -85,7 +85,7 @@ namespace Pixie1.Levels
             }
 
             // servants at local hero's castle
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Servant s = Servant.Create();
                 s.AvoidingKnights.ChaseRange = 4f;
@@ -164,6 +164,7 @@ namespace Pixie1.Levels
             Spritelet logo = new Spritelet("title-logo.png");
             logo.Duration = 7f;
             logo.StartTime = 13f;
+            logo.DrawInfo.LayerDepth = 1f;
             logo.Motion.Position = new Vector2(Screen.Center.X, Screen.Center.Y - 0.2f);
             Parent.Add(logo);
 

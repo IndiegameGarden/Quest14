@@ -29,6 +29,8 @@ namespace Pixie1
         PixieScreenlet mainScreenlet;
         MusicEngine musicEngine;
         Level level;
+        float maxDtUpdate = 0f; // time keeping
+        DebugMessage debugMsg;
 
         public PixieGame()
         {
@@ -67,7 +69,11 @@ namespace Pixie1
             TTengineMaster.ActiveScreen = mainScreenlet;
             TreeRoot = new FixedTimestepPhysics();
             TreeRoot.Add(mainScreenlet);
-            
+
+            // debug only
+            debugMsg = new DebugMessage("");
+            mainScreenlet.Add(debugMsg);
+
             // finally call base to enumnerate all (gfx) Game components to init
             base.Initialize();
         }
@@ -97,7 +103,12 @@ namespace Pixie1
 
         protected override void Update(GameTime gameTime)
         {
+            long t0 = System.DateTime.Now.Ticks;
             TTengineMaster.Update(gameTime, TreeRoot);
+            long t1 = System.DateTime.Now.Ticks;
+            float dt = ((float)(t1 - t0)) * 0.001f; //convert to ms
+            //if (dt > maxDtUpdate)
+            maxDtUpdate = maxDtUpdate * 0.98f + 0.02f * dt;
 
             // update any other XNA components
             base.Update(gameTime);
@@ -106,6 +117,7 @@ namespace Pixie1
         protected override void Draw(GameTime gameTime)
         {
             TTengineMaster.Draw(gameTime, TreeRoot);
+            debugMsg.Text = Math.Round(maxDtUpdate) + " ms      ";
 
             // then draw other (if any) XNA game components on the screen
             base.Draw(gameTime);

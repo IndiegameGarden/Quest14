@@ -64,7 +64,7 @@ namespace Pixie1.Actors
 
             WallFollowing = new AlwaysTurnRightBehavior();
             WallFollowing.MoveSpeed = ChasingHero.MoveSpeed;
-            ComplexBehavior.Add(WallFollowing);
+            //ComplexBehavior.Add(WallFollowing);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);
