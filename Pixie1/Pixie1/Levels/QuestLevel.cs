@@ -29,7 +29,7 @@ namespace Pixie1.Levels
         {           
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
-            DEFAULT_SCALE = 15f;// 15f;
+            DEFAULT_SCALE = 5f; // 15f;
             HERO_STARTING_POS = new Vector2(36f, 65f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
@@ -95,7 +95,7 @@ namespace Pixie1.Levels
                 FindWalkableGround(s);
             }
 
-            for (int i = 0; i < 1; i++) // XIV companions!
+            for (int i = 0; i < 14; i++) // XIV companions!
             {
                 Knight cp = Knight.Create(); 
                 cp.PositionAndTarget = new Vector2(KnightsStartingPositions[2*i],KnightsStartingPositions[2*i+1]);

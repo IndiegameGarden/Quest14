@@ -13,9 +13,9 @@ namespace Pixie1.Actors
 
         public List<Knight> Knights = new List<Knight>();
 
-        public const int LOG_LENGTH = 1024;
+        public const int LOG_LENGTH = 4096;
         public static Vector2[] PositionLog = new Vector2[LOG_LENGTH];
-        public static uint PositionLogIndex = 0;
+        public static int PositionLogIndex = 1;
 
         protected float health = 12f;
 
@@ -72,33 +72,38 @@ namespace Pixie1.Actors
             base.OnUpdate(ref p);
 
             // keep pos log
-            if (this.Target != PositionLog[CalcPositionLogIndex(0)])
+            if (this.Target != GetPositionLog(PositionLogIndex))
             {
                 // check if new pos is a straight-line extension of previous move...
-                Vector2 vLog = PositionLog[CalcPositionLogIndex(0)];
+                Vector2 vLog = GetPositionLog(PositionLogIndex);
                 Vector2 vMove = this.Target - vLog;
-                Vector2 vMovePrev = vLog - PositionLog[CalcPositionLogIndex(-1)];
+                Vector2 vMovePrev = vLog - GetPositionLog(PositionLogIndex-1);
                 vMove.Normalize();
                 if(vMovePrev.Length()>0f)
                     vMovePrev.Normalize();
                 if (vMove.Equals(vMovePrev))
                 {
                     //... it is, so just adjust current entry. Kind of compression of data = leaving out inbetween entries.
-                    PositionLog[CalcPositionLogIndex(0)] = this.Target;
+                    SetPositionLog(PositionLogIndex, Target);
                 }
                 else
                 {   // otherwise, update pos log normally
-                    PositionLogIndex = CalcPositionLogIndex(+1);
-                    PositionLog[CalcPositionLogIndex(0)] = this.Target;
+                    PositionLogIndex++;
+                    SetPositionLog(PositionLogIndex, Target);
                 }
             }
         }
 
-        public static uint CalcPositionLogIndex(int addValue)
+        public static Vector2 GetPositionLog(int idx)
         {
-            if (-addValue > PositionLogIndex)
-                return 0;
-            return ((uint)(PositionLogIndex + addValue)) % LOG_LENGTH;
+            if (idx < 0) idx = 0;
+            return PositionLog[idx % LOG_LENGTH];
+        }
+
+        public static void SetPositionLog(int idx, Vector2 v)
+        {
+            if (idx < 0) idx = 0;
+            PositionLog[idx % LOG_LENGTH] = v;
         }
     }
 }
