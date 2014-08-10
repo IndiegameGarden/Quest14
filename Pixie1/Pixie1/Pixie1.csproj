@@ -141,7 +141,6 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <Content Include="MonoGame.Framework.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\TTengine\TTengine\TTengine.csproj">
