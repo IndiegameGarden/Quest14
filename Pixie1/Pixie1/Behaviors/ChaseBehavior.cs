@@ -53,57 +53,48 @@ namespace Pixie1.Behaviors
             Vector2 dif = ChaseTarget.Position - ParentThing.Target;
             if (Avoidance)
                 dif = -dif;
+            if (dif.Length() == 0f)
+                return;
 
-            // 1) whats-free
-            bool isXfree = (dif.X != 0) || !ParentThing.CollidesWithBackground(new Vector2(dif.X, 0f));
-            bool isYfree = (dif.Y != 0) || !ParentThing.CollidesWithBackground(new Vector2(0f, dif.Y));
+            Vector2 difX = new Vector2(dif.X, 0f);
+            Vector2 difY = new Vector2(0f, dif.Y);
+            if (difX.Length() > 0f)
+                difX.Normalize();
+            if (difY.Length() > 0f)
+                difY.Normalize();
+
+            // whats-free
+            bool isBlockedX = (difX.X != 0f) && ParentThing.CollidesWithBackground(difX);
+            bool isBlockedY = (difY.Y != 0f) && ParentThing.CollidesWithBackground(difY);
+            bool isFullyBlocked = (isBlockedX && (dif.Y == 0f)) ||
+                                    (isBlockedY && (dif.X == 0f)) ||
+                                    (isBlockedX && isBlockedY);
+            bool isDiagonal = (dif.X != 0f) && (dif.Y != 0f);
 
             // choose one direction 1) based on whats free, then 2) semi-randomly, if diagonals would be required
-            if (dif.X != 0f && dif.Y != 0f)
+            isPauseChase = false;
+            if (isFullyBlocked)
             {
-                // 2) semi-random
+                dif = new Vector2(difY.Y, difX.X); // try a swap to get around obstacle
+            }
+            else if (isBlockedX)         // choose Y move if x is blocked
+                dif = difY;
+            else if (isBlockedY)    // choose X move if y is blocked
+                dif = difX;
+            else if (isDiagonal)   // choose random x/y if a diagonal move would be required
+            {
                 float r = RandomMath.RandomUnit();
-                // tweak probability of move x/y
                 float thres = 0.5f;
-                if (r > thres && isYfree)
-                    dif.X = 0f;
-                else if (isXfree)
-                    dif.Y = 0f;
-                else if (isYfree)
-                    dif.X = 0f;
-                else if (r > thres)
-                    dif.X = 0f;
+                if (r > thres)
+                    dif = difX;
                 else
-                    dif.Y = 0f;
-                // detect blockage
-                if (!isXfree && !isYfree)
-                {
-                    isPauseChase = true;
-                    IsTargetMoveDefined = false;
-                }
-                else
-                {
-                    isPauseChase = false;
-                    IsTargetMoveDefined = true;
-                }
+                    dif = difY;
             }
             else
             {
-                // cases of needing to move only horiz or vert to target
-                // detect blockage
-                if (!isXfree || !isYfree)
-                {
-                    isPauseChase = true;
-                    IsTargetMoveDefined = false;
-                }
-                else
-                {
-                    isPauseChase = false;
-                    IsTargetMoveDefined = true;
-                }
+                dif.Normalize();
             }
 
-            dif.Normalize();
             TargetMove = dif;
         }
 
@@ -125,11 +116,10 @@ namespace Pixie1.Behaviors
             {
                 Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();
-                if (dist > 0f && dist <= ChaseRange && dist > SatisfiedRange)
+                if (dist <= ChaseRange && dist > SatisfiedRange)
                 {
                     // indicate we're chasing
-                    if (!isPauseChase)
-                        IsTargetMoveDefined = true;
+                    IsTargetMoveDefined = !isPauseChase;
                     AllowNextMove();
                 }
             }

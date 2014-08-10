@@ -16,7 +16,7 @@ namespace Pixie1.Levels
     public class QuestLevel : Level
     {
         Vector2 PINKARTHUR_POSITION = new Vector2(557f, 281f);
-
+        Vector2 TRACKING_HELPER_POINT = new Vector2(28f, 54f);
         Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
 
@@ -29,7 +29,7 @@ namespace Pixie1.Levels
         {           
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
-            DEFAULT_SCALE = 5f; // 15f;
+            DEFAULT_SCALE = 15f; // 15f;
             HERO_STARTING_POS = new Vector2(36f, 65f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
@@ -40,6 +40,12 @@ namespace Pixie1.Levels
             //BG_STARTING_POS += new Vector2(200f, 4f); // debug
             //PIXIE_STARTING_POS = new Vector2(188f, 0f); // debug, close to win pos
             //BG_STARTING_POS = new Vector2(188f, 0f); // debug
+        }
+
+        protected override void InitPixie()
+        {            
+            base.InitPixie();
+            Hero.PositionLog[0] = TRACKING_HELPER_POINT;
         }
 
         protected override void InitLevel()

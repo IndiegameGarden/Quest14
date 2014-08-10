@@ -45,13 +45,13 @@ namespace Pixie1.Actors
             // chase companions that are very close
             ChasingComp = new ChaseBehavior(typeof(Knight));
             ChasingComp.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            ChasingComp.ChaseRange = 1.5f; // RandomMath.RandomBetween(12f, 40f);
+            ChasingComp.ChaseRange = 2f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(ChasingComp);
 
             // chase hero
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
-            Chasing.ChaseRange = 15f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.ChaseRange = 14f; // RandomMath.RandomBetween(12f, 40f);
             sub.Add(Chasing);
 
             Turning = new AlwaysTurnRightBehavior(); // patrolling
@@ -94,6 +94,7 @@ namespace Pixie1.Actors
                 {
                     if (Level.Current.Subtitles.Children.Count <= 4)
                     {
+                        Level.Current.Sound.PlayRandomCombatSound(0.3f, 0.4f);
                         Level.Current.Subtitles.Show(3, "(Red:) " + attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
                         Level.Current.hero.Health -= RandomMath.RandomBetween(1f, 3f);
                     }

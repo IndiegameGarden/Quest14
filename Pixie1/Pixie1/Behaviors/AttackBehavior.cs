@@ -11,15 +11,15 @@ namespace Pixie1.Behaviors
     public class AttackBehavior: ThingControl
     {
         public Thing Leader = null;
-        public float AttackDuration = 4f;
+        public float AttackDuration = 4.5f;
         public bool IsAttacking = false;
         public float CurrentAttackDuration = 0f;
 
-        protected string[] attackString = new string[] { "Attack!", "Forward, men!", "Go!", "Companions!", "To arms!", "Attack!", 
-            "Kill them!", "Cover me!", "Engage!", "Forward, companions!", "", "ATTACK!!", "Get me his head!", "Swords!", "Drive them back!",
-            "Begone, thou knave!", "Red traitors, die!", "Easy... not too fast.", "Strike now!", "STRIKE!" ,
-            "A thousand battles,\na thousand victories!", "ATTAAAAAACK!", "We shall prevail!", "Arthur, to your service!",
-            "Squash the red vermin.", "Blue and Gold! For honor!", "For honor! For justice!"};
+        protected string[] attackString = new string[] { "Attack!", "Forward, men!", "Go!", "Knights!", "To arms!", "Attack!", 
+            "Kill them!", "Cover me!", "Engage!", "ATTACK!!", "Swords!", "Drive them back!",
+            "Begone, red knaves!", "Red traitors, die!", "Strike now!", "STRIKE!" ,
+            "A thousand battles,\na thousand victories!", "We shall prevail!", "Arthur, to your service!",
+            "Squash the red vermin.", "Blue and Gold! For honor!", "For justice!", "For the King!"};
 
         public AttackBehavior(Thing leader)
         {
