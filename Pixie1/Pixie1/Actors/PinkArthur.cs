@@ -21,10 +21,12 @@ namespace Pixie1.Actors
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = Color.Pink;
+            Health = 15f;
+
             Following = new ChaseBehavior(Level.Current.hero);
             Following.Active = false;
             Following.SatisfiedRange = 3f;
-            Following.ChaseRange = 20f;
+            Following.ChaseRange = 21f;
         }
 
         protected override void OnNewParent()
@@ -32,7 +34,13 @@ namespace Pixie1.Actors
             base.OnNewParent();
             Add(Following);
         }
-        
+
+        protected override void OnDies()
+        {
+            base.OnDies();
+            Following.Active = false;
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);

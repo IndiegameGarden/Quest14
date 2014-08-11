@@ -114,9 +114,6 @@ namespace Pixie1
             hero.SetStartingPos(HERO_STARTING_POS);
             hero.TargetSpeed = PIXIE_TARGETSPEED;
             Add(hero);
-
-            keyControl = new PixieKeyControl();
-            hero.Add(keyControl);
         }
 
         /// <summary>
@@ -135,12 +132,12 @@ namespace Pixie1
 
         public virtual void LoseLevel()
         {
+            this.Subtitles.Children.Clear(); // clean out any remaining subtitles being shown.
             SubtitleText t = new SubtitleText();
             t.AddText("BADLY WOUNDED, YOU DIE.", 7f);
             t.AddText("Galad the Golden is no more.", 7f);
             t.AddText("Pink Arthur remains captive\nfor all his life.", 7f);
             Subtitles.Show(9,  t);
-            hero.PositionAndTarget = new Vector2(-200f,240f);
             isBackgroundScrollingOn = false;
         }
 

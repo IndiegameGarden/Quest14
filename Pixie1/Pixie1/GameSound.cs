@@ -30,6 +30,7 @@ namespace Pixie1
             soundsBank[4] = new SampleSoundEvent("hit_1.wav");
             soundsBank[5] = new SampleSoundEvent("hit_2.wav");
             soundsBank[6] = new SampleSoundEvent("hit_3.wav");
+            soundsBank[7] = new SampleSoundEvent("die1.wav");
         }
 
         public float Volume
@@ -74,6 +75,11 @@ namespace Pixie1
         {
             int n = RandomMath.RandomIntBetween(1,6);
             Play(n, RandomMath.RandomBetween(volumeMin, volumeMax));
+        }
+
+        public void PlayDiedSound(float vol)
+        {
+            Play(7, vol);
         }
 
     }

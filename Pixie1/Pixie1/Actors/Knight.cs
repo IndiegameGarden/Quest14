@@ -30,7 +30,8 @@ namespace Pixie1.Actors
         {
             IsCollisionFree = false;
             
-            SetColors(4f, new Color(28, 20, 230), new Color(70, 70, 255));
+            SetColors(4f, new Color(28, 20, 230), new Color(76, 76, 255));
+            Health = 15f;
 
             Pushing.Force = RandomMath.RandomBetween(1f, 1.5f);
 
@@ -42,7 +43,7 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Combat);
 
             ChasingHero = new ChaseBehavior(Level.Current.hero);
-            ChasingHero.ChaseRange = 142f;
+            ChasingHero.ChaseRange = 122f;
             ChasingHero.SatisfiedRange = 6f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
             ComplexBehavior.Add(ChasingHero);
@@ -64,11 +65,19 @@ namespace Pixie1.Actors
 
             WallFollowing = new AlwaysTurnRightBehavior();
             WallFollowing.MoveSpeed = ChasingHero.MoveSpeed;
-            //ComplexBehavior.Add(WallFollowing);
+            ComplexBehavior.Add(WallFollowing);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);
             ComplexBehavior.Add(Wandering);
+        }
+
+        protected override void OnDies()
+        {
+            base.OnDies();
+            Level.Current.Sound.PlayDiedSound(0.3f);
+            ColorFx.Active = false;
+            ComplexBehavior.Active = false;
         }
 
         protected override void OnUpdate(ref UpdateParams p)

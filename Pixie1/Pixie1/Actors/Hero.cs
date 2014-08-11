@@ -10,6 +10,7 @@ namespace Pixie1.Actors
 {
     public class Hero: Thing
     {
+        public PixieKeyControl KeyControl;
 
         public List<Knight> Knights = new List<Knight>();
 
@@ -17,17 +18,22 @@ namespace Pixie1.Actors
         public static Vector2[] PositionLog = new Vector2[LOG_LENGTH];
         public static int PositionLogIndex = 1;
 
-        protected float health = 12f;
-
         public Hero()
             : base("pixie")
         {            
             IsCollisionFree = false;
             SetColors(4f, Color.DarkGoldenrod, new Color(230, 210, 10));
             Velocity = 1.5f;
-
+            Health = 12f;
             Pushing.Force = 10f; // force higher than companions.
 
+        }
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            KeyControl = new PixieKeyControl();
+            this.Add(KeyControl);
         }
 
         /// <summary>
@@ -39,21 +45,6 @@ namespace Pixie1.Actors
             PositionAndTarget = pos;
             for (int i = 0; i < LOG_LENGTH; i++)
                 PositionLog[i] = pos;
-        }
-
-        public float Health
-        {
-            get
-            {
-                return health;
-            }
-
-            set
-            {
-                health = value;
-                if (health <= 0f)
-                    Level.Current.LoseLevel();
-            }
         }
 
         public void LeadAttack()
@@ -92,6 +83,16 @@ namespace Pixie1.Actors
                     SetPositionLog(PositionLogIndex, Target);
                 }
             }
+
+        }
+
+        protected override void OnDies()
+        {
+            base.OnDies();
+            ColorFx.Active = false;
+            KeyControl.Active = false;
+            
+            Level.Current.LoseLevel();
         }
 
         public static Vector2 GetPositionLog(int idx)

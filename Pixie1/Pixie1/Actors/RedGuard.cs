@@ -10,78 +10,56 @@ namespace Pixie1.Actors
     public class RedGuard: Thing
     {
         // behaviors - the things that red guards do 
+        public SubsumptionBehavior ComplexBehavior;
+        public CombatBehavior Combat;
         public BlinkBehavior Blinking;
         public ChaseBehavior  Chasing;
         public ChaseBehavior ChasingComp;
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
-        protected string[] attackString = new string[] { "Take this, golden villain!", "We hurt him!", "He bleeds!", "Our swords struck true!",
-            "He's dying!", "To the grave, traitor!", "Die, golden scum!" , "He stumbles!"};
+        protected string[] attackString = new string[] { "Take this, golden villain!", "We hurt the leader!", "Galad bleeds!", "Our swords struck true!",
+            "To the grave, traitor!", "Die, golden scum!" , "He stumbles!"};
 
         public static RedGuard Create()
         {
             return new RedGuard(Level.Current.hero);
         }
 
-        public static RedGuard CreateCloaky()
-        {
-            RedGuard p = new RedGuard(Level.Current.hero);
-            p.IsCloaky = true;
-            return p;
-        }
-
-        bool isCloaky = false;
-
         public RedGuard(Thing chaseTarget)
             : base("pixie")
         {
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(255, 10, 4);
+            Health = 12f;
 
-            SubsumptionBehavior sub = new SubsumptionBehavior();
-            Add(sub);
+            ComplexBehavior = new SubsumptionBehavior();
+            Add(ComplexBehavior);
 
-            // chase companions that are very close
+            Combat = new CombatBehavior(typeof(Knight));
+            ComplexBehavior.Add(Combat);
+
+            // chase knights that are very close
             ChasingComp = new ChaseBehavior(typeof(Knight));
             ChasingComp.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             ChasingComp.ChaseRange = 2f; // RandomMath.RandomBetween(12f, 40f);
-            sub.Add(ChasingComp);
+            ComplexBehavior.Add(ChasingComp);
 
             // chase hero
             Chasing = new ChaseBehavior(chaseTarget);
             Chasing.MoveSpeed = RandomMath.RandomBetween(0.47f, 0.75f);
             Chasing.ChaseRange = 14f; // RandomMath.RandomBetween(12f, 40f);
-            sub.Add(Chasing);
+            ComplexBehavior.Add(Chasing);
 
             Turning = new AlwaysTurnRightBehavior(); // patrolling
             Turning.MoveSpeed = Chasing.MoveSpeed; //RandomMath.RandomBetween(0.57f, 1.05f);
             Turning.MoveSpeed = 0.7f;
-            sub.Add(Turning);
+            ComplexBehavior.Add(Turning);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = 0.7f;
-            sub.Add(Wandering);
+            ComplexBehavior.Add(Wandering);
             
-        }
-
-        /// <summary>
-        /// set 'cloaky' status, a cloaky is a hardly visible bad pixel
-        /// </summary>
-        public bool IsCloaky
-        {
-            get
-            {
-                return isCloaky;
-            }
-            set
-            {
-                if (IsCloaky == value)
-                    return;
-                // if change - swap dutycycle
-                Blinking.DutyCycle = 1f - Blinking.DutyCycle;
-                isCloaky = value;                
-            }
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -92,14 +70,23 @@ namespace Pixie1.Actors
             {
                 if (CollidesWhenThisMoves(Level.Current.hero, TargetMove))
                 {
-                    if (Level.Current.Subtitles.Children.Count <= 4)
+                    if (Level.Current.Subtitles.Children.Count <= 4 && Level.Current.hero.Health > 0f)
                     {
                         Level.Current.Sound.PlayRandomCombatSound(0.3f, 0.4f);
                         Level.Current.Subtitles.Show(3, "(Red:) " + attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
-                        Level.Current.hero.Health -= RandomMath.RandomBetween(1f, 3f);
+                        Level.Current.hero.Health -= RandomMath.RandomBetween(1f, 2.5f);
                     }
                 }
             }
+
+        }
+
+        protected override void OnDies()
+        {
+            base.OnDies();
+            Level.Current.Sound.PlayDiedSound(0.3f);
+            DrawInfo.DrawColor = new Color(170, 80, 82);
+            ComplexBehavior.Active = false; // disable any moves
         }
     }
 }

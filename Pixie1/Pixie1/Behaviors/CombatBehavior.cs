@@ -33,17 +33,21 @@ namespace Pixie1.Behaviors
             List<Thing> facing = ParentThing.DetectCollisions(ParentThing.FacingDirection);
             WasCombat = IsCombat;
             IsCombat = false;
+            float randomVal = RandomMath.RandomUnit();
             foreach(Thing t in facing) 
             {
                 if (t.GetType() == EnemyType)
                 {
                     IsCombat = true;
+                    if(!WasCombat || randomVal < 0.08f)
+                        t.Health -= RandomMath.RandomBetween(0.8f, 1.6f);
+                    break; // only attack one thing at a time
                 }
             }
 
             if (IsCombat)
             {
-                if (WasCombat == false || RandomMath.RandomUnit() < 0.08f)
+                if (!WasCombat || randomVal < 0.08f)
                     Level.Current.Sound.PlayRandomCombatSound(0.23f, 0.4f);
             }
         }

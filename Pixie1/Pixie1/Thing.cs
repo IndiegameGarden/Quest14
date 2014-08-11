@@ -148,6 +148,34 @@ namespace Pixie1
         /// </summary>
         public PushBehavior Pushing;
 
+        /// <summary>
+        /// any color animation this Thing is having
+        /// </summary>
+        public ColorCycleBehavior ColorFx;
+
+        /// <summary>
+        /// the health value of this thing, if <= 0 then it is broken/dead
+        /// </summary>
+        public float Health
+        {
+            get
+            {
+                return health;
+            }
+
+            set
+            {
+                // check for die-moment
+                if (health > 0f && value <= 0f)
+                {
+                    OnDies();
+                }
+                health = value;
+            }
+        }
+
+        private float health = 100f;
+
         // used for the collision detection per-pixel, texture array for this thing
         protected Color[] textureData;
         // used for the collision detection per-pixel, ref to my background
@@ -189,6 +217,11 @@ namespace Pixie1
             bg = Level.Current.Background;
             if(!IsCollisionFree && !allThingsList.Contains(this))
                 allThingsList.Add(this);
+        }
+
+        protected virtual void OnDies()
+        {
+            // nothing - to override
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -342,6 +375,7 @@ namespace Pixie1
                 if (!t.Active) continue;
                 if (!t.Visible) continue;
                 if (t.Delete) continue;
+                if (t.Health <= 0f) continue;
                 if (t.GetType() == thingType)
                 {
                     float dist = (t.Position - this.Position).Length();
@@ -505,12 +539,10 @@ namespace Pixie1
 
         public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
         {
-            ColorCycleBehavior cycl = new ColorCycleBehavior(cyclePeriod);
-            cycl.minColor = minColor;
-            cycl.maxColor = maxColor;
-            //cycl.timePeriodR = cyclePeriod * RandomMath.RandomBetween(1.02f, 1.537f); ;
-            //cycl.timePeriodG = cyclePeriod * RandomMath.RandomBetween(0.7f, 0.93f); ;
-            Add(cycl);
+            ColorFx = new ColorCycleBehavior(cyclePeriod);
+            ColorFx.minColor = minColor;
+            ColorFx.maxColor = maxColor;
+            Add(ColorFx);
         }
 
     }

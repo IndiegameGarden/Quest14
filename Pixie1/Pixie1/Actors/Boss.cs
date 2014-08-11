@@ -30,7 +30,7 @@ namespace Pixie1.Actors
             base.OnUpdate(ref p);
             Hero hero = Level.Current.hero;
             Vector2 dif = (hero.Position - Position);
-            if (dif.Length() < 8.5f)
+            if (dif.Length() <= 8.5f)
             {
                 dif.Normalize();
                 Vector2 smiteVector = dif* p.Dt * 25f;
