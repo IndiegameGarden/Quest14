@@ -29,7 +29,7 @@ namespace Pixie1.Levels
         {           
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
-            DEFAULT_SCALE = 5f;// 15f; // 15f;
+            DEFAULT_SCALE = 15f;// 15f; // 15f;
             HERO_STARTING_POS = new Vector2(36f, 65f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
@@ -170,7 +170,7 @@ namespace Pixie1.Levels
             Spritelet logo = new Spritelet("title-logo.png");
             logo.Duration = 7f;
             logo.StartTime = 13f;
-            logo.DrawInfo.LayerDepth = 1f;
+            logo.DrawInfo.LayerDepth = 0.0f;
             logo.Motion.Position = new Vector2(Screen.Center.X, Screen.Center.Y - 0.2f);
             Parent.Add(logo);
 

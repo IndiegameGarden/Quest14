@@ -18,7 +18,7 @@ namespace Pixie1.Actors
         public AlwaysTurnRightBehavior WallFollowing;
         public RandomWanderBehavior Wandering;
         public AttackBehavior Attacking;
-        public static float TIME_START_MOVING = 1f;//12.6f;
+        public static float TIME_START_MOVING = 11.6f;
 
         public static Knight Create()
         {
@@ -43,7 +43,7 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Combat);
 
             ChasingHero = new ChaseBehavior(Level.Current.hero);
-            ChasingHero.ChaseRange = 40f; // 110f;
+            ChasingHero.ChaseRange = 50f; // 110f;
             ChasingHero.SatisfiedRange = 6f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.2f, 1.5f);
             ComplexBehavior.Add(ChasingHero);
@@ -64,7 +64,7 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Attacking);
 
             WallFollowing = new AlwaysTurnRightBehavior();
-            WallFollowing.MoveSpeed = ChasingHero.MoveSpeed;
+            WallFollowing.MoveSpeed = ChasingHero.MoveSpeed * 0.7f;
             ComplexBehavior.Add(WallFollowing);
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
