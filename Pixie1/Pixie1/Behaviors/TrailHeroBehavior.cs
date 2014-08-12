@@ -26,9 +26,18 @@ namespace Pixie1.Behaviors
         public float CheatRange = 10f;
 
         /// <summary>
+        /// whether I am on the trail of Hero currently, or not.
+        /// </summary>
+        public bool IsOnTrail = false;
+
+        /// <summary>
         /// index of position in Hero's PositionLog that is currently being used as target.
         /// </summary>
         protected int heroPositionLogTrackIndex = 0;
+        
+        /// <summary>
+        /// whether the hero-following led to a full block (no more movement options towards target) last move.
+        /// </summary>
         protected bool isFullyBlockedState = false;
 
         protected override void OnNextMove()
@@ -36,20 +45,47 @@ namespace Pixie1.Behaviors
             base.OnNextMove();
 
             // compute situation
+            Vector2 vMe = ParentThing.Target;
             Vector2 vTarget = Hero.GetPositionLog(heroPositionLogTrackIndex);
-            Vector2 vMeToTarget = vTarget - ParentThing.Target;
+            Vector2 vMeToTarget = vTarget - vMe;
             Vector2 vHero = Level.Current.hero.Target;
-            Vector2 vMeToHero = vHero - ParentThing.Target;
+            Vector2 vMeToHero = vHero - vMe;
             float distToHero = vMeToHero.Length();
             float distToTarget = vMeToTarget.Length();
 
             // reached target already? Then advance target.
-            if (distToTarget == 0f && heroPositionLogTrackIndex < Hero.PositionLogIndex)
+            if (distToTarget == 0f)
             {
-                heroPositionLogTrackIndex++;    // advance to next place of hero
+                if (heroPositionLogTrackIndex < Hero.PositionLogIndex)
+                {
+                    heroPositionLogTrackIndex++;    // advance to next place of hero
+                    // update some info
+                    vTarget = Hero.GetPositionLog(heroPositionLogTrackIndex);
+                    vMeToTarget = vTarget - vMe;
+                    distToTarget = vMeToTarget.Length();
+                }
+                IsOnTrail = true;
+            }
+
+            // if trail-point not close, re-select target by looping over entire Hero's trail
+            if (!IsOnTrail)
+            {
+                int idxBest = heroPositionLogTrackIndex;
+                float dmin = distToTarget;
+                int maxIters = Math.Min(Hero.LOG_LENGTH, Hero.PositionLogIndex);
+                for (int i = 0; i < maxIters; i++)
+                {
+                    float d = (Hero.PositionLog[i] - vMe).Length();
+                    if (d < dmin)
+                    {
+                        idxBest = i;
+                        dmin = d;
+                    }
+                }
+                heroPositionLogTrackIndex = idxBest;
                 // update some info
                 vTarget = Hero.GetPositionLog(heroPositionLogTrackIndex);
-                vMeToTarget = vTarget - ParentThing.Target;
+                vMeToTarget = vTarget - vMe;
                 distToTarget = vMeToTarget.Length();
             }
             
@@ -63,45 +99,26 @@ namespace Pixie1.Behaviors
             if (difY.Length() > 0f)
                 difY.Normalize();
             float distTargetToHero = vTargetToHero.Length();
-            bool isBlockedX = (dif.X != 0f) && ParentThing.CollidesWithSomething(difX);
-            bool isBlockedY = (dif.Y != 0f) && ParentThing.CollidesWithSomething(difY);
+            bool isBlockedX = (dif.X != 0f) && ParentThing.CollidesWithBackground(difX);
+            bool isBlockedY = (dif.Y != 0f) && ParentThing.CollidesWithBackground(difY);
             bool isFullyBlocked = (isBlockedX && (dif.Y == 0f)) ||
                                     (isBlockedY && (dif.X == 0f)) ||
-                                    (isBlockedX && isBlockedY);
-            
-            /*
-            if (isFullyBlocked && heroPositionLogTrackIndex >0)
-            {
-                // not yet close to target. So, test if there is a closer target on trail.
-                int idx = heroPositionLogTrackIndex - 1;
+                                    (isBlockedX && isBlockedY);            
 
-                Vector2 vTargetMin1 = Hero.GetPositionLog(idx);
-                Vector2 vMeToTargetMin1 = vTargetMin1 - ParentThing.Target;
-                float distToTargetMin1 = vMeToTargetMin1.Length();
-                if (distToTargetMin1 > 1f && distToTargetMin1 < distToTarget)    // YES, that one is closer.
-                {
-                    heroPositionLogTrackIndex = idx; // so use the closer target.
-                    // update some info
-                    vTarget = Hero.GetPositionLog(heroPositionLogTrackIndex);
-                    vMeToTarget = vTarget - ParentThing.Target;
-                    distToTarget = vMeToTarget.Length();
-                }
-            }
-             */
-            
-
+            // if my moves are blocked, and hero is far enough away that cheating won't be noticed, jump the line
+            // to the target, if target square is free.
             if (isFullyBlocked && distToHero > this.CheatRange && distTargetToHero > this.CheatRange
                 && !ParentThing.CollidesWithSomething(vMeToTarget))
             {
-                // if my moves are blocked, and hero is far enough away to be cheating, jump the line
-                // to the target, if target square is free.
                 ParentThing.PositionAndTarget = vTarget;
                 isFullyBlockedState = true;
+                IsOnTrail = true;
             }
             else if (isFullyBlocked)
             {
-                // skip my move if blocked - do another move
+                // mark that i'm blocked - so seems I'm off the trail.
                 isFullyBlockedState = true;
+                IsOnTrail = false;
             }
             else
             {
@@ -125,43 +142,27 @@ namespace Pixie1.Behaviors
             if(dif.Length()>0f)
                 dif.Normalize();
             TargetMove = dif;
-            IsTargetMoveDefined = !isFullyBlockedState;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
 
+            // some vars
             Vector2 vHero = Level.Current.hero.Target;
             Vector2 vMeToHero = vHero - ParentThing.Target;
+            Vector2 vTarget = Hero.GetPositionLog(heroPositionLogTrackIndex);
+            Vector2 vMeToTarget = vTarget - vHero;
             float distToHero = vMeToHero.Length();
+            float distToTarget = vMeToTarget.Length();
+
+            // check if in range to operate the behavior
             if (distToHero <= ChaseRange && distToHero > SatisfiedRange)
             {
-                IsTargetMoveDefined = !isFullyBlockedState;
                 AllowNextMove();
+                IsTargetMoveDefined = !isFullyBlockedState;
             }
-            if (distToHero <= SatisfiedRange && heroPositionLogTrackIndex>0 )
-            {
-                // select last hero's position to track and slightly go before that
-                int idx  = Hero.PositionLogIndex;
 
-                Vector2 vTarget = Hero.GetPositionLog(idx);
-                Vector2 vMeToTarget = vTarget - ParentThing.Target;
-                float distToTarget = vMeToTarget.Length();
-
-                float newDistToTarget = 0f;
-                do
-                {
-                    idx--;
-                    // update some info
-                    vTarget = Hero.GetPositionLog(idx);
-                    vMeToTarget = vTarget - ParentThing.Target;
-                    newDistToTarget = vMeToTarget.Length();
-                    if (newDistToTarget < distToTarget)
-                        heroPositionLogTrackIndex = idx;
-                } while (newDistToTarget < distToTarget);
-                
-            }
         }
     }
 }
