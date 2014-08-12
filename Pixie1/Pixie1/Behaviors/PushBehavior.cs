@@ -30,16 +30,9 @@ namespace Pixie1.Behaviors
         /// <param name="dir"></param>
         public void BePushed(Vector2 dir)
         {
-            if (Force < 5f)  // FIXME hack to let pixie not be pushed
+            if (Force < 7f)  // FIXME hack to let pixie not be pushed
                 pushFromOthers += dir;
         }
-
-        protected override void OnNextMove()
-        {
- 	        base.OnNextMove();
- 	         	        
-        }
-
 
         protected override void OnUpdate(ref UpdateParams p)
         {
@@ -58,13 +51,14 @@ namespace Pixie1.Behaviors
                     dif.Y = 0f;
                 else
                     dif.X = 0f;
+                dist = dif.Length(); // keep track of push force in that direction.
                 dif.Normalize();
                	
-                // if that square is taken, transfer my push to the Thing there with my own Force
+                // if that square is taken, transfer my push to the Thing there with my own Force added
                 List<Thing> lt = ParentThing.DetectCollisions(dif);
                 foreach (Thing t in lt)
                 {
-                    t.Pushing.BePushed(dif);
+                    t.Pushing.BePushed(dif * dist);
                 }
 
                 // if the square being pushed to is free, allow the move to go there

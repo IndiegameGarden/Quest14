@@ -19,6 +19,7 @@ namespace Pixie1.Actors
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = Color.Brown;
+            Pushing.Force = 0f; // no push force of my own.
         }
 
         public static Block Create() {
