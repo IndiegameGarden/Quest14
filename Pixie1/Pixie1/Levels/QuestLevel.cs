@@ -101,7 +101,7 @@ namespace Pixie1.Levels
                 FindWalkableGround(s);
             }
 
-            for (int i = 0; i < 1; i++) // XIV companions!
+            for (int i = 0; i < 14; i++) // XIV companions!
             {
                 Knight cp = Knight.Create(); 
                 cp.PositionAndTarget = new Vector2(KnightsStartingPositions[2*i],KnightsStartingPositions[2*i+1]);

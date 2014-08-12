@@ -31,6 +31,11 @@ namespace Pixie1.Behaviors
         public bool IsOnTrail = false;
 
         /// <summary>
+        /// how long to pause trailing when I find myself fully blocked.
+        /// </summary>
+        public float TIME_PAUSE_WHEN_FULLY_BLOCKED = 7f;
+
+        /// <summary>
         /// index of position in Hero's PositionLog that is currently being used as target.
         /// </summary>
         protected int heroPositionLogTrackIndex = 0;
@@ -39,6 +44,8 @@ namespace Pixie1.Behaviors
         /// whether the hero-following led to a full block (no more movement options towards target) last move.
         /// </summary>
         protected bool isFullyBlockedState = false;
+
+        protected float timeInFullyBlockedState = 0f;
 
         protected override void OnNextMove()
         {
@@ -111,7 +118,7 @@ namespace Pixie1.Behaviors
                 && !ParentThing.CollidesWithSomething(vMeToTarget))
             {
                 ParentThing.PositionAndTarget = vTarget;
-                isFullyBlockedState = true;
+                isFullyBlockedState = false;
                 IsOnTrail = true;
             }
             else if (isFullyBlocked)
@@ -120,9 +127,10 @@ namespace Pixie1.Behaviors
                 isFullyBlockedState = true;
                 IsOnTrail = false;
             }
-            else
+            else if (!isFullyBlockedState ||  timeInFullyBlockedState > TIME_PAUSE_WHEN_FULLY_BLOCKED)
             {
                 isFullyBlockedState = false;
+                timeInFullyBlockedState = 0f;
                 if (isBlockedX)         // choose Y move if x is blocked
                     dif = difY;
                 else if (isBlockedY)    // choose X move if y is blocked
@@ -147,6 +155,10 @@ namespace Pixie1.Behaviors
         protected override void OnUpdate(ref UpdateParams p)
         {
             base.OnUpdate(ref p);
+
+            // keep time in state
+            if (isFullyBlockedState)
+                timeInFullyBlockedState += p.Dt;
 
             // some vars
             Vector2 vHero = Level.Current.hero.Target;
