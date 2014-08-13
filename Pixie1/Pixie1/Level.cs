@@ -72,11 +72,23 @@ namespace Pixie1
         public LevelItemLoader ItemsMap;
 
         /// <summary>
-        /// our heroine Pixie
+        /// our hero
         /// </summary>
         public Hero hero;
+
+        /// <summary>
+        /// boss monster
+        /// </summary>
         public Boss boss;
 
+        /// <summary>
+        /// king to be rescued
+        /// </summary>
+        public PinkArthur king;
+
+        /// <summary>
+        /// takes care of displaying subtitles in priority order
+        /// </summary>
         public SubtitleManager Subtitles;
 
         // class internal
@@ -138,8 +150,24 @@ namespace Pixie1
             t.AddText("BADLY WOUNDED, YOU DIE.", 7f);
             t.AddText("Galad the Golden is no more.", 7f);
             t.AddText("Pink Arthur remains captive\nfor all his life.", 7f);
+            t.AddText("--- THE END ---", 7f);
             Subtitles.Show(9,  t);
             isBackgroundScrollingOn = false;
+
+            t = new SubtitleText();
+            t.AddText("Hold Esc to Exit", 7f);
+            t.AddText("", 1f);
+            t.AddText("Coding & art by Indiegame Garden 2012-2014", 4f);
+            t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
+            t.AddText("Music by John the Luteist", 3f);
+            t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
+
+            t.ScaleVector = new Vector2(1f, 1f);
+            t.Motion.Scale = 0.5f;
+            t.Motion.Position = new Vector2(Screen.Center.X, 0.08f);
+            t.StartTime = this.SimTime + 28.5f;
+            Parent.AddNextUpdate(t);
+
         }
 
         public void WinLevel()
@@ -215,6 +243,26 @@ namespace Pixie1
                 PixieGame.Instance.StopPlay();
             }
 
+#if DEBUG
+            // debug keys
+            if (st.IsKeyDown(Keys.D1))
+            {
+                Level.Current.hero.PositionAndTarget = new Vector2(567f, 262f);
+                Level.Current.SCREEN_MOTION_SPEED = 150f;
+            }
+            else if (st.IsKeyDown(Keys.D2))
+            {
+                Level.Current.hero.PositionAndTarget = new Vector2(70f, 64f);
+                Level.Current.king.PositionAndTarget = new Vector2(72f, 64f);
+                Level.Current.SCREEN_MOTION_SPEED = 150f;
+            }
+            else
+                Level.Current.SCREEN_MOTION_SPEED = 8f;
+           if (st.IsKeyDown(Keys.F1))
+               Level.Current.hero.IsCollisionFree = true;
+           else if (st.IsKeyDown(Keys.F2))
+               Level.Current.hero.IsCollisionFree = false;
+#endif
         }
 
         // scroll the level background to match pixie

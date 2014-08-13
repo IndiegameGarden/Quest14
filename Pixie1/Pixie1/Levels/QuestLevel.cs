@@ -161,10 +161,10 @@ namespace Pixie1.Levels
             Add(Sound);
 
             // pink arthur
-            PinkArthur p = new PinkArthur();
-            p.PositionAndTarget = PINKARTHUR_POSITION;
-            //p.PositionAndTarget = new Vector2(90f,158f); // debug
-            Add(p);
+            king = new PinkArthur();
+            king.PositionAndTarget = PINKARTHUR_POSITION;
+            //king.PositionAndTarget = new Vector2(90f,158f); // debug
+            Add(king);
 
             // graphic title/logo
             Spritelet logo = new PixieLogo("title-logo.png");
@@ -173,9 +173,9 @@ namespace Pixie1.Levels
             Parent.AddNextUpdate(logo);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("KNIGHTS OF HONOR!", 4f);
+            t.AddText("Knights of honor!", 4f);
             t.AddText("Follow me! Together we will\nrescue Arthur, our King.", 4f);            
-            t.AddText("(Knights:)\nFor Justice! For Honor! For the King!", 4f).DrawInfo.DrawColor = Color.RoyalBlue;
+            t.AddText("(Knights:)\nFOR JUSTICE! FOR HONOR! FOR THE KING!", 4f).DrawInfo.DrawColor = Color.RoyalBlue;
             Subtitles.Show(0, t);
             t.StartTime = 1f;
 
@@ -187,8 +187,8 @@ namespace Pixie1.Levels
             t.AddText("...where rumors say the Giant Red Sorceress lives.", 5f);
             t.AddText("Get him out and take him back, valiant knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows, WASD = move // SPACE = Knights's Attack // X = Use Spell", 7f);
-            t.AddText("Gamepad = move // Button-A = Knights's Attack // Button-B = Use Spell", 7f);
+            t.AddText("Arrows, WASD = move   //   SPACE = Knights's Attack   //   X = Use Spell   //   Esc = Exit", 7f);
+            t.AddText("Gamepad = move   //   Button-A = Knights's Attack   //   Button-B = Use Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by Indiegame Garden", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);

@@ -19,7 +19,7 @@ namespace Pixie1
         {
             soundScript = new SoundEvent("GameMusic");
             SampleSoundEvent ev1 = new SampleSoundEvent("quest14_medley.ogg"); 
-            soundScript.AddEvent(1, ev1);
+            soundScript.AddEvent(0.4, ev1);
             soundScript.AddEvent(1 * 630, ev1);
             soundScript.AddEvent(2 * 630, ev1);
             soundScript.AddEvent(3 * 630, ev1);
