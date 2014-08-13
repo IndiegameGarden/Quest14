@@ -168,39 +168,39 @@ namespace Pixie1.Levels
 
             // graphic title/logo
             Spritelet logo = new PixieLogo("title-logo.png");
-            logo.Duration = 7f;
-            logo.StartTime = 1f;// 13f;                        
+            logo.Duration = 8f;
+            logo.StartTime = 13f;                        
             Parent.AddNextUpdate(logo);
 
             SubtitleText t = new SubtitleText();
-            t.AddText("HONORABLE KNIGHTS!", 4f);
-            t.AddText("Follow me! Together, we will rescue\nArthur, our King!", 4f);            
-            t.AddText("For Justice! For Honor! For the King!", 4f);
+            t.AddText("KNIGHTS OF HONOR!", 4f);
+            t.AddText("Follow me! Together we will\nrescue Arthur, our King.", 4f);            
+            t.AddText("(Knights:)\nFor Justice! For Honor! For the King!", 4f).DrawInfo.DrawColor = Color.RoyalBlue;
             Subtitles.Show(0, t);
             t.StartTime = 1f;
-            //t.DrawInfo.DrawColor = Color.LightCoral;
 
             t = new SubtitleText();
             t.AddText("Galad the Golden, you must rescue Pink Arthur...", 5f);
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
             t.AddText("The Fourteen Kobalt Knights will aid you!", 5f);
-            t.AddText("Arthur was taken deep into Red's Keep.", 5f);
+            t.AddText("Arthur was taken deep into Red's Keep...", 5f);
+            t.AddText("...where rumors say the Giant Red Sorceress lives.", 5f);
             t.AddText("Get him out and take him back, valiant knight!", 5f);
             t.AddText("", 1f);
             t.AddText("Arrows, WASD = move // SPACE = Knights's Attack // X = Use Spell", 7f);
             t.AddText("Gamepad = move // Button-A = Knights's Attack // Button-B = Use Spell", 7f);
             t.AddText("", 1f);
-            t.AddText("Coding & art by IndiegameGarden.com", 4f);
-            t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
-            t.AddText("Music by John the Luteist", 4f);
-            t.AddText("Sprite by Charles Gabriel (opengameart.org)", 4f);
+            t.AddText("Coding & art by Indiegame Garden", 4f);
+            t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
+            t.AddText("Music by John the Luteist", 3f);
+            t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f ;
             t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = 14f + 7f;
+            t.StartTime = logo.StartTime + logo.Duration + 0.6f;
         }
 
         protected override bool ScreenBorderHit()

@@ -13,7 +13,7 @@ namespace Pixie1.Actors
 
         public Boss(): base("boss")
         {
-            PositionAndTarget = new Microsoft.Xna.Framework.Vector2(520f, 290f);
+            PositionAndTarget = new Vector2(520f, 290f);
 
             // chase hero
             Chasing = new ChaseBehavior(Level.Current.hero);
@@ -21,7 +21,7 @@ namespace Pixie1.Actors
             Chasing.ChaseRange = 26f; // RandomMath.RandomBetween(12f, 40f);
             Add(Chasing);
 
-            DrawInfo.Center = new Microsoft.Xna.Framework.Vector2(0.5f, 0.5f);
+            DrawInfo.Center = new Vector2(0.5f, 0.5f);
 
         }
 

@@ -110,7 +110,7 @@ namespace Pixie1
             }
         }
 
-        public void AddText(string txt, float duration)
+        public SubtitleText AddText(string txt, float duration)
         {
             SubtitleText st = new SubtitleText(txt);
             st.Duration = duration - 0.1f;
@@ -118,6 +118,7 @@ namespace Pixie1
             AddNextUpdate(st);
             nextTextStartTime += duration;
             Duration = nextTextStartTime;
+            return st;
         }
 
         protected void AutoPosition()
