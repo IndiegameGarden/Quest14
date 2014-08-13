@@ -545,5 +545,9 @@ namespace Pixie1
             Add(ColorFx);
         }
 
+        protected override void OnDraw(ref DrawParams p)
+        {
+            base.OnDraw(ref p);
+        }
     }
 }

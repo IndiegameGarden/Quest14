@@ -167,12 +167,10 @@ namespace Pixie1.Levels
             Add(p);
 
             // graphic title/logo
-            Spritelet logo = new Spritelet("title-logo.png");
+            Spritelet logo = new PixieLogo("title-logo.png");
             logo.Duration = 7f;
-            logo.StartTime = 13f;
-            logo.DrawInfo.LayerDepth = 0.0f;
-            logo.Motion.Position = new Vector2(Screen.Center.X, Screen.Center.Y - 0.2f);
-            Parent.Add(logo);
+            logo.StartTime = 1f;// 13f;                        
+            Parent.AddNextUpdate(logo);
 
             SubtitleText t = new SubtitleText();
             t.AddText("HONORABLE KNIGHTS!", 4f);
@@ -194,7 +192,7 @@ namespace Pixie1.Levels
             t.AddText("", 1f);
             t.AddText("Coding & art by IndiegameGarden.com", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
-            t.AddText("Music by Friar John the Luteist", 4f);
+            t.AddText("Music by John the Luteist", 4f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 4f);
             
             Parent.Add(t);

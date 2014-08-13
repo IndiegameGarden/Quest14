@@ -102,6 +102,7 @@ namespace Pixie1
         {
             Motion.Scale = DEFAULT_SCALE;
             Motion.ScaleTarget = DEFAULT_SCALE;
+            // create own custom SpriteBatch for blocky graphics (PointClamp)
             MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice,SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
         }
 
@@ -182,13 +183,14 @@ namespace Pixie1
 
             //Parent.Add(debugMsg);
             Add(MotionB);
-            Add(Subtitles);
 
             InitLevel();
             InitPixie();
             InitBadPixels();
             InitToys();
             InitLevelSpecific();
+
+            Add(Subtitles);
         }
 
         /// check keys specific for level
