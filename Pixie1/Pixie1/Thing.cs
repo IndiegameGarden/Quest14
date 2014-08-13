@@ -443,7 +443,7 @@ namespace Pixie1
             Rectangle thingRect = new Rectangle(posX, posY, BoundingRectangle.Width, BoundingRectangle.Height);
             if (bgSampleRect.Right >= bg.Texture.Width)
                 return true;
-            if (bgSampleRect.Bottom >= bg.Texture.Height)
+            if (bgSampleRect.Bottom > bg.Texture.Height)
                 return true;
             int bgWidth = bg.Texture.Width;
             return IntersectPixelsBg(thingRect, textureData, bgSampleRect, bg.textureData, bgWidth);

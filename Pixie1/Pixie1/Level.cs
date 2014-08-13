@@ -150,7 +150,7 @@ namespace Pixie1
             t.AddText("BADLY WOUNDED, YOU DIE.", 7f);
             t.AddText("Galad the Golden is no more.", 7f);
             t.AddText("Pink Arthur remains captive\nfor all his life.", 7f);
-            t.AddText("--- THE END ---", 7f);
+            t.AddText("** THE END **", 7f);
             Subtitles.Show(9,  t);
             isBackgroundScrollingOn = false;
 

@@ -17,8 +17,9 @@ namespace Pixie1.Actors
 
             // chase hero
             Chasing = new ChaseBehavior(Level.Current.hero);
-            Chasing.MoveSpeed = RandomMath.RandomBetween(0.18f, 0.22f);
-            Chasing.ChaseRange = 26f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.MoveSpeed = RandomMath.RandomBetween(0.18f, 0.24f);
+            Chasing.ChaseRange = 30f; // RandomMath.RandomBetween(12f, 40f);
+            Chasing.SatisfiedRange = 1f;
             Add(Chasing);
 
             DrawInfo.Center = new Vector2(0.5f, 0.5f);
@@ -29,7 +30,7 @@ namespace Pixie1.Actors
         {
             base.OnUpdate(ref p);
             Hero hero = Level.Current.hero;
-            Vector2 dif = (hero.Position - Position);
+            Vector2 dif = (hero.Target - Target);
             if (dif.Length() <= 8.5f)
             {
                 dif.Normalize();

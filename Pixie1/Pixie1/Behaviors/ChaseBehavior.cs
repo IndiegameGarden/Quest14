@@ -64,8 +64,8 @@ namespace Pixie1.Behaviors
                 difY.Normalize();
 
             // whats-free
-            bool isBlockedX = (difX.X != 0f) && ParentThing.CollidesWithBackground(difX);
-            bool isBlockedY = (difY.Y != 0f) && ParentThing.CollidesWithBackground(difY);
+            bool isBlockedX = (difX.X != 0f) && ParentThing.ChecksCollisions && ParentThing.CollidesWithBackground(difX);
+            bool isBlockedY = (difY.Y != 0f) && ParentThing.ChecksCollisions && ParentThing.CollidesWithBackground(difY);
             bool isFullyBlocked = (isBlockedX && (dif.Y == 0f)) ||
                                     (isBlockedY && (dif.X == 0f)) ||
                                     (isBlockedX && isBlockedY);
