@@ -33,7 +33,7 @@ namespace Pixie1.Behaviors
         /// <summary>
         /// how long to pause trailing when I find myself fully blocked.
         /// </summary>
-        public float TIME_PAUSE_WHEN_FULLY_BLOCKED = 7f;
+        public float TimeToPauseWhenFullyBlocked = 7f;
 
         /// <summary>
         /// index of position in Hero's PositionLog that is currently being used as target.
@@ -127,7 +127,7 @@ namespace Pixie1.Behaviors
                 isFullyBlockedState = true;
                 IsOnTrail = false;
             }
-            else if (!isFullyBlockedState ||  timeInFullyBlockedState > TIME_PAUSE_WHEN_FULLY_BLOCKED)
+            else if (!isFullyBlockedState ||  timeInFullyBlockedState > TimeToPauseWhenFullyBlocked)
             {
                 isFullyBlockedState = false;
                 timeInFullyBlockedState = 0f;
