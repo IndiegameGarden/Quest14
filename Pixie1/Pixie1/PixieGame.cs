@@ -72,7 +72,7 @@ namespace Pixie1
 
             // debug only
             debugMsg = new DebugMessage("");
-            mainScreenlet.Add(debugMsg);
+            //mainScreenlet.Add(debugMsg);
 
             // finally call base to enumnerate all (gfx) Game components to init
             base.Initialize();
@@ -117,7 +117,7 @@ namespace Pixie1
         protected override void Draw(GameTime gameTime)
         {
             TTengineMaster.Draw(gameTime, TreeRoot);
-            debugMsg.Text = Math.Round(maxDtUpdate) + " ms      ";
+            //debugMsg.Text = Math.Round(maxDtUpdate) + " ms      ";
 
             // then draw other (if any) XNA game components on the screen
             base.Draw(gameTime);
