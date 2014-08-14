@@ -175,7 +175,7 @@ namespace Pixie1.Levels
             SubtitleText t = new SubtitleText();
             t.AddText("Knights of honor!", 4f);
             t.AddText("Follow me! Together we will\nrescue Arthur, our King.", 4f);            
-            t.AddText("(Knights:)\nFOR JUSTICE! FOR HONOR! FOR THE KING!", 4f).DrawInfo.DrawColor = Color.RoyalBlue;
+            t.AddText("(Knights:)\nFOR JUSTICE! FOR THE KING!!", 4f).DrawInfo.DrawColor = Color.RoyalBlue;
             Subtitles.Show(0, t);
             t.StartTime = 1f;
 
