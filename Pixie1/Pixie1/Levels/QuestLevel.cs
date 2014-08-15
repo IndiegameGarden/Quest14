@@ -28,7 +28,7 @@ namespace Pixie1.Levels
             // Level settings
             SCREEN_MOTION_SPEED = 8.0f;
             DEFAULT_SCALE = 15f;// 15f;
-            PIXIE_STARTING_POS = new Vector2(42f, 155f); // in pixels        
+            PIXIE_STARTING_POS = new Vector2(42f, 160f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
             //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
@@ -85,7 +85,7 @@ namespace Pixie1.Levels
             for (int i = 0; i < 14; i++) // XIV companions!
             {
                 Companion cp = Companion.Create(); // Cloaky();
-                cp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 6f, PIXIE_STARTING_POS.Y + 6f));
+                cp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(PIXIE_STARTING_POS.X - 10f, PIXIE_STARTING_POS.X + 10f), RandomMath.RandomBetween(PIXIE_STARTING_POS.Y - 11f, PIXIE_STARTING_POS.Y + 1f));
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(cp);
                 pixie.Companions.Add(cp);
