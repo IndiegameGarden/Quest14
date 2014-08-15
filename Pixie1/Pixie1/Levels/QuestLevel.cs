@@ -166,7 +166,7 @@ namespace Pixie1.Levels
             t.AddText("", 1f);
             t.AddText("Coding & art by Indiegame Garden (IndiegameGarden.com)", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 4f);
-            t.AddText("Music by you-may-know-who (guess!)", 4f);
+            t.AddText("Music by John the Luteist", 4f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 4f);
             t.AddText("FMOD Audio engine (c) Firelight Technologies 2004-2013 (fmod.org)", 4f);
             
