@@ -17,14 +17,13 @@ namespace Pixie1
 
         public GameMusic()
         {
-            //track = TTengineMaster.ActiveGame.Content.Load<Song>("A01");
             soundScript = new SoundEvent("GameMusic");
-            SampleSoundEvent ev1 = new SampleSoundEvent("quest14_medley.ogg"); 
-            soundScript.AddEvent(2, ev1);
-            soundScript.AddEvent(166, ev1);
-            soundScript.AddEvent(332, ev1);
-            soundScript.AddEvent(498, ev1);
-            soundScript.AddEvent(664, ev1);
+            SampleSoundEvent ev1 = new SampleSoundEvent("ductia.ogg"); 
+            soundScript.AddEvent(0.8, ev1);
+            soundScript.AddEvent(190 * 1, ev1);
+            soundScript.AddEvent(190 * 2, ev1);
+            soundScript.AddEvent(190 * 3, ev1);
+            soundScript.AddEvent(190 * 4, ev1);
         }
 
         public float Volume

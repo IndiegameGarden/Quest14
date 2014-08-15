@@ -131,8 +131,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="quest14_medley.ogg">
-      <Name>quest14_medley</Name>
+    <None Include="ductia.ogg">
+      <Name>ductia</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
