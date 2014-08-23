@@ -457,7 +457,7 @@ namespace Pixie1
         /// </summary>
         /// <param name="rectangleA">Bounding rectangle of the first sprite</param>
         /// <param name="dataA">Pixel data of the first sprite</param>
-        /// <param name="rectangleB">Bouding rectangle of the second sprite</param>
+        /// <param name="rectangleB">Bounding rectangle of the second sprite</param>
         /// <param name="dataB">Pixel data of the second sprite</param>
         /// <returns>True if non-transparent pixels overlap; false otherwise</returns>
         static bool IntersectPixels(Rectangle rectangleA, Color[] dataA,
