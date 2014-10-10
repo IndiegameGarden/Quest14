@@ -10,6 +10,7 @@ namespace Pixie1
     public class PixieKeyControl: ThingControl
     {
         float pressTime = 0f;
+        Vector2 userInputDirection, userInputDirectionPrevious;
         bool isTriggerPressed = false;
         Hero pixie = null;
 
@@ -32,48 +33,58 @@ namespace Pixie1
             float dx = 0f, dy = 0f;
 
             KeyboardState kb = Keyboard.GetState();
-            GamePadState gp = GamePad.GetState(0);
+            GamePadState gp = GamePad.GetState(PlayerIndex.One);
+            Vector2 sticks = Vector2.Zero;
+            if (gp.IsConnected)
+            {
+                sticks = gp.ThumbSticks.Left + gp.ThumbSticks.Right;
+            }
 
-            if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W) || gp.IsButtonDown(Buttons.DPadUp))
+            if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W) || gp.IsButtonDown(Buttons.DPadUp)
+                || sticks.Y > 0f )
+                    dy += -1.0f;                
+            if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S) || gp.IsButtonDown(Buttons.DPadDown)
+                || sticks.Y < 0f )
+                    dy += 1.0f;
+            if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A) || gp.IsButtonDown(Buttons.DPadLeft)
+                || sticks.X < 0f)
+                    dx += -1.0f;
+            if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D) || gp.IsButtonDown(Buttons.DPadRight) ||
+                sticks.X > 0f)
+                    dx += 1.0f;
+
+            userInputDirectionPrevious = userInputDirection;
+            userInputDirection = new Vector2(dx, dy);
+
+            // handle case where 2nd key pressed Left/Right or Up/Down
+            if (userInputDirectionPrevious.Y != 0 && dy == userInputDirectionPrevious.Y && dx != 0)
+                dy = 0f;
+            if (userInputDirectionPrevious.X != 0 && dx == userInputDirectionPrevious.X && dy != 0)
+            {
+                dx = 0f;
+                pressTime = 0f;
+            }
+
+            if (dx != 0f || dy != 0f)
             {
                 if (pressTime == 0f)
-                    dy = -1.0f;
-                pressTime += p.Dt;
+                    TargetMove = new Vector2(dx, dy);
+                pressTime += p.Dt;  // keep amount of time a direction input has been given
             }
-            else if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S) || gp.IsButtonDown(Buttons.DPadDown))
-            {
-                if (pressTime == 0f)
-                    dy = +1.0f;
-                pressTime += p.Dt;
-            }
-            else if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A) || gp.IsButtonDown(Buttons.DPadLeft))
-            {
-                if (pressTime == 0f)
-                    dx = -1.0f;
-                pressTime += p.Dt;
-            }
-            else if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D) || gp.IsButtonDown(Buttons.DPadRight))
-            {
-                if (pressTime == 0f)
-                    dx = +1.0f;
-                pressTime += p.Dt;
-            }
-            else
+
+            if (userInputDirection.LengthSquared() == 0f)
             {
                 pressTime = 0f;
             }
 
-            KeyboardState kbstate = Keyboard.GetState();
-
             // trigger attack
-            if (kbstate.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A))
+            if (kb.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A) || kb.IsKeyDown(Keys.RightControl))
             {
                 pixie.LeadAttack();
             }
 
             // trigger Toy
-            bool isTriggerKeyPressed = kbstate.IsKeyDown(Keys.X) ||
-                                    kbstate.IsKeyDown(Keys.LeftControl) || 
+            bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || kb.IsKeyDown(Keys.LeftControl) || 
                                     gp.IsButtonDown(Buttons.B);
             Toy t = ParentThing.ToyActive; 
             if (!isTriggerPressed && isTriggerKeyPressed)
@@ -103,7 +114,7 @@ namespace Pixie1
                 pressTime = 0f;
 
             // make user's requested motion vector
-            TargetMove = new Vector2(dx, dy);
+            
             if (TargetMove.LengthSquared() > 0f)
                 IsTargetMoveDefined = true;
 
