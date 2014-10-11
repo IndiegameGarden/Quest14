@@ -185,15 +185,16 @@ namespace Pixie1.Levels
             t.AddText("The Fourteen Kobalt Knights will aid you!", 5f);
             t.AddText("Arthur was taken deep into Red's Keep...", 5f);
             t.AddText("...where rumors say the Giant Red Sorceress lives.", 5f);
-            t.AddText("Get him out and take him back, valiant knight!", 5f);
+            t.AddText("Get him out and take him back, chivalrous knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows, WASD = move   //   SPACE = Knights's Attack   //   X = Use Spell   //   Esc = Exit", 7f);
+            t.AddText("Arrows, WASD = move   //   SPACE = Knights's Attack   //   LCTRL, X = Use Spell   //   Esc = Exit", 7f);
             t.AddText("Gamepad = move   //   Button-A = Knights's Attack   //   Button-B = Use Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by Indiegame Garden", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
             t.AddText("Music by John the Luteist", 3f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
+            t.AddText("#BuiltWithMonoGame", 3f);
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
