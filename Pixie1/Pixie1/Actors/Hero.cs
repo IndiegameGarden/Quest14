@@ -26,6 +26,7 @@ namespace Pixie1.Actors
             Velocity = 1.5f;
             Health = 12f;
             Pushing.Force = 10f; // force higher than companions.
+            DrawInfo.LayerDepth = 0.4f;
 
         }
 

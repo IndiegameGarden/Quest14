@@ -12,6 +12,8 @@ namespace Pixie1
         float pressTime = 0f;
         Vector2 userInputDirection, userInputDirectionPrevious;
         bool isTriggerPressed = false;
+        bool isAttackPressed = false; // attack key
+        bool wasAttackPressed = false; // prev state of isAttackPressed
         Hero pixie = null;
 
         public PixieKeyControl()
@@ -78,7 +80,9 @@ namespace Pixie1
             }
 
             // trigger attack
-            if (kb.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A) || kb.IsKeyDown(Keys.RightControl))
+            wasAttackPressed = isAttackPressed;
+            isAttackPressed = kb.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A) || kb.IsKeyDown(Keys.RightControl);
+            if (isAttackPressed && !wasAttackPressed)
             {
                 pixie.LeadAttack();
             }

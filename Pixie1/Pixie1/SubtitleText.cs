@@ -70,6 +70,7 @@ namespace Pixie1
             timings = new float[] { 0f };
             doReplace = true;
             DrawInfo.DrawColor = Color.White;
+            DrawInfo.LayerDepth = 0.1f;
             InitFont();
         }
 

@@ -169,7 +169,8 @@ namespace Pixie1.Levels
             // graphic title/logo
             Spritelet logo = new PixieLogo("title-logo.png");
             logo.Duration = 8f;
-            logo.StartTime = 13f;                        
+            logo.StartTime = 13f;
+            logo.DrawInfo.LayerDepth = 0.1f;
             Parent.AddNextUpdate(logo);
 
             SubtitleText t = new SubtitleText();

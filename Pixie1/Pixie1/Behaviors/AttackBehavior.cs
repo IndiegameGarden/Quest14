@@ -29,9 +29,16 @@ namespace Pixie1.Behaviors
         public void TriggerAttack() {
             if (!IsAttacking)
             {
+                (ParentThing as Knight).ChasingHero.SatisfiedRange = 11f; // more range allowed during attack
                 if (Level.Current.Subtitles.Children.Count <= 3)
-                    Level.Current.Subtitles.Show(0, attackString[RandomMath.RandomIntBetween(0,attackString.Length-1)], 1.5f);
+                    Level.Current.Subtitles.Show(0, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 1.5f);
                 IsAttacking = true;
+                CurrentAttackDuration = 0f;
+            }
+            else
+            {
+                // if already attacking, allow more range with new attack
+                (ParentThing as Knight).ChasingHero.SatisfiedRange++;
                 CurrentAttackDuration = 0f;
             }
         }
@@ -40,8 +47,7 @@ namespace Pixie1.Behaviors
         {
             base.OnUpdate(ref p);
             if (IsAttacking)
-            {
-                (ParentThing as Knight).ChasingHero.SatisfiedRange = 11f; // more range allowed during attack
+            {                
                 CurrentAttackDuration += p.Dt;
                 if (CurrentAttackDuration > AttackDuration)
                 {

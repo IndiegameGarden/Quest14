@@ -19,6 +19,7 @@ namespace Pixie1.Actors
         {            
             IsCollisionFree = false;
             DrawInfo.DrawColor = Color.Brown;
+            DrawInfo.LayerDepth = 0.6f;
             Pushing.Force = 0f; // no push force of my own.
         }
 
