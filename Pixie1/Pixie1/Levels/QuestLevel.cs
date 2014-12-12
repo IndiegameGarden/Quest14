@@ -17,7 +17,6 @@ namespace Pixie1.Levels
     {
         Vector2 PINKARTHUR_POSITION = new Vector2(557f, 281f);
         Vector2 TRACKING_HELPER_POINT = new Vector2(28f, 54f);
-        Color LEVEL_FOREGROUND_COLOR = new Color(231, 231, 248);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
 
         int[] KnightsStartingPositions = new int[]{22,58, 28,58, 33,58, 36,61 , 36,63, 34,72, 31,72, 28,72, 25,72, 22,72, 20,70, 20,67, 20,65, 20,60};
@@ -54,7 +53,6 @@ namespace Pixie1.Levels
 
             // select bitmap bg
             Background = new LevelBackground("Level1.png");
-            Background.ForegroundColor = LEVEL_FOREGROUND_COLOR;
             Background.TargetSpeed = SCREEN_MOTION_SPEED;
             Add(Background);
             Background.Target = HERO_STARTING_POS;

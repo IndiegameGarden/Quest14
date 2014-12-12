@@ -62,6 +62,11 @@ namespace Pixie1
 
         public abstract string ToyName();
 
+        public virtual string ToyHint()
+        {
+            return "";
+        }
+
         /// <summary>
         /// a ParentThing starts using the Toy
         /// </summary>
@@ -157,7 +162,13 @@ namespace Pixie1
         {
             string tname = ToyName();
             if (tname.Length > 0)
-                return "It says:" + (tname.Length > 16 ? "\n" : " ") + "\"" + tname + "\"";
+            {
+                string s = "It says:" + (tname.Length > 16 ? "\n" : " ") + "\"" + tname + "\"";
+                string thint = ToyHint();
+                if (thint.Length > 0)
+                    s += "\n(" + thint + ")";
+                return s;
+            }
             else
                 return "";
         }

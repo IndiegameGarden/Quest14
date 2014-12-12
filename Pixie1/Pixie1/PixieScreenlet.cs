@@ -11,6 +11,7 @@ namespace Pixie1
         public PixieScreenlet(int x, int y)
             : base(x, y)
         {
+            //
         }
     }
 }

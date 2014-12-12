@@ -19,13 +19,7 @@ namespace Pixie1
         /// background color is the non-passable color of the level borders and also the color
         /// of any transparent parts in the level bitmap.
         /// </summary>
-        public Color BackgroundColor = Color.Black;
-
-        /// <summary>
-        /// foreground color is the default passable color of the level where Pixie walks, i.e.
-        /// the most common color she walks on.
-        /// </summary>
-        public Color ForegroundColor = Color.White;
+        public Color BackgroundColor = new Color((int)2, (int)17, (int)2);
 
         SpriteBatch spriteBatch;
 

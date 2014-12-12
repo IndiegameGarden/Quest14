@@ -21,7 +21,12 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "Merlin's Seeds of Stealth\n(press X to swallow!)";
+            return "Merlin's Seeds of Stealth";
+        }
+
+        public override string ToyHint()
+        {
+            return "press X to swallow!";
         }
 
         public override void StartUsing()

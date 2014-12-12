@@ -15,7 +15,12 @@ namespace Pixie1.Toys
 
         public override string ToyName()
         {
-            return "Spell of Illusions (X to cast!)";
+            return "Spell of Illusions";
+        }
+
+        public override string ToyHint()
+        {
+            return "press X to cast!";
         }
 
         public override void StartUsing()

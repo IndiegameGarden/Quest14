@@ -42,11 +42,6 @@ namespace Pixie1
         public float BOUND_Y = 0.3f;
 
         /// <summary>
-        /// default color of the background (e.g. for areas not covered by the bg bitmap)
-        /// </summary>
-        public Color BackgroundColor = Color.Black;
-
-        /// <summary>
         /// level moves/scrolls behavior for TTengine
         /// </summary>
         public MotionBehavior MotionB;
@@ -115,7 +110,7 @@ namespace Pixie1
             Motion.Scale = DEFAULT_SCALE;
             Motion.ScaleTarget = DEFAULT_SCALE;
             // create own custom SpriteBatch for blocky graphics (PointClamp)
-            MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice,SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            //MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice,SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
         }
 
         /// <summary>

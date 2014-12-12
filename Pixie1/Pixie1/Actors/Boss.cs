@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Pixie1.Behaviors;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using TTengine.Core;
+using Pixie1.Behaviors;
 
 namespace Pixie1.Actors
 {
@@ -23,7 +25,7 @@ namespace Pixie1.Actors
             Add(Chasing);
 
             DrawInfo.Center = new Vector2(0.5f, 0.5f);
-
+            MySpriteBatch = new TTSpriteBatch(Screen.graphicsDevice, SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
         }
 
         protected override void OnUpdate(ref TTengine.Core.UpdateParams p)

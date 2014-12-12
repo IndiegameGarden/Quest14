@@ -72,7 +72,7 @@ namespace Pixie1.Actors
                 {
                     if (Level.Current.Subtitles.Children.Count <= 4 && Level.Current.hero.Health > 0f)
                     {
-                        Level.Current.Sound.PlayRandomCombatSound(0.3f, 0.4f);
+                        Level.Current.Sound.PlayRandomCombatSound(0.2f, 0.3f);
                         Level.Current.Subtitles.Show(3, "(Red:) " + attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
                         Level.Current.hero.Health -= RandomMath.RandomBetween(1f, 2.5f);
                     }
@@ -84,7 +84,7 @@ namespace Pixie1.Actors
         protected override void OnDies()
         {
             base.OnDies();
-            Level.Current.Sound.PlayDiedSound(0.3f);
+            Level.Current.Sound.PlayDiedSound(0.24f);
             DrawInfo.DrawColor = new Color(170, 80, 82);
             ComplexBehavior.Active = false; // disable any moves
         }
