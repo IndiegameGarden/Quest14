@@ -30,7 +30,7 @@ namespace Pixie1.Behaviors
             if (!IsAttacking)
             {
                 (ParentThing as Knight).ChasingHero.SatisfiedRange = 11f; // more range allowed during attack
-                if (Level.Current.Subtitles.Children.Count <= 3)
+                if (Level.Current.Subtitles.Children.Count <= 2)
                     Level.Current.Subtitles.Show(0, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 1.5f);
                 IsAttacking = true;
                 CurrentAttackDuration = 0f;

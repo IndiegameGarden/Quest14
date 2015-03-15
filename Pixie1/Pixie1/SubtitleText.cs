@@ -30,6 +30,8 @@ namespace Pixie1
         /// </summary>
         public bool Shadow = true;
 
+        public bool IsAutoPosition = true;
+
         /// <summary>
         /// which font to use for drawing text (can be changed)
         /// </summary>
@@ -113,17 +115,36 @@ namespace Pixie1
 
         public SubtitleText AddText(string txt, float duration)
         {
+            if (nextTextStartTime < SimTime)
+                nextTextStartTime = SimTime; // ensure titles not started in the past
             SubtitleText st = new SubtitleText(txt);
+            st.IsAutoPosition = this.IsAutoPosition;
             st.Duration = duration - 0.1f;
             st.StartTime = nextTextStartTime;
+            st.DrawInfo.DrawColor = this.DrawInfo.DrawColor;
             AddNextUpdate(st);
             nextTextStartTime += duration;
             Duration = nextTextStartTime;
             return st;
         }
 
+        public void ClearText()
+        {
+            nextTextStartTime = SimTime;
+            Duration = 0;
+            foreach (var c in Children)
+            {
+                if (c is SubtitleText)
+                {
+                    c.Delete = true;
+                }
+            }
+        }
+
         protected void AutoPosition()
         {
+            if (!IsAutoPosition) return;
+
             int lines = TTutil.LineCount(text[0]);
             float yOffset = -((float)(lines - 1)) * VerticalLineSpacing - VerticalLineSpacing;
 

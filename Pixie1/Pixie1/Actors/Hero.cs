@@ -50,8 +50,27 @@ namespace Pixie1.Actors
 
         public void LeadAttack()
         {
+            if (SimTime < 200 && SimTime > 0*21.6)
+                ShowAttackDirectionString();
             foreach (Knight c in Knights)
                 c.Attacking.TriggerAttack();
+        }
+
+        protected void ShowAttackDirectionString()
+        {
+            String t = "Knights attack\n";
+            if (FacingDirection.X < 0 && FacingDirection.Y == 0)
+                t += "west";
+            if (FacingDirection.X > 0 && FacingDirection.Y == 0)
+                t += "east";
+            if (FacingDirection.X == 0 && FacingDirection.Y < 0)
+                t += "north";
+            if (FacingDirection.X == 0 && FacingDirection.Y > 0)
+                t += "south";
+            t += "ward.";
+            Level.Current.ControlsHelpText.ClearText();
+            Level.Current.ControlsHelpText.AddText(t, 3.3f);
+            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
         }
 
         protected override void OnDraw(ref DrawParams p)

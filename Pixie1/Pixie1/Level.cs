@@ -86,6 +86,8 @@ namespace Pixie1
         /// </summary>
         public SubtitleManager Subtitles;
 
+        public SubtitleText ControlsHelpText;
+
         // class internal
         protected ThingControl keyControl; // for pixie
         //protected DebugMessage debugMsg;
@@ -99,6 +101,7 @@ namespace Pixie1
             // create level's objects. These will be added as a child later.
             MotionB = new MotionBehavior();
             Subtitles = new SubtitleManager();
+            ControlsHelpText = new SubtitleText();
             //debugMsg = new DebugMessage();
         }
 
@@ -107,6 +110,16 @@ namespace Pixie1
         /// </summary>
         protected virtual void InitLevel()
         {
+            var t = ControlsHelpText;
+            t.IsAutoPosition = false;
+            t.ScaleVector = new Vector2(1f, 1f);
+            t.Motion.Scale = 0.3f;
+            t.Motion.Position = new Vector2(Screen.Center.X * 1.6f, 0.01f);
+            t.DrawInfo.DrawColor = Color.LightSalmon;
+            //t.Text = "TEST";
+            Parent.Add(t);
+            //t.AddText("BLA", 9.3f);
+
             Motion.Scale = DEFAULT_SCALE;
             Motion.ScaleTarget = DEFAULT_SCALE;
             // create own custom SpriteBatch for blocky graphics (PointClamp)
@@ -152,7 +165,7 @@ namespace Pixie1
             t = new SubtitleText();
             t.AddText("Hold Esc to Exit", 7f);
             t.AddText("", 1f);
-            t.AddText("Coding & art by Indiegame Garden 2012-2014", 4f);
+            t.AddText("Coding & art by Indiegame Garden 2012-2015", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
             t.AddText("Music by John the Luteist", 3f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
@@ -296,6 +309,7 @@ namespace Pixie1
 
         protected override void OnUpdate(ref UpdateParams p)
         {
+            this.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
@@ -305,7 +319,7 @@ namespace Pixie1
             LevelKeyControl(ref p);
             if (isBackgroundScrollingOn)
                 ScrollBackground(ref p);
-
+            
             //debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
             // DEBUG sample pixel
             //Color c= Background.SamplePixel(pixie.Target);

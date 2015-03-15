@@ -1,0 +1,7 @@
+TODO
+- knights are very jumpy when doing nothing (during battle areas)
+- knights attack corpses (with sound)
+- quite silent when no battle ongoing.
+
+DONe
+OK 2015-03-15 - could add helpful top text when pressing keys (e.g. show valid keys / what happens)

@@ -87,6 +87,13 @@ namespace Pixie1
                 pixie.LeadAttack();
             }
 
+            // help msg
+            if (kb.IsKeyDown(Keys.Z) || kb.IsKeyDown(Keys.C) || kb.IsKeyDown(Keys.F1) || kb.IsKeyDown(Keys.D1)
+                || kb.IsKeyDown(Keys.V) || kb.IsKeyDown(Keys.P) || kb.IsKeyDown(Keys.Enter))
+            {
+                ShowKeysHelp();
+            }
+
             // trigger Toy
             bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || kb.IsKeyDown(Keys.LeftControl) || 
                                     gp.IsButtonDown(Buttons.B);
@@ -96,10 +103,13 @@ namespace Pixie1
                 isTriggerPressed = true;
 
                 // use toy                
-                if (t != null)
+                if (t != null && (!t.IsUsed && t.UsesLeft > 0))
                 {
-                    if (!t.IsUsed && t.UsesLeft > 0)
-                        t.StartUsing();
+                    t.StartUsing();
+                }
+                else
+                {
+                    ShowNoToyString();
                 }
             }
             else if (!isTriggerKeyPressed)
@@ -124,5 +134,21 @@ namespace Pixie1
 
         }
 
+        protected void ShowNoToyString()
+        {
+            String t = "No spell\nto cast!";
+            Level.Current.ControlsHelpText.ClearText();
+            Level.Current.ControlsHelpText.AddText(t, 3.3f);
+            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+        }
+
+        protected void ShowKeysHelp()
+        {
+            String t = "Arrows/WASD: Move\nSPACE: Attack\nX: Cast spell\nESC: Hold to Exit";
+            Level.Current.ControlsHelpText.ClearText();
+            Level.Current.ControlsHelpText.AddText(t, 3.3f);
+            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+        }
     }
+
 }
