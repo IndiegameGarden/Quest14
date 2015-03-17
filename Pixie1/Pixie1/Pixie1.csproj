@@ -115,6 +115,7 @@
     <Compile Include="PixieLogo.cs" />
     <Compile Include="SubtitleManager.cs" />
     <Compile Include="SubtitleText.cs" />
+    <Compile Include="TimedSpritelet.cs" />
     <Compile Include="Toy.cs" />
     <Compile Include="ThingControl.cs" />
     <Compile Include="PixieKeyControl.cs" />

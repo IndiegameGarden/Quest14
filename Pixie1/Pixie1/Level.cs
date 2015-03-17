@@ -29,6 +29,8 @@ namespace Pixie1
         public int DefaultPassableIntensityThreshold = 280;
         public Vector2 HERO_STARTING_POS = Vector2.Zero; // in pixels        
         public Vector2 BG_STARTING_POS = Vector2.Zero;    // in pixels; bg=background
+        public Vector2 HELPSCROLL_SHOW_POS;
+        public Vector2 HELPSCROLL_HIDE_POS;
 
         // specific crap FIXME
         public bool hasFoundPinkArthur = false;
@@ -88,6 +90,8 @@ namespace Pixie1
 
         public SubtitleText ControlsHelpText;
 
+        public TimedSpritelet HelpScroll;
+
         // class internal
         protected ThingControl keyControl; // for pixie
         //protected DebugMessage debugMsg;
@@ -102,6 +106,7 @@ namespace Pixie1
             MotionB = new MotionBehavior();
             Subtitles = new SubtitleManager();
             ControlsHelpText = new SubtitleText();
+            HelpScroll = new TimedSpritelet("help-scroll.png");
             //debugMsg = new DebugMessage();
         }
 
@@ -115,10 +120,18 @@ namespace Pixie1
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.3f;
             t.Motion.Position = new Vector2(Screen.Center.X * 1.6f, 0.01f);
+            
             t.DrawInfo.DrawColor = Color.LightSalmon;
-            //t.Text = "TEST";
             Parent.Add(t);
-            //t.AddText("BLA", 9.3f);
+
+            HELPSCROLL_SHOW_POS = new Vector2(Screen.Width - 0.09f, 0.01f);
+            HELPSCROLL_HIDE_POS = new Vector2(HELPSCROLL_SHOW_POS.X, -1f);
+            HelpScroll.Motion.Position = HELPSCROLL_HIDE_POS;
+            HelpScroll.Motion.TargetPos = HELPSCROLL_HIDE_POS;
+            HelpScroll.Motion.TargetPosSpeed = 3f;
+            HelpScroll.DrawInfo.Center = new Vector2(1f, 0f);
+            HelpScroll.DrawInfo.LayerDepth = 0.1f;
+            Parent.Add(HelpScroll);
 
             Motion.Scale = DEFAULT_SCALE;
             Motion.ScaleTarget = DEFAULT_SCALE;
@@ -163,12 +176,7 @@ namespace Pixie1
             isBackgroundScrollingOn = false;
 
             t = new SubtitleText();
-            t.AddText("Hold Esc to Exit", 7f);
-            t.AddText("", 1f);
-            t.AddText("Coding & art by Indiegame Garden 2012-2015", 4f);
-            t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
-            t.AddText("Music by John the Luteist", 3f);
-            t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
+            t.AddText("Coding & art by Indiegame Garden 2012-2015", 7f);
 
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f;

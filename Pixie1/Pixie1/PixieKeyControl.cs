@@ -136,7 +136,7 @@ namespace Pixie1
 
         protected void ShowNoToyString()
         {
-            String t = "No spell\nto cast!";
+            String t = "No magic\nitem!";
             Level.Current.ControlsHelpText.ClearText();
             Level.Current.ControlsHelpText.AddText(t, 3.3f);
             Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
@@ -144,10 +144,7 @@ namespace Pixie1
 
         protected void ShowKeysHelp()
         {
-            String t = "Arrows/WASD: Move\nSPACE: Attack\nX: Cast spell\nESC: Hold to Exit";
-            Level.Current.ControlsHelpText.ClearText();
-            Level.Current.ControlsHelpText.AddText(t, 3.3f);
-            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+            Level.Current.HelpScroll.Show();
         }
     }
 

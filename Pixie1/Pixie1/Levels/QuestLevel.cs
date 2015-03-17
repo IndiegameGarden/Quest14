@@ -187,9 +187,9 @@ namespace Pixie1.Levels
             t.AddText("...where rumors say the Giant Red Sorceress lives.", 5f);
             t.AddText("Get him out and take him back, chivalrous knight!", 5f);
             t.AddText("", 1f);
-            t.AddText("Arrows, WASD = move   //   SPACE = Knights's Attack",6f);
-            t.AddText("LCTRL, X = Use Spell   //   Esc = Exit", 6f);
-            t.AddText("Gamepad:   Button-A = Attack   //   Button-B = Spell", 7f);
+            t.AddText("Press F1 for controls help",6f);
+            //t.AddText("LCTRL, X = Use Spell   //   Esc = Exit", 6f);
+            //t.AddText("Gamepad:   Button-A = Attack   //   Button-B = Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by Indiegame Garden", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
