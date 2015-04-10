@@ -36,7 +36,7 @@ namespace Pixie1.Behaviors
             float randomVal = RandomMath.RandomUnit();
             foreach(Thing t in facing) 
             {
-                if (t.GetType() == EnemyType)
+                if (t.GetType() == EnemyType && t.Health > 0 )
                 {
                     IsCombat = true;
                     if(!WasCombat || randomVal < 0.08f)

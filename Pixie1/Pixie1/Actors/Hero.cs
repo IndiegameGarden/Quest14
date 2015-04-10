@@ -50,7 +50,7 @@ namespace Pixie1.Actors
 
         public void LeadAttack()
         {
-            if (SimTime < 200 && SimTime > 0*21.6)
+            if (SimTime < 200 && SimTime > 21.6)
                 ShowAttackDirectionString();
             foreach (Knight c in Knights)
                 c.Attacking.TriggerAttack();
