@@ -274,9 +274,9 @@ namespace Pixie1
             }
             else
                 Level.Current.SCREEN_MOTION_SPEED = 8f;
-           if (st.IsKeyDown(Keys.F1))
+           if (st.IsKeyDown(Keys.F2))
                Level.Current.hero.IsCollisionFree = true;
-           else if (st.IsKeyDown(Keys.F2))
+           else if (st.IsKeyDown(Keys.F1))
                Level.Current.hero.IsCollisionFree = false;
 #endif
         }
