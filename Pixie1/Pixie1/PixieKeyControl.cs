@@ -89,13 +89,13 @@ namespace Pixie1
 
             // help msg
             if (kb.IsKeyDown(Keys.Z) || kb.IsKeyDown(Keys.C) || kb.IsKeyDown(Keys.F1) || kb.IsKeyDown(Keys.D1)
-                || kb.IsKeyDown(Keys.V) || kb.IsKeyDown(Keys.P) || kb.IsKeyDown(Keys.Enter))
+                || kb.IsKeyDown(Keys.V) || kb.IsKeyDown(Keys.P) || kb.IsKeyDown(Keys.Enter) || kb.IsKeyDown(Keys.Q))
             {
                 ShowKeysHelp();
             }
 
             // trigger Toy
-            bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || kb.IsKeyDown(Keys.LeftControl) || 
+            bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || kb.IsKeyDown(Keys.LeftControl) || kb.IsKeyDown(Keys.RightControl) || 
                                     gp.IsButtonDown(Buttons.B);
             Toy t = ParentThing.ToyActive; 
             if (!isTriggerPressed && isTriggerKeyPressed)

@@ -1,7 +1,10 @@
 TODO
+- add joystick controls to graphical panel
 - knights are very jumpy when doing nothing (during battle areas)
 - knights attack corpses (with sound)
 - quite silent when no battle ongoing.
 
-DONe
+DONE
+OK 2015-04-10 - add key 'q' to show controls help
+OK 2015-03-17 - show keys help panel as a graphic
 OK 2015-03-15 - could add helpful top text when pressing keys (e.g. show valid keys / what happens)
