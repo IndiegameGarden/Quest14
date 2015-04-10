@@ -13,6 +13,7 @@ namespace Pixie1.Toys
 
         public ZoomOutToy()
         {
+            UsedUponPickup = false;
             zoomFactor = 0.5f;
             zoomSpeed = 0.001f;
             UseTimeMax = 30f;

@@ -13,6 +13,7 @@ namespace Pixie1.Toys
     {
         public InvisibilityToy(): base()
         {
+            UsedUponPickup = false;
             UseTimeMax = 16f;
             SetColors(1.9f, Color.LightSkyBlue, new Color(1f,1f,1f,0f));
         }
