@@ -94,6 +94,12 @@ namespace Pixie1
                 ShowKeysHelp();
             }
 
+            // inventory msg
+            if (kb.IsKeyDown(Keys.I))
+            {
+                Level.Current.hero.ShowInventory();
+            }
+
             // trigger Toy
             bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || kb.IsKeyDown(Keys.LeftControl) ||  
                                     gp.IsButtonDown(Buttons.B);
@@ -106,6 +112,8 @@ namespace Pixie1
                 if (t != null && (!t.IsUsed && t.UsesLeft > 0))
                 {
                     t.StartUsing();
+                    if (t.IsUsed && t.UsesLeft <= 0)
+                        ParentThing.ToyActive = null; // remove toy from inventory once used up.
                 }
                 else
                 {
@@ -136,7 +144,7 @@ namespace Pixie1
 
         protected void ShowNoToyString()
         {
-            String t = "No magic\nitem!";
+            String t = "No magic\nitem to use!";
             Level.Current.ControlsHelpText.ClearText();
             Level.Current.ControlsHelpText.AddText(t, 3.3f);
             Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion

@@ -109,6 +109,7 @@ namespace Pixie1
              {
                  ParentThing = Parent as Thing;
                  ParentThing.ToyActive = this;
+                 Level.Current.hero.ShowInventory();
                  if (UsedUponPickup && UsesLeft > 0)
                  {
                      StartUsing();

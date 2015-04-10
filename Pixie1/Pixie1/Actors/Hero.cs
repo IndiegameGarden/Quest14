@@ -73,6 +73,19 @@ namespace Pixie1.Actors
             Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
         }
 
+        public void ShowInventory()
+        {
+            String t = "You now hold\n";
+            if (this.ToyActive==null)
+                t = "You hold\nnothing.";
+            else {
+                t+= "\"" + this.ToyActive.ToyName() + "\"";
+            }
+            Level.Current.ControlsHelpText.ClearText();
+            Level.Current.ControlsHelpText.AddText(t, 3.3f);
+            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+        }
+
         protected override void OnDraw(ref DrawParams p)
         {
             base.OnDraw(ref p);

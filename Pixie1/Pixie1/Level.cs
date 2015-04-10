@@ -130,7 +130,7 @@ namespace Pixie1
             HelpScroll.Motion.TargetPos = HELPSCROLL_HIDE_POS;
             HelpScroll.Motion.TargetPosSpeed = 3f;
             HelpScroll.DrawInfo.Center = new Vector2(1f, 0f);
-            HelpScroll.DrawInfo.LayerDepth = 0.1f;
+            HelpScroll.DrawInfo.LayerDepth = 0.01f;
             Parent.Add(HelpScroll);
 
             Motion.Scale = DEFAULT_SCALE;
