@@ -69,7 +69,7 @@ namespace Pixie1.Actors
 
             Wandering = new RandomWanderBehavior(2.7f, 11.3f);
             Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);
-            ComplexBehavior.Add(Wandering);
+            //ComplexBehavior.Add(Wandering);
         }
 
         protected override void OnDies()
