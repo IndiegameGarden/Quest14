@@ -18,6 +18,7 @@ namespace Pixie1
         SoundEvent soundScript = new SoundEvent();
         RenderParams rp = new RenderParams();
         SoundEvent[] soundsBank = new SoundEvent[20];
+        double lastPlayAttackSignaltime = -100;
 
         public GameSound()
         {
@@ -33,6 +34,7 @@ namespace Pixie1
             soundsBank[7] = new SampleSoundEvent("die1.wav");
             soundsBank[8] = new SampleSoundEvent("pickup.wav");
             soundsBank[9] = new SampleSoundEvent("use-toy.wav");
+            soundsBank[10] = new SampleSoundEvent("trumpet.wav");
         }
 
         public float Volume
@@ -84,14 +86,22 @@ namespace Pixie1
             Play(7, vol);
         }
 
+        public void PlayPickupSound()
+        {
+            Play(8, 1.0f);
+        }
+        
         public void PlayUseToySound()
         {
             Play(9, 1.0f);
         }
 
-        public void PlayPickupSound()
+        public void PlayAttackSignal()
         {
-            Play(8, 1.0f);
+            if (SimTime < lastPlayAttackSignaltime + 8)
+                return;
+            Play(10, 1.0f);
+            lastPlayAttackSignaltime = SimTime;
         }
 
     }

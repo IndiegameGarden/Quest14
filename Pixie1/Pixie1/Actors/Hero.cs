@@ -50,8 +50,10 @@ namespace Pixie1.Actors
 
         public void LeadAttack()
         {
-            if (SimTime < 200 && SimTime > 21.6)
+            if (SimTime < 280 && SimTime > 21.6)
                 ShowAttackDirectionString();
+            if (SimTime > 50 && RandomMath.RandomUnit() < 0.33)
+                Level.Current.Sound.PlayAttackSignal();
             foreach (Knight c in Knights)
                 c.Attacking.TriggerAttack();
         }
