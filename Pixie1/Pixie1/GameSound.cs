@@ -31,7 +31,7 @@ namespace Pixie1
             soundsBank[4] = new SampleSoundEvent("hit_1.wav");
             soundsBank[5] = new SampleSoundEvent("hit_2.wav");
             soundsBank[6] = new SampleSoundEvent("hit_3.wav");
-            soundsBank[7] = new SampleSoundEvent("die1.wav");
+            soundsBank[7] = new SampleSoundEvent("die2.wav");
             soundsBank[8] = new SampleSoundEvent("pickup.wav");
             soundsBank[9] = new SampleSoundEvent("use-toy.wav");
             soundsBank[10] = new SampleSoundEvent("trumpet.wav");
