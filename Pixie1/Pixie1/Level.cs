@@ -105,7 +105,7 @@ namespace Pixie1
             // create level's objects. These will be added as a child later.
             MotionB = new MotionBehavior();
             Subtitles = new SubtitleManager();
-            ControlsHelpText = new SubtitleText();
+            ControlsHelpText = new SubtitleText();            
             HelpScroll = new TimedSpritelet("help-scroll.png");
             //debugMsg = new DebugMessage();
         }
@@ -118,10 +118,11 @@ namespace Pixie1
             var t = ControlsHelpText;
             t.IsAutoPosition = false;
             t.ScaleVector = new Vector2(1f, 1f);
-            t.Motion.Scale = 0.3f;
-            t.Motion.Position = new Vector2(Screen.Center.X * 1.6f, 0.01f);
-            
-            t.DrawInfo.DrawColor = Color.LightSalmon;
+            t.Motion.Scale = 0.4f;
+            t.Motion.Position = new Vector2(Screen.Center.X * 1.5f, 0.01f);
+            t.ShadowVector = new Vector2(1f, 1f); // adapt shadow for small text
+
+            t.DrawInfo.DrawColor = Color.Coral; // Color.LightSalmon;
             Parent.Add(t);
 
             HELPSCROLL_SHOW_POS = new Vector2(Screen.Width - 0.09f, 0.01f);

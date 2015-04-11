@@ -109,7 +109,7 @@ namespace Pixie1
              {
                  ParentThing = Parent as Thing;
                  ParentThing.ToyActive = this;
-                 Level.Current.hero.ShowInventory();
+                 //Level.Current.hero.ShowInventory();
                  if (UsedUponPickup && UsesLeft > 0)
                  {
                      StartUsing();
@@ -164,7 +164,7 @@ namespace Pixie1
             string tname = ToyName();
             if (tname.Length > 0)
             {
-                string s = "It says:" + (tname.Length > 16 ? "\n" : " ") + "\"" + tname + "\"";
+                string s = "\"" + tname + "\"";
                 string thint = ToyHint();
                 if (thint.Length > 0)
                     s += "\n(" + thint + ")";
