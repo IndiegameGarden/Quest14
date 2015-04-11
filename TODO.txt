@@ -1,8 +1,10 @@
 TODO
-- knights are very jumpy when doing nothing (during battle areas)
 - quite silent when no battle ongoing.
 
 DONE
+OK 2015-04-11 - add item used sound
+OK 2015-04-11 - add item pickup sound
+OK 2015-04-11 - knights are very jumpy when doing nothing (during battle areas)
 OK 2015-04-10 - show text inventory when item picked up
 OK 2015-04-10 - knights attack corpses (with sound) (only attack Things with health>0)
 OK 2015-04-10 - add joystick controls to graphical panel

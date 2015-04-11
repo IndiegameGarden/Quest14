@@ -31,6 +31,8 @@ namespace Pixie1
             soundsBank[5] = new SampleSoundEvent("hit_2.wav");
             soundsBank[6] = new SampleSoundEvent("hit_3.wav");
             soundsBank[7] = new SampleSoundEvent("die1.wav");
+            soundsBank[8] = new SampleSoundEvent("pickup.wav");
+            soundsBank[9] = new SampleSoundEvent("use-toy.wav");
         }
 
         public float Volume
@@ -80,6 +82,16 @@ namespace Pixie1
         public void PlayDiedSound(float vol)
         {
             Play(7, vol);
+        }
+
+        public void PlayUseToySound()
+        {
+            Play(9, 1.0f);
+        }
+
+        public void PlayPickupSound()
+        {
+            Play(8, 1.0f);
         }
 
     }

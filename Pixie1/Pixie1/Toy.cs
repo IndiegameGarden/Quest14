@@ -31,6 +31,11 @@ namespace Pixie1
         public bool IsUsed = false;
 
         /// <summary>
+        /// true when has been used for the first time, false if never used yet
+        /// </summary>
+        public bool IsFirstUsed = false;
+
+        /// <summary>
         /// whether the Toy usage is being actively triggered now (true) or not (false).
         /// Triggering is for example by keypress or by the AI of a Thing.
         /// </summary>
@@ -72,6 +77,9 @@ namespace Pixie1
         /// </summary>
         public virtual void StartUsing()
         {
+            if (!IsFirstUsed)
+                Level.Current.Sound.PlayUseToySound();
+            IsFirstUsed = true;
             IsUsed = true;
             UseTime = 0f;
             UsesLeft--;
@@ -144,6 +152,7 @@ namespace Pixie1
             // collision with pixie = pickup            
             if (ParentThing==null && Collides(pixie))
             {
+                Level.Current.Sound.PlayPickupSound();
                 if (CanBePickedUp)
                 {
                     pixie.Add(this);
