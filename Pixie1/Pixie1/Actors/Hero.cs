@@ -52,7 +52,7 @@ namespace Pixie1.Actors
         {
             if (SimTime < 280 && SimTime > 21.6)
                 ShowAttackDirectionString();
-            if (SimTime > 50 && RandomMath.RandomUnit() < 0.33)
+            if (SimTime > 45 && RandomMath.RandomUnit() < 0.4)
                 Level.Current.Sound.PlayAttackSignal();
             foreach (Knight c in Knights)
                 c.Attacking.TriggerAttack();
