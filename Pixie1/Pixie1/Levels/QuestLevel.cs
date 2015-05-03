@@ -195,9 +195,11 @@ namespace Pixie1.Levels
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
             t.AddText("Music by John the Luteist", 3f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
+            t.AddText("Press F1 for controls help", 3f);
             
             Parent.Add(t);
             t.ScaleVector = new Vector2(1f, 1f);
+            t.ShadowVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f ;
             t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
             //t.DrawInfo.Center = Vector2.Zero;

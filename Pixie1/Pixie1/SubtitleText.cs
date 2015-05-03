@@ -119,6 +119,9 @@ namespace Pixie1
                 nextTextStartTime = SimTime; // ensure titles not started in the past
             SubtitleText st = new SubtitleText(txt);
             st.IsAutoPosition = this.IsAutoPosition;
+            st.ShadowVector = this.ShadowVector;
+            st.SubtitleFont = this.SubtitleFont;
+            st.Shadow = this.Shadow;
             st.Duration = duration - 0.1f;
             st.StartTime = nextTextStartTime;
             st.DrawInfo.DrawColor = this.DrawInfo.DrawColor;

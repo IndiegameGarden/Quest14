@@ -180,6 +180,7 @@ namespace Pixie1
             t.AddText("Coding & art by Indiegame Garden 2012-2015", 7f);
 
             t.ScaleVector = new Vector2(1f, 1f);
+            t.ShadowVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f;
             t.Motion.Position = new Vector2(Screen.Center.X, 0.08f);
             t.StartTime = this.SimTime + 28.5f;
@@ -192,13 +193,15 @@ namespace Pixie1
             if (!hasWon)
             {
                 SubtitleText t = new SubtitleText();
-                t.AddText("YOU WIN!", 5f);
+                t.AddText("YOU WIN!!", 5f);
                 t.AddText("Pink Arthur is rescued.", 4f);
                 t.AddText("He rules for\nmany prosperous years.", 4f);
+                t.AddText("The Knights of the Square Table\ncommit a many legendary deeds.", 5f);
                 t.AddText("", 2f);
-                t.AddText("** THE END **", 13f);
+                t.AddText("** THE END **", 4f);
                 float playTime = (float)Math.Round(SimTime);
-                t.AddText("(Rescue time: " + playTime + " heartbeats.)", 15f);
+                t.AddText("(Rescue time: " + playTime + " heart-beats.)", 15f);
+                t.AddText("** THE END **", 30f);
                 Subtitles.Show(6, t);
                 hasWon = true;
             }
