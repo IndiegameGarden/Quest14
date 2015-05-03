@@ -154,9 +154,9 @@ namespace Pixie1
         public PushBehavior Pushing;
 
         /// <summary>
-        /// any color animation this Thing is having
+        /// any color animation or effect this Thing is having
         /// </summary>
-        public ColorCycleBehavior ColorFx;
+        public Gamelet ColorFx;
 
         /// <summary>
         /// the health value of this thing, if <= 0 then it is broken/dead
@@ -541,10 +541,11 @@ namespace Pixie1
 
         public void SetColors(float cyclePeriod, Color minColor, Color maxColor)
         {
-            ColorFx = new ColorCycleBehavior(cyclePeriod);
-            ColorFx.minColor = minColor;
-            ColorFx.maxColor = maxColor;
-            Add(ColorFx);
+            var fx = new ColorCycleBehavior(cyclePeriod);
+            fx.minColor = minColor;
+            fx.maxColor = maxColor;
+            Add(fx);
+            ColorFx = fx;
         }
 
         protected override void OnDraw(ref DrawParams p)
