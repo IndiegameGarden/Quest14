@@ -54,7 +54,10 @@ namespace Pixie1.Behaviors
             if (IsCombat)
             {
                 if (!WasCombat || randomVal < 0.08f)
-                    Level.Current.Sound.PlayRandomCombatSound(0.2f, 0.3f);
+                {
+                    var dist = (ParentThing.Position - Level.Current.hero.Position).Length();
+                    Level.Current.Sound.PlayRandomCombatSound(0.2f, 0.3f, dist);
+                }
             }
         }
 

@@ -14,6 +14,7 @@ namespace Pixie1
      */
     public class GameSound: Gamelet
     {
+        public const float HEARING_RANGE = 60f;
         float vol = 0.5f;
         SoundEvent soundScript = new SoundEvent();
         RenderParams rp = new RenderParams();
@@ -75,10 +76,23 @@ namespace Pixie1
             Play(effect, RandomMath.RandomBetween(volumeMin, volumeMax));
         }
 
-        public void PlayRandomCombatSound(float volumeMin, float volumeMax)
+        /// <summary>
+        /// play a random combat sound, optionally adapted by a distance to player
+        /// </summary>
+        /// <param name="volumeMin"></param>
+        /// <param name="volumeMax"></param>
+        /// <param name="distToPlayer"></param>
+        public void PlayRandomCombatSound(float volumeMin, float volumeMax, float distToPlayer = 0f)
         {
+            float a = 1f;
+            if (distToPlayer > 0f)
+            {
+                if (distToPlayer > HEARING_RANGE)
+                    return;
+                a = 1f - (distToPlayer / HEARING_RANGE);
+            }
             int n = RandomMath.RandomIntBetween(1,6);
-            Play(n, RandomMath.RandomBetween(volumeMin, volumeMax));
+            Play(n, RandomMath.RandomBetween(volumeMin * a, volumeMax * a));
         }
 
         public void PlayDiedSound(float vol)
