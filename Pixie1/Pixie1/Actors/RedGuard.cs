@@ -18,8 +18,12 @@ namespace Pixie1.Actors
         public AlwaysTurnRightBehavior Turning;
         public RandomWanderBehavior Wandering;
 
+        // combat damage
+        public float    MinDamage = 0.9f,
+                        MaxDamage = 2.5f;
         protected string[] attackString = new string[] { "Take this, golden villain!", "We hurt the leader!", "Galad bleeds!", "Our swords struck true!",
-            "To the grave, traitor!", "Die, golden scum!" , "He stumbles!"};
+            "To the grave, traitor!", "Die, golden scum!" , "He stumbles!", "Kill him!", "Take the leader!",
+            "Death to all Pixelot!", "We got him!", "Victory to the sorceress!" };
 
         public static RedGuard Create()
         {
@@ -74,7 +78,9 @@ namespace Pixie1.Actors
                     {
                         Level.Current.Sound.PlayRandomCombatSound(0.2f, 0.3f);
                         Level.Current.Subtitles.Show(3, "(Red:) " + attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
-                        Level.Current.hero.Health -= RandomMath.RandomBetween(1f, 2.5f);
+                        var damage = RandomMath.RandomBetween(MinDamage, MaxDamage);
+                        HurtBehavior.Apply(Level.Current.hero, damage, MaxDamage);
+                        Level.Current.hero.Health -= damage;
                     }
                 }
             }

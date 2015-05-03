@@ -19,7 +19,9 @@ namespace Pixie1.Behaviors
             "Kill them!", "Cover me!", "Engage!", "ATTACK!!", "Swords!", "Drive them back!",
             "Begone, red knaves!", "Red traitors, die!", "Strike now!", "STRIKE!" ,
             "A thousand battles,\na thousand victories!", "We shall prevail!", "Arthur, to your service!",
-            "Squash the red vermin.", "Blue and Gold! For honor!", "For justice!", "For the King!"};
+            "Squash the red vermin.", "Blue and Gold! For honor!", "For justice!", "For the King!",
+            "For the glory of Pixelot!", "Death to the sorceress!", "Butcher the red scum!", "Be strong!",
+            "Bear with me!" };
 
         public AttackBehavior(Thing leader)
         {

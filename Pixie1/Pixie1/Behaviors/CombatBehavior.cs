@@ -10,6 +10,8 @@ namespace Pixie1.Behaviors
      */
     public class CombatBehavior: ThingControl
     {
+        public float MaxDamage = 1.6f,
+                     MinDamage = 0.8f;
         public Type EnemyType;
         public bool IsCombat = false;
         public bool WasCombat = false;
@@ -36,11 +38,15 @@ namespace Pixie1.Behaviors
             float randomVal = RandomMath.RandomUnit();
             foreach(Thing t in facing) 
             {
-                if (t.GetType() == EnemyType && t.Health > 0 )
+                if (t.GetType() == EnemyType && t.Health > 0 && !t.IsStealthy)
                 {
                     IsCombat = true;
-                    if(!WasCombat || randomVal < 0.08f)
-                        t.Health -= RandomMath.RandomBetween(0.8f, 1.6f);
+                    if (!WasCombat || randomVal < 0.08f)
+                    {                        
+                        var damage = RandomMath.RandomBetween(MinDamage, MaxDamage);
+                        HurtBehavior.Apply(t,damage,MaxDamage);
+                        t.Health -= damage;
+                    }
                     break; // only attack one thing at a time
                 }
             }

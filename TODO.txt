@@ -1,7 +1,9 @@
 TODO
-- blink pixel black when hit taken
+- treasure chamber?
+- shadow correction for small text
 
 DONE
+OK 2015-05-03 - blink pixel when hit taken
 OK 2015-05-03 - blink invisible characters
 OK 2015-04-11 - add item used sound
 OK 2015-04-11 - add item pickup sound
