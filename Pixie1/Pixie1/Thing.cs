@@ -21,6 +21,11 @@ namespace Pixie1
     public class Thing: Spritelet
     {
         /// <summary>
+        /// if stealthy, is not noticed by enemies
+        /// </summary>
+        public bool IsStealthy = false;
+
+        /// <summary>
         /// if true can pass anything
         /// </summary>
         public bool IsCollisionFree = true;
@@ -289,7 +294,7 @@ namespace Pixie1
                         // check all attached Things too                        
                         foreach (Gamelet g in Children)
                         {
-                            if (g is Thing && g.Visible)
+                            if (g is Thing)
                             {
                                 Thing t = g as Thing;
                                 if (t.IsCollisionFree) continue;
@@ -355,8 +360,6 @@ namespace Pixie1
             {
                 if (t == this) continue;
                 if (!t.Active) continue;
-                if (!t.Visible) continue;
-                if (t.Delete) continue;
                 if (CollidesWhenThisMoves(t,myPotentialMove))
                 {
                     l.Add(t);
@@ -365,7 +368,7 @@ namespace Pixie1
             return l;
         }
 
-        public Thing FindNearest(Type thingType)
+        public Thing FindNearest(Type thingType, bool ignoreStealthy = true)
         {
             Thing foundThing = null;
             float bestDist = 99999999f;
@@ -373,8 +376,7 @@ namespace Pixie1
             {
                 if (t == this) continue;
                 if (!t.Active) continue;
-                if (!t.Visible) continue;
-                if (t.Delete) continue;
+                if (ignoreStealthy && t.IsStealthy) continue;
                 if (t.Health <= 0f) continue;
                 if (t.GetType() == thingType)
                 {

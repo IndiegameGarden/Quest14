@@ -112,7 +112,7 @@ namespace Pixie1.Behaviors
                 ChaseTarget = ParentThing.FindNearest(ChaseTargetType);
             }
             
-            if (ChaseTarget != null && ChaseTarget.Visible && ChaseTarget.Health > 0f)
+            if (ChaseTarget != null && !ChaseTarget.IsStealthy && ChaseTarget.Health > 0f)
             {
                 Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();

@@ -2,6 +2,7 @@ TODO
 - blink pixel black when hit taken
 
 DONE
+OK 2015-05-03 - blink invisible characters
 OK 2015-04-11 - add item used sound
 OK 2015-04-11 - add item pickup sound
 OK 2015-04-11 - knights are very jumpy when doing nothing (during battle areas)

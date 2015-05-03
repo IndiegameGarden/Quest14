@@ -45,5 +45,11 @@ namespace Pixie1.Behaviors
             else
                 Parent.Visible = false;
         }
+
+        protected override void OnDelete()
+        {
+            base.OnDelete();
+            Parent.Visible = true; // ensure after blinking stops, we can see it again.
+        }
     }
 }
