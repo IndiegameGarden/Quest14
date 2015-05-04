@@ -19,6 +19,7 @@ namespace Pixie1.Behaviors
         public CombatBehavior(Type enemyType)
         {
             EnemyType = enemyType;
+            MoveSpeed = 0.3f;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -41,6 +42,8 @@ namespace Pixie1.Behaviors
                 if (t.GetType() == EnemyType && t.Health > 0 && !t.IsStealthy)
                 {
                     IsCombat = true;
+                    IsTargetMoveDefined = true;
+                    TargetMove = Vector2.Zero;
                     if (!WasCombat || randomVal < 0.08f)
                     {                        
                         var damage = RandomMath.RandomBetween(MinDamage, MaxDamage);

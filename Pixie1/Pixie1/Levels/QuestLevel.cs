@@ -15,6 +15,11 @@ namespace Pixie1.Levels
     /// </summary>
     public class QuestLevel : Level
     {
+#if DEBUG
+        const float DEBUG_SHIFT_POS_RIGHT = 200f;
+#else
+        const float DEBUG_SHIFT_POS_RIGHT = 0f;
+#endif
         Vector2 PINKARTHUR_POSITION = new Vector2(557f, 281f);
         Vector2 TRACKING_HELPER_POINT = new Vector2(28f, 54f);
         Color ITEM_BLOCK_COLOR = new Color(179, 102, 27); // 179,102,27 brown: block
@@ -32,7 +37,7 @@ namespace Pixie1.Levels
             HERO_STARTING_POS = new Vector2(36f, 65f); // in pixels        
             //PIXIE_STARTING_POS = new Vector2(242f, 155f); // debug
             //PIXIE_STARTING_POS = PRINCESS_POSITION + new Vector2(-10f,-10f); // debug
-            //PIXIE_STARTING_POS += new Vector2(200f, 4f); // debug
+            HERO_STARTING_POS += new Vector2(DEBUG_SHIFT_POS_RIGHT, 0f); // debug
             //PIXIE_STARTING_POS = new Vector2(73f, 10f); // debug
             //BG_STARTING_POS = new Vector2(30f, 155f); // in pixels; bg=background            
             BG_STARTING_POS = HERO_STARTING_POS; // +new Vector2(-12f, 0f); 
@@ -102,7 +107,7 @@ namespace Pixie1.Levels
             for (int i = 0; i < 14; i++) // XIV companions!
             {
                 Knight cp = Knight.Create(); 
-                cp.PositionAndTarget = new Vector2(KnightsStartingPositions[2*i],KnightsStartingPositions[2*i+1]);
+                cp.PositionAndTarget = new Vector2(KnightsStartingPositions[2*i] + DEBUG_SHIFT_POS_RIGHT,KnightsStartingPositions[2*i+1]);
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(cp);
                 hero.Knights.Add(cp);
