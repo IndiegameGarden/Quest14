@@ -41,7 +41,7 @@ namespace Pixie1.Behaviors
             else
             {
                 // if already attacking, allow more range with new attack
-                if (k.ChasingHero.SatisfiedRange < 18f)
+                if (k.ChasingHero.SatisfiedRange < 23f)
                     k.ChasingHero.SatisfiedRange++;
                 CurrentAttackDuration = 0f;
             }
