@@ -44,7 +44,7 @@ namespace Pixie1.Actors
 
             ChasingHero = new ChaseBehavior(Level.Current.hero);
             ChasingHero.ChaseRange = 24f; // 110f;
-            ChasingHero.SatisfiedRange = 7f;
+            ChasingHero.SatisfiedRange = 8f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.54f, 1.87f);
             ComplexBehavior.Add(ChasingHero);
 
@@ -66,11 +66,11 @@ namespace Pixie1.Actors
 
             WallFollowing = new AlwaysTurnRightBehavior();
             WallFollowing.MoveSpeed = ChasingHero.MoveSpeed * 0.7f;
-            ComplexBehavior.Add(WallFollowing);
+            //ComplexBehavior.Add(WallFollowing);
 
-            Wandering = new RandomWanderBehavior(2.7f, 11.3f);
-            Wandering.MoveSpeed = RandomMath.RandomBetween(0.09f, 0.25f);
-            //ComplexBehavior.Add(Wandering);
+            Wandering = new RandomWanderBehavior(15.7f, 23.3f);
+            Wandering.MoveSpeed = RandomMath.RandomBetween(0.001f, 0.02f);
+            ComplexBehavior.Add(Wandering);
         }
 
         protected override void OnDies()
