@@ -1,8 +1,8 @@
 TODO
 - treasure chamber?
-- more intelligent path following?
 
 DONE
+OK 2015-05-06 - more intelligent path following using Astar
 OK 2015-05-04 - attacking slows down move of character (hopefully)
 OK 2015-05-03 - no attack sounds for far-away fights
 OK 2015-05-03 - knights should walk a bit faster than hero (to catch up)

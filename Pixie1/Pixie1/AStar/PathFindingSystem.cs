@@ -24,12 +24,30 @@ namespace Pixie1.AStar
         }
     }
 
+    public class MySolver<TPathNode, TUserContext> : SpatialAStar<TPathNode, TUserContext> where TPathNode : IPathNode<TUserContext>
+    {
+        protected override Double Heuristic(PathNode inStart, PathNode inEnd)
+        {
+            return Math.Abs(inStart.X - inEnd.X) + Math.Abs(inStart.Y - inEnd.Y);
+        }
+
+        protected override Double NeighborDistance(PathNode inStart, PathNode inEnd)
+        {
+            return Heuristic(inStart, inEnd);
+        }
+
+        public MySolver(TPathNode[,] inGrid)
+            : base(inGrid)
+        {
+        }
+    }
+
     public class PathFindingSystem
     {
         Queue<PathFindingJob> jobQ = new Queue<PathFindingJob>();
         Thread thread;
         bool isRunning = true;
-        SpatialAStar<MyPathNode, Object> aStar;
+        MySolver<MyPathNode, Object> aStar;
         MyPathNode[,] grid ;
         LevelBackground levelBg;
 
@@ -59,7 +77,7 @@ namespace Pixie1.AStar
                 }
             }
 
-            aStar = new SpatialAStar<MyPathNode, Object>(grid);
+            aStar = new MySolver<MyPathNode, Object>(grid);
             StartSystemThread();
         }
 
