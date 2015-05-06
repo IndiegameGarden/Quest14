@@ -94,6 +94,7 @@ namespace Pixie1
 
         public void StopPlay()
         {
+            Level.Current.PathFinder.StopSystem();
             Exit();
         }
 

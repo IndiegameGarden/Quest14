@@ -16,7 +16,7 @@ namespace Pixie1.Levels
     public class QuestLevel : Level
     {
 #if DEBUG
-        const float DEBUG_SHIFT_POS_RIGHT = 200f;
+        const float DEBUG_SHIFT_POS_RIGHT = 0f; //200f;
 #else
         const float DEBUG_SHIFT_POS_RIGHT = 0f;
 #endif

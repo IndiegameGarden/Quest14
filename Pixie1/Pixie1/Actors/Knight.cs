@@ -43,14 +43,15 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Combat);
 
             ChasingHero = new ChaseBehavior(Level.Current.hero);
-            ChasingHero.ChaseRange = 50f; // 110f;
-            ChasingHero.SatisfiedRange = 6f;
+            ChasingHero.ChaseRange = 24f; // 110f;
+            ChasingHero.SatisfiedRange = 7f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.54f, 1.87f);
             ComplexBehavior.Add(ChasingHero);
 
-            TrailHeroBehavior tb = new TrailHeroBehavior();
+            //TrailHeroBehavior tb = new TrailHeroBehavior();
+            PathFindToHeroBehavior tb = new PathFindToHeroBehavior();
             tb.ChaseRange = 970f;
-            tb.CheatRange = ChasingHero.ChaseRange + 8f;
+            //tb.CheatRange = ChasingHero.ChaseRange + 8f;
             tb.SatisfiedRange = ChasingHero.ChaseRange - 2f;
             ComplexBehavior.Add(tb);
 

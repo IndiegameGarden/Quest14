@@ -76,6 +76,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -95,7 +96,12 @@
     <Compile Include="Actors\Block.cs" />
     <Compile Include="Actors\Servant.cs" />
     <Compile Include="Actors\PinkArthur.cs" />
+    <Compile Include="AStar\PathFindingJob.cs" />
+    <Compile Include="AStar\PathFindingSystem.cs" />
+    <Compile Include="AStar\PriorityQueue.cs" />
+    <Compile Include="AStar\SpatialAStar.cs" />
     <Compile Include="Behaviors\AttackBehavior.cs" />
+    <Compile Include="Behaviors\PathFindToHeroBehavior.cs" />
     <Compile Include="Behaviors\HurtBehavior.cs" />
     <Compile Include="Behaviors\TrailHeroBehavior.cs" />
     <Compile Include="Behaviors\CombatBehavior.cs" />

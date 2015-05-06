@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Pixie1.Actors;
+using Pixie1.AStar;
 
 namespace Pixie1
 {
@@ -62,6 +63,11 @@ namespace Pixie1
         /// background bitmap
         /// </summary>
         public LevelBackground Background;
+
+        /// <summary>
+        /// path finding system for level
+        /// </summary>
+        public PathFindingSystem PathFinder;
 
         /// <summary>
         /// load items/toys/things to a level using a bitmap
@@ -233,6 +239,7 @@ namespace Pixie1
             Add(MotionB);
 
             InitLevel();
+            PathFinder = new PathFindingSystem(Background, DefaultPassableIntensityThreshold);
             InitPixie();
             InitBadPixels();
             InitToys();
@@ -278,10 +285,25 @@ namespace Pixie1
             }
             else
                 Level.Current.SCREEN_MOTION_SPEED = 8f;
+
            if (st.IsKeyDown(Keys.F2))
                Level.Current.hero.IsCollisionFree = true;
            else if (st.IsKeyDown(Keys.F1))
                Level.Current.hero.IsCollisionFree = false;
+           else if (st.IsKeyDown(Keys.OemMinus))
+           {
+               Motion m = Level.Current.Motion;
+               m.ZoomTarget = 0.5f;
+               m.ZoomSpeed = 0.005f;
+               m.ZoomCenterTarget = Level.Current.hero.Motion;
+           }
+           else if (st.IsKeyDown(Keys.OemPlus))
+           {
+               Motion m = Level.Current.Motion;
+               m.ZoomTarget = 1f;
+               m.ZoomSpeed = 0.005f;
+               m.ZoomCenterTarget = Level.Current.hero.Motion;
+           }
 #endif
         }
 
@@ -306,18 +328,6 @@ namespace Pixie1
         {
             return true;
         }
-
-        /// <summary>
-        /// check whether the given pixel position in this level is currently passable
-        /// </summary>
-        /// <param name="pos">pixel position to check</param>
-        /// <returns>true if passable for any Thing entity</returns>
-        /*
-        public bool CanPass(Vector2 pos)
-        {
-            return Background.IsWalkable(pos);
-        }
-        */
 
         protected override void OnUpdate(ref UpdateParams p)
         {
