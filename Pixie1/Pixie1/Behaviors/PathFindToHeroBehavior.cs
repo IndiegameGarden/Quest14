@@ -28,23 +28,31 @@ namespace Pixie1.Behaviors
         {
             base.OnNextMove();
 
-            // follow path finding trail
-            Vector2 vNext = new Vector2(pathPointer.Value.X, pathPointer.Value.Y);
-            Vector2 dif = vNext - ParentThing.Target;
-            if (pathPointer == job.Result.Last)
+            try
             {
-                // path is done. No next move.
+                // follow path finding trail
+                Vector2 vNext = new Vector2(pathPointer.Value.X, pathPointer.Value.Y);
+                Vector2 dif = vNext - ParentThing.Target;
+                if (pathPointer == job.Result.Last)
+                {
+                    // path is done. No next move.
+                    job = null;
+                }
+                else
+                {
+                    pathPointer = pathPointer.Next;
+                }
+
+                // do the move
+                if (dif.Length() > 0f)
+                    dif.Normalize();
+                TargetMove = dif;
+            }
+            // if using the path failed for some reason, reset it.
+            catch (Exception)
+            {
                 job = null;
             }
-            else
-            {
-                pathPointer = pathPointer.Next;
-            }
-
-            // do the move
-            if(dif.Length()>0f)
-                dif.Normalize();
-            TargetMove = dif;
         }
 
         protected override void OnUpdate(ref UpdateParams p)
@@ -80,7 +88,6 @@ namespace Pixie1.Behaviors
             else
             {
                 // not in the right range. Delete any previous paths to reset.
-                pathPointer = null;
                 job = null;
             }
 
