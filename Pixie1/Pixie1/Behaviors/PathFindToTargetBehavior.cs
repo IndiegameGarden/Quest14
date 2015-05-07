@@ -39,6 +39,12 @@ namespace Pixie1.Behaviors
                 // follow path finding trail
                 Vector2 vNext = new Vector2(pathPointer.Value.X, pathPointer.Value.Y);
                 Vector2 dif = vNext - ParentThing.Target;
+                // do the move
+                if (dif.Length() > 0f)
+                    dif.Normalize();
+                TargetMove = dif;
+
+                // advance the pointer to path/trail
                 if (pathPointer == job.Result.Last)
                 {
                     // path is done. No next move.
@@ -46,13 +52,11 @@ namespace Pixie1.Behaviors
                 }
                 else
                 {
-                    pathPointer = pathPointer.Next;
+                    // only advance pointer when position was reached
+                    if (ParentThing.Target + TargetMove == vNext)
+                        pathPointer = pathPointer.Next;
                 }
 
-                // do the move
-                if (dif.Length() > 0f)
-                    dif.Normalize();
-                TargetMove = dif;
             }
             // if using the path failed for some reason, reset it.
             catch (Exception)
