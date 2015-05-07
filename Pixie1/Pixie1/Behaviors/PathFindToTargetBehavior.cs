@@ -9,8 +9,13 @@ using Pixie1.AStar;
 
 namespace Pixie1.Behaviors
 {
-    public class PathFindToHeroBehavior: ThingControl
+    public class PathFindToTargetBehavior: ThingControl
     {
+        /// <summary>
+        /// the Thing to path-find to (may change over time)
+        /// </summary>
+        public Thing TargetThing;
+
         /// <summary>
         /// chase range in pixels
         /// </summary>
@@ -21,6 +26,7 @@ namespace Pixie1.Behaviors
         /// </summary>
         public float SatisfiedRange = 2f;
 
+        // internal vars
         LinkedListNode<MyPathNode> pathPointer = null;
         PathFindingJob job = null;
 
@@ -60,12 +66,12 @@ namespace Pixie1.Behaviors
             base.OnUpdate(ref p);
 
             // some vars
-            Vector2 vHero = Level.Current.hero.Target;
-            Vector2 vMeToHero = vHero - ParentThing.Target;
-            float distToHero = vMeToHero.Length();
+            Vector2 vTarg = TargetThing.Target;
+            Vector2 vMeToTarg = vTarg - ParentThing.Target;
+            float distToTarg = vMeToTarg.Length();
 
             // check if in range to operate the behavior
-            if (distToHero <= ChaseRange && distToHero > SatisfiedRange)
+            if (distToTarg <= ChaseRange && distToTarg > SatisfiedRange)
             {
                 // check if a path is already planned...
                 if (job != null && job.Result != null)
@@ -79,7 +85,7 @@ namespace Pixie1.Behaviors
                     var newJob = new PathFindingJob()
                     {
                         From = ParentThing.Target,
-                        To = vHero,
+                        To = vTarg,
                         Callback = PathFinderCallback
                     };
                     Level.Current.PathFinder.AddJob(newJob);

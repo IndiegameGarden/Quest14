@@ -43,16 +43,19 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Combat);
 
             ChasingHero = new ChaseBehavior(Level.Current.hero);
-            ChasingHero.ChaseRange = 24f; // 110f;
+            ChasingHero.ChaseRange = 20f; // 110f;
             ChasingHero.SatisfiedRange = 8f;
             ChasingHero.MoveSpeed = RandomMath.RandomBetween(1.54f, 1.87f);
             ComplexBehavior.Add(ChasingHero);
 
             //TrailHeroBehavior tb = new TrailHeroBehavior();
-            PathFindToHeroBehavior tb = new PathFindToHeroBehavior();
-            tb.ChaseRange = 970f;
-            //tb.CheatRange = ChasingHero.ChaseRange + 8f;
-            tb.SatisfiedRange = ChasingHero.ChaseRange - 2f;
+            //tb.CheatRange = ChasingHero.ChaseRange + 8f;             
+            var tb = new PathFindToTargetBehavior()
+            {
+                TargetThing = Level.Current.hero,
+                ChaseRange = 970f,    
+                SatisfiedRange = ChasingHero.ChaseRange - 2f
+            };
             ComplexBehavior.Add(tb);
 
             ChasingRedGuard = new ChaseBehavior(typeof(RedGuard));
@@ -64,8 +67,8 @@ namespace Pixie1.Actors
             Attacking.AttackDuration = RandomMath.RandomBetween(1.5f, 2.8f);
             ComplexBehavior.Add(Attacking);
 
-            WallFollowing = new AlwaysTurnRightBehavior();
-            WallFollowing.MoveSpeed = ChasingHero.MoveSpeed * 0.7f;
+            //WallFollowing = new AlwaysTurnRightBehavior();
+            //WallFollowing.MoveSpeed = ChasingHero.MoveSpeed * 0.7f;
             //ComplexBehavior.Add(WallFollowing);
 
             Wandering = new RandomWanderBehavior(15.7f, 23.3f);

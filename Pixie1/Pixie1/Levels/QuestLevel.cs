@@ -185,6 +185,10 @@ namespace Pixie1.Levels
 
             t = new SubtitleText();
             t.IsAutoPosition = true;
+            t.ScaleVector = new Vector2(1f, 1f);
+            t.ShadowVector = new Vector2(1f, 1f);
+            t.Motion.Scale = 0.5f;
+            t.StartTime = logo.StartTime + logo.Duration + 0.6f;
             t.AddText("Galad the Golden, you must rescue Pink Arthur...", 5f);
             t.AddText("...from the clutches of the evil Red Guard.", 5f);
             t.AddText("The Fourteen Kobalt Knights will aid you!", 5f);
@@ -193,22 +197,14 @@ namespace Pixie1.Levels
             t.AddText("Get him out and take him back, chivalrous knight!", 5f);
             t.AddText("", 1f);
             t.AddText("Press F1 for controls help",6f);
-            //t.AddText("LCTRL, X = Use Spell   //   Esc = Exit", 6f);
-            //t.AddText("Gamepad:   Button-A = Attack   //   Button-B = Spell", 7f);
             t.AddText("", 1f);
             t.AddText("Coding & art by Indiegame Garden", 4f);
             t.AddText("Sounds by Jute and artisticdude (opengameart.org)", 3f);
             t.AddText("Music by John the Luteist", 3f);
             t.AddText("Sprite by Charles Gabriel (opengameart.org)", 3f);
-            t.AddText("Press F1 for controls help", 3f);
-            
+            t.AddText("Press F1 for controls help", 3f);            
             Parent.Add(t);
-            t.ScaleVector = new Vector2(1f, 1f);
-            t.ShadowVector = new Vector2(1f, 1f);
-            t.Motion.Scale = 0.5f ;
-            t.Motion.Position = new Vector2(Screen.Center.X,0.08f);
-            //t.DrawInfo.Center = Vector2.Zero;
-            t.StartTime = logo.StartTime + logo.Duration + 0.6f;
+            t.Motion.Position = new Vector2(Screen.Center.X, 0.08f);
         }
 
         protected override bool ScreenBorderHit()

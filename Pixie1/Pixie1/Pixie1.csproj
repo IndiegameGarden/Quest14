@@ -101,7 +101,7 @@
     <Compile Include="AStar\PriorityQueue.cs" />
     <Compile Include="AStar\SpatialAStar.cs" />
     <Compile Include="Behaviors\AttackBehavior.cs" />
-    <Compile Include="Behaviors\PathFindToHeroBehavior.cs" />
+    <Compile Include="Behaviors\PathFindToTargetBehavior.cs" />
     <Compile Include="Behaviors\HurtBehavior.cs" />
     <Compile Include="Behaviors\TrailHeroBehavior.cs" />
     <Compile Include="Behaviors\CombatBehavior.cs" />

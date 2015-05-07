@@ -127,7 +127,6 @@ namespace Pixie1
             t.Motion.Scale = 0.4f;
             t.Motion.Position = new Vector2(Screen.Center.X * 1.5f, 0.01f);
             t.ShadowVector = new Vector2(1f, 1f); // adapt shadow for small text
-
             t.DrawInfo.DrawColor = Color.Coral; // Color.LightSalmon;
             Parent.Add(t);
 
@@ -183,13 +182,12 @@ namespace Pixie1
             isBackgroundScrollingOn = false;
 
             t = new SubtitleText();
-            t.AddText("Coding & art by Indiegame Garden 2012-2015", 7f);
-
             t.ScaleVector = new Vector2(1f, 1f);
             t.ShadowVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.5f;
             t.Motion.Position = new Vector2(Screen.Center.X, 0.08f);
             t.StartTime = this.SimTime + 28.5f;
+            t.AddText("Coding & art by Indiegame Garden 2012-2015", 7f);
             Parent.AddNextUpdate(t);
 
         }
