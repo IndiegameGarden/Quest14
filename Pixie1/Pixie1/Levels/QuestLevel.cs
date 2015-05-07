@@ -148,6 +148,10 @@ namespace Pixie1.Levels
             InitToy(new SpeedModifyToy(2f), 172,230);
             InitToy(new SpeedModifyToy(2f), 450, 291);
             InitToy(new ZoomOutToy(), 560,57);
+            InitToy(new TruthSerum(), 400, 267);
+#if DEBUG
+            InitToy(new TruthSerum(), 41, 56); //debug
+#endif
         }
 
         protected void InitToy(Toy t, int x, int y)

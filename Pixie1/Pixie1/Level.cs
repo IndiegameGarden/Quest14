@@ -281,6 +281,11 @@ namespace Pixie1
                 Level.Current.king.PositionAndTarget = new Vector2(72f, 64f);
                 Level.Current.SCREEN_MOTION_SPEED = 150f;
             }
+            else if (st.IsKeyDown(Keys.D3))
+            {
+                Level.Current.hero.PositionAndTarget = new Vector2(380f, 267f);
+                Level.Current.SCREEN_MOTION_SPEED = 150f;
+            }
             else
                 Level.Current.SCREEN_MOTION_SPEED = 8f;
 

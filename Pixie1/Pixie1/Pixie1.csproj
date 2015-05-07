@@ -110,7 +110,6 @@
     <Compile Include="Actors\RedGuard.cs" />
     <Compile Include="Behaviors\AlwaysTurnRightBehavior.cs" />
     <Compile Include="Behaviors\RandomWanderBehavior.cs" />
-    <Compile Include="Behaviors\ReverseControlBehavior.cs" />
     <Compile Include="Behaviors\BlinkBehaviour.cs" />
     <Compile Include="Behaviors\ChaseBehavior.cs" />
     <Compile Include="Behaviors\ColorCycleBehavior.cs" />
@@ -134,6 +133,7 @@
     <Compile Include="PixieGame.cs" />
     <Compile Include="LevelBackground.cs" />
     <Compile Include="RandomMath.cs" />
+    <Compile Include="Toys\TruthSerum.cs" />
     <Compile Include="Toys\MerlinTestToy.cs" />
     <Compile Include="Toys\InvisibilityToy.cs" />
     <Compile Include="Toys\PaintToy.cs" />

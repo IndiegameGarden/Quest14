@@ -18,11 +18,6 @@ namespace Pixie1.Toys
             return "Spell of Illusions";
         }
 
-        public override string ToyHint()
-        {
-            return "press X to cast!";
-        }
-
         public override void StartUsing()
         {
             base.StartUsing();

@@ -41,6 +41,10 @@ namespace Pixie1
 
         protected float wTime = RandomMath.RandomBetween(0f,0.2f); // TODO value would depend on MoveSpeed.
 
+        public void ReverseBehavior() {
+            TargetMoveMultiplier *= -1f;
+        }
+
         protected override void OnNewParent()
         {
             base.OnNewParent();

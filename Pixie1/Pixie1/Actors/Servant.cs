@@ -9,10 +9,10 @@ namespace Pixie1.Actors
 {
     public class Servant: Thing
     {
+        public SubsumptionBehavior ComplexBehavior;
         public ChaseBehavior AvoidingHero;
         public ChaseBehavior AvoidingKnights;
         public RandomWanderBehavior Wandering;
-        public ReverseControlBehavior Reverse;
 
         public static Servant Create()
         {
@@ -26,25 +26,26 @@ namespace Pixie1.Actors
             Pushing.Force = 0f; // servants cant push others.
             DrawInfo.DrawColor = Color.Yellow;
 
+            ComplexBehavior = new SubsumptionBehavior();
+            Add(ComplexBehavior);
+
             // avoid other things
             AvoidingKnights = new ChaseBehavior(typeof(Knight));
             AvoidingKnights.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             AvoidingKnights.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
-            Add(AvoidingKnights);
+            AvoidingKnights.ReverseBehavior();
+            ComplexBehavior.Add(AvoidingKnights);
 
             // avoid other things
             AvoidingHero = new ChaseBehavior(typeof(Hero));
             AvoidingHero.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             AvoidingHero.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
-            //Avoiding.Avoidance = true;
-            Add(AvoidingHero);
+            AvoidingHero.ReverseBehavior();
+            ComplexBehavior.Add(AvoidingHero);
 
             Wandering = new RandomWanderBehavior(9.7f, 14.3f);
             Wandering.MoveSpeed = 0.3f;
-            Add(Wandering);
-
-            Reverse = new ReverseControlBehavior();
-            Add(Reverse);
+            ComplexBehavior.Add(Wandering);
         }
 
         protected override void OnUpdate(ref UpdateParams p)
