@@ -14,7 +14,7 @@ namespace Pixie1.Behaviors
         /// <summary>
         /// the Thing to path-find to (may change over time)
         /// </summary>
-        public Thing TargetThing;
+        public Thing ChaseTarget;
 
         /// <summary>
         /// chase range in pixels
@@ -66,12 +66,12 @@ namespace Pixie1.Behaviors
             base.OnUpdate(ref p);
 
             // some vars
-            Vector2 vTarg = TargetThing.Target;
+            Vector2 vTarg = ChaseTarget.Target;
             Vector2 vMeToTarg = vTarg - ParentThing.Target;
             float distToTarg = vMeToTarg.Length();
 
             // check if in range to operate the behavior
-            if (distToTarg <= ChaseRange && distToTarg > SatisfiedRange)
+            if (distToTarg <= ChaseRange && distToTarg > SatisfiedRange && !ChaseTarget.IsStealthy)
             {
                 // check if a path is already planned...
                 if (job != null && job.Result != null)

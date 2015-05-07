@@ -52,7 +52,7 @@ namespace Pixie1.Actors
             //tb.CheatRange = ChasingHero.ChaseRange + 8f;             
             var tb = new PathFindToTargetBehavior()
             {
-                TargetThing = Level.Current.hero,
+                ChaseTarget = Level.Current.hero,
                 ChaseRange = 970f,    
                 SatisfiedRange = ChasingHero.ChaseRange - 2f
             };
