@@ -145,9 +145,9 @@ namespace Pixie1
         protected void ShowNoToyString()
         {
             String t = "No magic\nitem to use!";
-            Level.Current.ControlsHelpText.ClearText();
-            Level.Current.ControlsHelpText.AddText(t, 3.3f);
-            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+            Level.Current.StatusText.ClearText();
+            Level.Current.StatusText.AddText(t, 3.3f);
+            Level.Current.StatusText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
         }
 
         protected void ShowKeysHelp()

@@ -70,9 +70,9 @@ namespace Pixie1.Actors
             if (FacingDirection.X == 0 && FacingDirection.Y > 0)
                 t += "south";
             t += "ward.";
-            Level.Current.ControlsHelpText.ClearText();
-            Level.Current.ControlsHelpText.AddText(t, 3.3f);
-            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+            Level.Current.StatusText.ClearText();
+            Level.Current.StatusText.AddText(t, 3.3f);
+            Level.Current.StatusText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
         }
 
         public void ShowInventory()
@@ -83,9 +83,9 @@ namespace Pixie1.Actors
             else {
                 t+= "\"" + this.ToyActive.ToyName() + "\"";
             }
-            Level.Current.ControlsHelpText.ClearText();
-            Level.Current.ControlsHelpText.AddText(t, 3.3f);
-            Level.Current.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+            Level.Current.StatusText.ClearText();
+            Level.Current.StatusText.AddText(t, 3.3f);
+            Level.Current.StatusText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
         }
 
         protected override void OnDraw(ref DrawParams p)

@@ -94,7 +94,7 @@ namespace Pixie1
         /// </summary>
         public SubtitleManager Subtitles;
 
-        public SubtitleText ControlsHelpText;
+        public SubtitleText StatusText;
 
         public TimedSpritelet HelpScroll;
 
@@ -111,7 +111,7 @@ namespace Pixie1
             // create level's objects. These will be added as a child later.
             MotionB = new MotionBehavior();
             Subtitles = new SubtitleManager();
-            ControlsHelpText = new SubtitleText();            
+            StatusText = new SubtitleText();            
             HelpScroll = new TimedSpritelet("help-scroll.png");
             //debugMsg = new DebugMessage();
         }
@@ -121,7 +121,7 @@ namespace Pixie1
         /// </summary>
         protected virtual void InitLevel()
         {
-            var t = ControlsHelpText;
+            var t = StatusText;
             t.IsAutoPosition = false;
             t.ScaleVector = new Vector2(1f, 1f);
             t.Motion.Scale = 0.4f;
@@ -329,7 +329,7 @@ namespace Pixie1
 
         protected override void OnUpdate(ref UpdateParams p)
         {
-            this.ControlsHelpText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
+            this.StatusText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
