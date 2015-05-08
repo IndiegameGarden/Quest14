@@ -55,6 +55,7 @@ namespace Pixie1.AStar
         public TPathNode[,] SearchSpace { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
+        public bool IsAllowDiagonals = true;
 
         protected class PathNode : IPathNode<TUserContext>, IComparer<PathNode>, IIndexedObject
         {
@@ -155,7 +156,11 @@ namespace Pixie1.AStar
             if (startNode == endNode)
                 return new LinkedList<TPathNode>(new TPathNode[] { startNode.UserContext });
 
-            PathNode[] neighborNodes = new PathNode[8];
+            PathNode[] neighborNodes ; 
+            if (IsAllowDiagonals)
+                neighborNodes = new PathNode[8];
+            else
+                neighborNodes = new PathNode[4];
 
             m_ClosedSet.Clear();
             m_OpenSet.Clear();
@@ -202,7 +207,10 @@ namespace Pixie1.AStar
                 m_OpenSet.Remove(x);
                 m_ClosedSet.Add(x);
 
-                StoreNeighborNodes(x, neighborNodes);
+                if (IsAllowDiagonals)
+                    StoreNeighborNodes(x, neighborNodes);
+                else
+                    StoreNeighborNodesNoDiagonals(x, neighborNodes);
 
                 for (int i = 0; i < neighborNodes.Length; i++)
                 {
@@ -327,6 +335,33 @@ namespace Pixie1.AStar
                 inNeighbors[7] = m_SearchSpace[x + 1, y + 1];
             else
                 inNeighbors[7] = null;
+        }
+
+        private void StoreNeighborNodesNoDiagonals(PathNode inAround, PathNode[] inNeighbors)
+        {
+            int x = inAround.X;
+            int y = inAround.Y;
+
+            if (y > 0)
+                inNeighbors[0] = m_SearchSpace[x, y - 1];
+            else
+                inNeighbors[0] = null;
+
+            if (x > 0)
+                inNeighbors[1] = m_SearchSpace[x - 1, y];
+            else
+                inNeighbors[1] = null;
+
+            if (x < Width - 1)
+                inNeighbors[2] = m_SearchSpace[x + 1, y];
+            else
+                inNeighbors[2] = null;
+
+            if (y < Height - 1)
+                inNeighbors[3] = m_SearchSpace[x, y + 1];
+            else
+                inNeighbors[3] = null;
+
         }
 
         private class OpenCloseMap

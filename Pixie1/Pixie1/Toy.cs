@@ -146,7 +146,8 @@ namespace Pixie1
             // pixie facing this Toy == print info message
             if (ParentThing == null && toyExplanationMessage==null && pixieFacingToy)
             {
-                toyExplanationMessage = Level.Current.Subtitles.Show(5,SayToyName(), 2.1f);
+                var nm = SayToyName();
+                toyExplanationMessage = Level.Current.Subtitles.Show(5,nm, 2.1f + 0.07f * nm.Length);
             }
 
             // collision with pixie = pickup            

@@ -77,7 +77,9 @@ namespace Pixie1.AStar
                 }
             }
 
-            aStar = new MySolver<MyPathNode, Object>(grid);
+            aStar = new MySolver<MyPathNode, Object>(grid) { 
+                IsAllowDiagonals = false
+            };
             StartSystemThread();
         }
 

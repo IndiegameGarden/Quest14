@@ -19,18 +19,18 @@ namespace Pixie1.Toys
             : base()
         {
             UsedUponPickup = false;
-            UseTimeMax = 260f;
+            UseTimeMax = 130f;
             SetColors(1.9f, Color.MediumSeaGreen, Color.Chartreuse);
         }
 
         public override string ToyName()
         {
-            return "Serum of Truth";
+            return "Serum of Compulsion";
         }
 
         public override string ToyHint()
         {
-            return "apply to able body and question";
+            return "thrust into your foe and...";
         }
 
         public override void StartUsing()
@@ -50,7 +50,7 @@ namespace Pixie1.Toys
 
             if (SerumTarget == null)
             {
-                Level.Current.Subtitles.Show(2, "I can't apply the serum here.", 3f);
+                Level.Current.Subtitles.Show(2, "I can't use the serum here.", 3f);
                 IsUsed = false;
                 UsesLeft++;
             }
@@ -79,7 +79,7 @@ namespace Pixie1.Toys
                     sv.ComplexBehavior.Active = false;
                     sv.AddNextUpdate(pathFindBehavior);
                 }
-                t += ", show me - where is Arthur?";
+                t += ", show me - WHERE is Arthur?!";
                 Level.Current.Subtitles.Show(7, t, 4f);
             }
         }

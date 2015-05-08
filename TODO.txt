@@ -1,8 +1,9 @@
 TODO
 - treasure chamber?
-- bug in open access in top cathedral.
 
 DONE
+OK 2015-05-08 - pathfinding only using 4 neighbor positions, no diagonals
+OK 2015-05-08 - bug in open access in top cathedral.
 OK 2015-05-06 - more intelligent path following using Astar
 OK 2015-05-04 - attacking slows down move of character (hopefully)
 OK 2015-05-03 - no attack sounds for far-away fights
