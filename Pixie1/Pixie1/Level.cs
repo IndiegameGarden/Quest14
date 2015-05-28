@@ -200,10 +200,10 @@ namespace Pixie1
                 SubtitleText t = new SubtitleText();
                 t.AddText("My King! WE WON!!", 5f).DrawInfo.DrawColor = Color.DarkGoldenrod;
                 t.AddText("(Arthur:) I am home, at last.", 4f).DrawInfo.DrawColor = PINK_COLOR;
-                t.AddText("(Arthur:) A reward, Galad,\nawaits thee...", 5f).DrawInfo.DrawColor = PINK_COLOR;
-                t.AddText("(Arthur:) ...in the Garden of the Golden Chain!", 6f).DrawInfo.DrawColor = PINK_COLOR;
+                t.AddText("A reward, Galad,\nawaits thee...", 5f).DrawInfo.DrawColor = PINK_COLOR;
+                t.AddText("...in the Garden of the Golden Chain!", 6f).DrawInfo.DrawColor = PINK_COLOR;
                 t.AddText("", 1f);
-                t.AddText("And so Arthur ruled for\nmany more prosperous years.", 4f);
+                t.AddText("(Bard:) And so Arthur ruled for\nmany more prosperous years.", 4f);
                 t.AddText("His Knights of the Square Table didth\ncommit a many legendary deeds.", 6f);
                 t.AddText("", 2f);
                 t.AddText("** THE END **", 4f);                
@@ -212,9 +212,8 @@ namespace Pixie1
                 Subtitles.Show(6, t);
                 hasWon = true;
 
-                var garden = new LevelBackground("Garden1.png");
-                garden.DrawInfo.LayerDepth = 0.49f;
-                this.AddNextUpdate(garden);
+                // level changes o so slightly
+                Background.OverlayTexture("Garden1.png");
             }
         }
 
@@ -284,7 +283,7 @@ namespace Pixie1
             }
             else if (st.IsKeyDown(Keys.D2))
             {
-                hero.PositionAndTarget = new Vector2(70f, 64f);
+                hero.PositionAndTarget = new Vector2(20f, 180f);
                 SCREEN_MOTION_SPEED = 150f;
             }
             else if (st.IsKeyDown(Keys.D3))
