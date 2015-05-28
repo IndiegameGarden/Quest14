@@ -100,7 +100,7 @@ namespace Pixie1
 
         // class internal
         protected ThingControl keyControl; // for pixie
-        //protected DebugMessage debugMsg;
+        protected DebugMessage debugMsg = new DebugMessage();
         protected SubtitleText subTitles;
         float timeEscDown = 0f;        
 
@@ -276,20 +276,25 @@ namespace Pixie1
 
 #if DEBUG
             // debug keys
-            if (st.IsKeyDown(Keys.D1))
+            if (st.IsKeyDown(Keys.D4))
             {
                 hero.PositionAndTarget = new Vector2(567f, 262f);
-                SCREEN_MOTION_SPEED = 150f;
+                SCREEN_MOTION_SPEED = 250f;
+            }
+            else if (st.IsKeyDown(Keys.D1))
+            {
+                hero.PositionAndTarget = new Vector2(40f, 60f);
+                SCREEN_MOTION_SPEED = 250f;
             }
             else if (st.IsKeyDown(Keys.D2))
             {
                 hero.PositionAndTarget = new Vector2(20f, 180f);
-                SCREEN_MOTION_SPEED = 150f;
+                SCREEN_MOTION_SPEED = 250f;
             }
             else if (st.IsKeyDown(Keys.D3))
             {
                 hero.PositionAndTarget = new Vector2(380f, 267f);
-                SCREEN_MOTION_SPEED = 150f;
+                SCREEN_MOTION_SPEED = 250f;
             }
             else
                 SCREEN_MOTION_SPEED = 8f;
@@ -351,12 +356,13 @@ namespace Pixie1
             LevelKeyControl(ref p);
             if (isBackgroundScrollingOn)
                 ScrollBackground(ref p);
-            
-            //debugMsg.Text = "Pixie: trg=" + pixie.Target +", pos=" + pixie.Position;
-            // DEBUG sample pixel
-            //Color c= Background.SamplePixel(pixie.Target);
-            //debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
 
+            /*
+            debugMsg.Text = "Pixie: trg=" + hero.Target + ", pos=" + hero.Position;
+            // DEBUG sample pixel
+            Color c = Background.SamplePixel(hero.Target);
+            debugMsg.Text += "Color: " + c.R + "," + c.G + "," + c.B + "," + c.A;
+            */
         }
     }
 }

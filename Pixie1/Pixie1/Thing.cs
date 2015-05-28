@@ -548,6 +548,12 @@ namespace Pixie1
             ColorFx = fx;
         }
 
+        public override void OverlayTexture(string textureFilename)
+        {
+            base.OverlayTexture(textureFilename);
+            Texture.GetData(textureData); // after change, re-create the data used for collisions etc.
+        }
+
         protected override void OnDraw(ref DrawParams p)
         {
             base.OnDraw(ref p);
