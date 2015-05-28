@@ -45,11 +45,8 @@ namespace Pixie1.Actors
         {
             base.OnUpdate(ref p);
 
-            // enable the following behavior
-            if (isFollowHero)
-            {
-                Following.Active = true;
-            }
+            // enable the following behavior - or not
+            Following.Active = isFollowHero;
 
             // check when to start following our rescuer
             float dist = (Level.Current.hero.Position - Position).Length();
@@ -62,9 +59,10 @@ namespace Pixie1.Actors
             }
 
             // check win position
-            if (Position.X <= 52f && Position.Y <= 74f)
+            if (Position.X <= 44f && Position.Y <= 74f)
             {
                 Level.Current.WinLevel();
+                isFollowHero = false;
             }
         }
 

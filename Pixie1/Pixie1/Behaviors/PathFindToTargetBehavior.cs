@@ -109,8 +109,12 @@ namespace Pixie1.Behaviors
         /// <param name="job"></param>
         public void PathFinderCallback(PathFindingJob job)
         {
-            this.pathPointer = job.Result.First;
-            this.job = job; // NOTE job should be assigned last. This triggers the other (game) thread to use value of job.
+            // if no path found -> dont use the job result.
+            if (job != null && job.Result != null && job.Result.First != null)
+            {
+                this.pathPointer = job.Result.First;
+                this.job = job; // NOTE job should be assigned last. This triggers the other (game) thread to use value of job.
+            }
         }
 
     }

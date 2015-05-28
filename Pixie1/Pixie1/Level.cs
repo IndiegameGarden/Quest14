@@ -23,7 +23,7 @@ namespace Pixie1
         public static Level Current = null;
 
         // some default colors and settings that may be changed by Level subclasses
-        public static Color PIXIE_COLOR = new Color(251, 101, 159); // pink
+        public Color PINK_COLOR = new Color(251, 101, 159); // pink
         public float DEFAULT_SCALE = 20.0f;
         public float SCREEN_MOTION_SPEED = 15.0f;
         public float PIXIE_TARGETSPEED = 5.0f;
@@ -196,18 +196,25 @@ namespace Pixie1
         {
             if (!hasWon)
             {
-                SubtitleText t = new SubtitleText();
-                t.AddText("YOU WIN!!", 5f);
-                t.AddText("Pink Arthur is rescued.", 4f);
-                t.AddText("He rules for\nmany prosperous years.", 4f);
-                t.AddText("The Knights of the Square Table\ncommit a many legendary deeds.", 5f);
-                t.AddText("", 2f);
-                t.AddText("** THE END **", 4f);
                 float playTime = (float)Math.Round(SimTime);
+                SubtitleText t = new SubtitleText();
+                t.AddText("My King! WE WON!!", 5f).DrawInfo.DrawColor = Color.DarkGoldenrod;
+                t.AddText("(Arthur:) I am home, at last.", 4f).DrawInfo.DrawColor = PINK_COLOR;
+                t.AddText("(Arthur:) A reward, Galad,\nawaits thee...", 5f).DrawInfo.DrawColor = PINK_COLOR;
+                t.AddText("(Arthur:) ...in the Garden of the Golden Chain!", 6f).DrawInfo.DrawColor = PINK_COLOR;
+                t.AddText("", 1f);
+                t.AddText("And so Arthur ruled for\nmany more prosperous years.", 4f);
+                t.AddText("His Knights of the Square Table didth\ncommit a many legendary deeds.", 6f);
+                t.AddText("", 2f);
+                t.AddText("** THE END **", 4f);                
                 t.AddText("(Rescue time: " + playTime + " heart-beats.)", 15f);
-                t.AddText("** THE END **", 30f);
+                t.AddText("** THE END **", 4f);
                 Subtitles.Show(6, t);
                 hasWon = true;
+
+                var garden = new LevelBackground("Garden1.png");
+                garden.DrawInfo.LayerDepth = 0.49f;
+                this.AddNextUpdate(garden);
             }
         }
 
@@ -218,7 +225,7 @@ namespace Pixie1
                 hasFoundPinkArthur = true;
                 SubtitleText t = new SubtitleText();
                 t.AddText("My King! Here you are.", 4f);
-                t.AddText("We have come to rescue you.", 4f);
+                t.AddText("We have come, to rescue thee.", 4f);
                 t.AddText("Follow me, out of this\ncursed place.", 7f);
                 Subtitles.Show(8, t);
             }
@@ -254,7 +261,7 @@ namespace Pixie1
             {
                 timeEscDown += p.Dt;
                 MotionB.ScaleTarget = 1.5f*DEFAULT_SCALE;
-                MotionB.ScaleSpeed = 0.005f;
+                MotionB.ScaleSpeed = 0.009f;
                 //Motion.RotateModifier = timeEscDown * 0.05f;
                 //PixieGame.Instance.Exit();
             }
@@ -272,41 +279,42 @@ namespace Pixie1
             // debug keys
             if (st.IsKeyDown(Keys.D1))
             {
-                Level.Current.hero.PositionAndTarget = new Vector2(567f, 262f);
-                Level.Current.SCREEN_MOTION_SPEED = 150f;
+                hero.PositionAndTarget = new Vector2(567f, 262f);
+                SCREEN_MOTION_SPEED = 150f;
             }
             else if (st.IsKeyDown(Keys.D2))
             {
-                Level.Current.hero.PositionAndTarget = new Vector2(70f, 64f);
-                Level.Current.king.PositionAndTarget = new Vector2(72f, 64f);
-                Level.Current.SCREEN_MOTION_SPEED = 150f;
+                hero.PositionAndTarget = new Vector2(70f, 64f);
+                SCREEN_MOTION_SPEED = 150f;
             }
             else if (st.IsKeyDown(Keys.D3))
             {
-                Level.Current.hero.PositionAndTarget = new Vector2(380f, 267f);
-                Level.Current.SCREEN_MOTION_SPEED = 150f;
+                hero.PositionAndTarget = new Vector2(380f, 267f);
+                SCREEN_MOTION_SPEED = 150f;
             }
             else
-                Level.Current.SCREEN_MOTION_SPEED = 8f;
+                SCREEN_MOTION_SPEED = 8f;
 
-           if (st.IsKeyDown(Keys.F2))
-               Level.Current.hero.IsCollisionFree = true;
-           else if (st.IsKeyDown(Keys.F1))
-               Level.Current.hero.IsCollisionFree = false;
-           else if (st.IsKeyDown(Keys.OemMinus))
-           {
-               Motion m = Level.Current.Motion;
-               m.ZoomTarget = 0.5f;
-               m.ZoomSpeed = 0.005f;
-               m.ZoomCenterTarget = Level.Current.hero.Motion;
-           }
-           else if (st.IsKeyDown(Keys.OemPlus))
-           {
-               Motion m = Level.Current.Motion;
-               m.ZoomTarget = 1f;
-               m.ZoomSpeed = 0.005f;
-               m.ZoomCenterTarget = Level.Current.hero.Motion;
-           }
+            if (st.IsKeyDown(Keys.F2))         // god mode
+                hero.IsCollisionFree = true;
+            else if (st.IsKeyDown(Keys.F1))     // normal mode
+                hero.IsCollisionFree = false;
+            else if (st.IsKeyDown(Keys.F3))
+                king.PositionAndTarget = hero.Target + new Vector2(2f, 0f); // fetch king rightaway
+            else if (st.IsKeyDown(Keys.OemMinus))
+            {
+                var m = Motion;
+                m.ZoomTarget = 0.5f;
+                m.ZoomSpeed = 0.005f;
+                m.ZoomCenterTarget = hero.Motion;
+            }
+            else if (st.IsKeyDown(Keys.OemPlus))
+            {
+                var m = Motion;
+                m.ZoomTarget = 1f;
+                m.ZoomSpeed = 0.005f;
+                m.ZoomCenterTarget = hero.Motion;
+            }
 #endif
         }
 
