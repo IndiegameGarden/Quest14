@@ -1,5 +1,6 @@
 TODO
-- treasure chamber?
+- test garden
+- remove useless pos tracking code
 
 DONE
 OK 2015-05-08 - pathfinding only using 4 neighbor positions, no diagonals
