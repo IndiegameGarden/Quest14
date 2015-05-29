@@ -1,8 +1,10 @@
 TODO
-- test garden
-- remove useless pos tracking code
+- companion never dies(?)
+- new toys: fear of foes, ...
 
 DONE
+OK 2015-05-29 - test garden
+OK 2015-05-29 - remove useless pos tracking code
 OK 2015-05-08 - pathfinding only using 4 neighbor positions, no diagonals
 OK 2015-05-08 - bug in open access in top cathedral.
 OK 2015-05-06 - more intelligent path following using Astar
