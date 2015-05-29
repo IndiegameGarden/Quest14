@@ -46,12 +46,6 @@ namespace Pixie1.Levels
             //BG_STARTING_POS = new Vector2(188f, 0f); // debug
         }
 
-        protected override void InitPixie()
-        {            
-            base.InitPixie();
-            Hero.PositionLog[0] = TRACKING_HELPER_POINT;
-        }
-
         protected override void InitLevel()
         {
             base.InitLevel();

@@ -14,10 +14,6 @@ namespace Pixie1.Actors
 
         public List<Knight> Knights = new List<Knight>();
 
-        public const int LOG_LENGTH = 4096;
-        public static Vector2[] PositionLog = new Vector2[LOG_LENGTH];
-        public static int PositionLogIndex = 1;
-
         public Hero()
             : base("pixie")
         {            
@@ -35,17 +31,6 @@ namespace Pixie1.Actors
             base.OnInit();
             KeyControl = new PixieKeyControl();
             this.Add(KeyControl);
-        }
-
-        /// <summary>
-        /// Sets Hero's starting Target/Position and pre-inits the PositionLog with that value.
-        /// </summary>
-        /// <param name="pos"></param>
-        public void SetStartingPos(Vector2 pos)
-        {
-            PositionAndTarget = pos;
-            for (int i = 0; i < LOG_LENGTH; i++)
-                PositionLog[i] = pos;
         }
 
         public void LeadAttack()
@@ -93,34 +78,6 @@ namespace Pixie1.Actors
             base.OnDraw(ref p);
         }
 
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-
-            // keep pos log
-            if (this.Target != GetPositionLog(PositionLogIndex))
-            {
-                // check if new pos is a straight-line extension of previous move...
-                Vector2 vLog = GetPositionLog(PositionLogIndex);
-                Vector2 vMove = this.Target - vLog;
-                Vector2 vMovePrev = vLog - GetPositionLog(PositionLogIndex-1);
-                vMove.Normalize();
-                if(vMovePrev.Length()>0f)
-                    vMovePrev.Normalize();
-                if (vMove.Equals(vMovePrev))
-                {
-                    //... it is, so just adjust current entry. Kind of compression of data = leaving out inbetween entries.
-                    SetPositionLog(PositionLogIndex, Target);
-                }
-                else
-                {   // otherwise, update pos log normally
-                    PositionLogIndex++;
-                    SetPositionLog(PositionLogIndex, Target);
-                }
-            }
-
-        }
-
         protected override void OnDies()
         {
             base.OnDies();
@@ -130,16 +87,5 @@ namespace Pixie1.Actors
             Level.Current.LoseLevel();
         }
 
-        public static Vector2 GetPositionLog(int idx)
-        {
-            if (idx < 0) idx = 0;
-            return PositionLog[idx % LOG_LENGTH];
-        }
-
-        public static void SetPositionLog(int idx, Vector2 v)
-        {
-            if (idx < 0) idx = 0;
-            PositionLog[idx % LOG_LENGTH] = v;
-        }
     }
 }
