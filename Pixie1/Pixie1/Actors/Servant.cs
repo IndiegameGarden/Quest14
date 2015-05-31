@@ -29,17 +29,17 @@ namespace Pixie1.Actors
             ComplexBehavior = new SubsumptionBehavior();
             Add(ComplexBehavior);
 
-            // avoid other things
+            // avoid knights - done by a 'reversed' chase
             AvoidingKnights = new ChaseBehavior(typeof(Knight));
             AvoidingKnights.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            AvoidingKnights.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            AvoidingKnights.ChaseRange = RandomMath.RandomBetween(10f, 17f);
             AvoidingKnights.ReverseBehavior();
             ComplexBehavior.Add(AvoidingKnights);
 
-            // avoid other things
+            // avoid hero - done by a 'reversed' chase
             AvoidingHero = new ChaseBehavior(typeof(Hero));
             AvoidingHero.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
-            AvoidingHero.ChaseRange = 11f; // RandomMath.RandomBetween(12f, 40f);
+            AvoidingHero.ChaseRange = RandomMath.RandomBetween(10f, 17f);
             AvoidingHero.ReverseBehavior();
             ComplexBehavior.Add(AvoidingHero);
 

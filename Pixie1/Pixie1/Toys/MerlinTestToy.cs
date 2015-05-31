@@ -14,7 +14,7 @@ namespace Pixie1.Toys
         public MerlinTestToy()
             : base()
         {
-            UseTimeMax = 10f;
+            UseTimeMax = 15f;
             SetColors(1.9f, Color.LightSkyBlue, new Color(0.9f,0.4f,1f,0f));
         }
 
