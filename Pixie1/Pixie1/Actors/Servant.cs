@@ -48,22 +48,5 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Wandering);
         }
 
-        protected override void OnUpdate(ref UpdateParams p)
-        {
-            base.OnUpdate(ref p);
-
-            /*
-            if (TargetMove.LengthSquared() > 0)
-            {
-                if (CollidesWhenThisMoves(Level.Current.pixie, TargetMove))
-                {
-                    if (Level.Current.Subtitles.Children.Count <= 4)
-                    {
-                        Level.Current.Subtitles.Show(3, attackString[RandomMath.RandomIntBetween(0, attackString.Length - 1)], 3.5f, Color.IndianRed);
-                    }
-                }
-            }
-             */
-        }
     }
 }
