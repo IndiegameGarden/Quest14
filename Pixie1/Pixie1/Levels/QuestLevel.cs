@@ -76,6 +76,7 @@ namespace Pixie1.Levels
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
                 //bp.TargetSpeed = 18.0f; // TODO
                 Add(bp);
+                AllEnemies.Add(bp);
                 FindWalkableGround(bp);
             }
 
@@ -134,17 +135,18 @@ namespace Pixie1.Levels
             InitToy(new ZoomOutToy(), 413,173);
             InitToy(new PaintToy(), 309,143);
             InitToy(new PaintToy(), 307, 274);
-            //InitToy(new PaintToy(), 33,154); // debug
-            //InitToy(new InvisibilityToy(), 37, 154); // debug
-            //InitToy(new SpeedModifyToy(2f), 41, 154); // debug
             InitToy(new InvisibilityToy(), 463,296);
             InitToy(new InvisibilityToy(), 173, 65);
             InitToy(new SpeedModifyToy(2f), 172,230);
             InitToy(new SpeedModifyToy(2f), 450, 291);
             InitToy(new ZoomOutToy(), 560,57);
             InitToy(new TruthSerum(), 402, 243); // in a cove
+            InitToy(new RedsConfusionToy(), 419, 66); //twisted wand - chase reds away
 #if DEBUG
             InitToy(new TruthSerum(), 41, 56); //debug
+            InitToy(new PaintToy(), 33,154); // debug
+            InitToy(new InvisibilityToy(), 37, 154); // debug
+            InitToy(new SpeedModifyToy(2f), 41, 154); // debug
 #endif
         }
 

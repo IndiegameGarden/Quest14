@@ -98,6 +98,8 @@ namespace Pixie1
 
         public TimedSpritelet HelpScroll;
 
+        public List<Thing> AllEnemies = new List<Thing>();
+
         // class internal
         protected ThingControl keyControl; // for pixie
         protected DebugMessage debugMsg = new DebugMessage();

@@ -22,7 +22,7 @@ namespace Pixie1.Behaviors
                     {
                         IsTargetMoveDefined = true;
                         TargetMove = childControl.TargetMove;
-                        TargetMoveMultiplier = childControl.TargetMoveMultiplier;
+                        TargetMoveMultiplier = childControl.TargetMoveMultiplier * this.TargetMoveMultiplier;
                         break;
                     }
                 }

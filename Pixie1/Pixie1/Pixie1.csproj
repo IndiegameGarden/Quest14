@@ -132,6 +132,7 @@
     <Compile Include="PixieGame.cs" />
     <Compile Include="LevelBackground.cs" />
     <Compile Include="RandomMath.cs" />
+    <Compile Include="Toys\RedsConfusionToy.cs" />
     <Compile Include="Toys\TruthSerum.cs" />
     <Compile Include="Toys\MerlinTestToy.cs" />
     <Compile Include="Toys\InvisibilityToy.cs" />

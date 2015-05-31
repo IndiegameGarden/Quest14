@@ -1,9 +1,9 @@
 TODO
 - new icon
 - unhealthy knights and reds get slower?
-- new toys: fear of foes, ...
 
 DONE
+OK 2015-05-31 - new toys: fear of foes = RedsConfusionToy
 OK 2015-05-31 - bugfix that companion never dies -> now works again, also color change.
 OK 2015-05-29 - test garden
 OK 2015-05-29 - remove useless pos tracking code
