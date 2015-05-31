@@ -35,7 +35,7 @@ namespace Pixie1.Actors
         {
             IsCollisionFree = false;
             DrawInfo.DrawColor = new Color(255, 10, 4);
-            Health = 12f;
+            Health = 13f;
 
             ComplexBehavior = new SubsumptionBehavior();
             Add(ComplexBehavior);

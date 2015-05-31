@@ -20,7 +20,7 @@ namespace Pixie1.Actors
             IsCollisionFree = false;
             SetColors(4f, Color.DarkGoldenrod, new Color(230, 210, 10));
             Velocity = 1.5f;
-            Health = 12f;
+            Health = 15f;
             Pushing.Force = 10f; // force higher than companions.
             DrawInfo.LayerDepth = 0.4f;
 
@@ -83,6 +83,7 @@ namespace Pixie1.Actors
             base.OnDies();
             ColorFx.Active = false;
             KeyControl.Active = false;
+            Level.Current.Sound.PlayDiedSound(0.3f);
             
             Level.Current.LoseLevel();
         }

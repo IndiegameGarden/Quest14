@@ -179,7 +179,7 @@ namespace Pixie1
             t.AddText("Pink Arthur remains captive\nfor all his life.", 7f);
             t.AddText("** THE END **", 7f);
             Subtitles.Show(9,  t);
-            isBackgroundScrollingOn = false;
+            isBackgroundScrollingOn = false; // stop the scrolling of the level around hero
 
             t = new SubtitleText();
             t.ScaleVector = new Vector2(1f, 1f);
@@ -201,7 +201,7 @@ namespace Pixie1
                 t.AddText("My King! WE WON!!", 5f).DrawInfo.DrawColor = Color.DarkGoldenrod;
                 t.AddText("(Arthur:) I am home, at last.", 4f).DrawInfo.DrawColor = PINK_COLOR;
                 t.AddText("A reward, Galad,\nawaits thee...", 5f).DrawInfo.DrawColor = PINK_COLOR;
-                t.AddText("...in the Garden of the Golden Chain!", 6f).DrawInfo.DrawColor = PINK_COLOR;
+                t.AddText("...in the Garden of Golden Chain!", 6f).DrawInfo.DrawColor = PINK_COLOR;
                 t.AddText("", 1f);
                 t.AddText("(Bard:) And so Arthur ruled for\nmany more prosperous years.", 4f);
                 t.AddText("His Knights of the Square Table didth\ncommit a many legendary deeds.", 6f);

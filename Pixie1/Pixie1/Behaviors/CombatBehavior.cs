@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace Pixie1.Behaviors
 {
     /**
-     * when engaged in close proximity to an enemy, plays sounds (and maybe do hitpoints etc)
+     * when engaged in close proximity to an enemy, plays sounds and do hitpoints
      */
     public class CombatBehavior: ThingControl
     {
