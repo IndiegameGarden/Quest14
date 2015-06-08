@@ -1,4 +1,5 @@
 TODO
+- 'died' sound not audible
 - unhealthy knights and reds get slower?
 
 DONE

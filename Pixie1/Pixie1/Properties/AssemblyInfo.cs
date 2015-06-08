@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Galad must rescue his king, Pink Arthur.")]
 [assembly: AssemblyDescription("Galad must rescue his king, Pink Arthur.")]
 [assembly: AssemblyCompany("IndiegameGarden.com")]
-[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2013-2014")]
+[assembly: AssemblyCopyright("Copyright © IndiegameGarden.com 2012-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 // On Windows, the following GUID is for the ID of the typelib if this
 // project is exposed to COM. On other platforms, it unique identifies the
 // title storage container when deploying this assembly to the device.
-[assembly: Guid("7bd1aafd-76be-48c8-9ac3-1b928ba0d8a5")]
+[assembly: Guid("1bd1aafd-79be-48c8-9ac3-1b928ba0d8b5")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,4 +31,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
