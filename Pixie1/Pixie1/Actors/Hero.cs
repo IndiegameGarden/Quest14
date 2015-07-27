@@ -83,7 +83,7 @@ namespace Pixie1.Actors
             base.OnDies();
             ColorFx.Active = false;
             KeyControl.Active = false;
-            Level.Current.Sound.PlayDiedSound(0.3f);
+            Level.Current.Sound.PlayDiedSound(1.0f);
             
             Level.Current.LoseLevel();
         }

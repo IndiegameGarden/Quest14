@@ -15,38 +15,42 @@ namespace Pixie1
     public class GameSound: Gamelet
     {
         public const float HEARING_RANGE = 60f;
-        float vol = 0.5f;
+        public enum SoundEffects { COMBAT1 = 0, COMBAT2, COMBAT3, COMBAT4, COMBAT5, COMBAT6, COMBAT7, DIE, PICKUP, USE_TOY, TRUMPET, NULL };
+
         SoundEvent soundScript = new SoundEvent();
         RenderParams rp = new RenderParams();
-        SoundEvent[] soundsBank = new SoundEvent[20];
+        SoundEvent[] soundsBank = new SoundEvent[(int)SoundEffects.NULL + 1];
         double lastPlayAttackSignaltime = -100;
 
         public GameSound()
         {
             MusicEngine.GetInstance();
 
-            soundsBank[0] = new SampleSoundEvent("sword-unsheathe.wav");
-            soundsBank[1] = new SampleSoundEvent("swing.wav");
-            soundsBank[2] = new SampleSoundEvent("swing2.wav");
-            soundsBank[3] = new SampleSoundEvent("swing3.wav");
-            soundsBank[4] = new SampleSoundEvent("hit_1.wav");
-            soundsBank[5] = new SampleSoundEvent("hit_2.wav");
-            soundsBank[6] = new SampleSoundEvent("hit_3.wav");
-            soundsBank[7] = new SampleSoundEvent("die2.wav");
-            soundsBank[8] = new SampleSoundEvent("pickup.wav");
-            soundsBank[9] = new SampleSoundEvent("use-toy.wav");
-            soundsBank[10] = new SampleSoundEvent("trumpet.wav");
+            soundsBank[(int)SoundEffects.COMBAT1] = new SampleSoundEvent("sword-unsheathe.wav");
+            soundsBank[(int)SoundEffects.COMBAT2] = new SampleSoundEvent("swing.wav");
+            soundsBank[(int)SoundEffects.COMBAT3] = new SampleSoundEvent("swing2.wav");
+            soundsBank[(int)SoundEffects.COMBAT4] = new SampleSoundEvent("swing3.wav");
+            soundsBank[(int)SoundEffects.COMBAT5] = new SampleSoundEvent("hit_1.wav");
+            soundsBank[(int)SoundEffects.COMBAT6] = new SampleSoundEvent("hit_2.wav");
+            soundsBank[(int)SoundEffects.COMBAT7] = new SampleSoundEvent("hit_3.wav");
+            soundsBank[(int)SoundEffects.DIE]     = new SampleSoundEvent("die2.wav");
+            soundsBank[(int)SoundEffects.PICKUP] = new SampleSoundEvent("pickup.wav");
+            soundsBank[(int)SoundEffects.USE_TOY] = new SampleSoundEvent("use-toy.wav");
+            soundsBank[(int)SoundEffects.TRUMPET] = new SampleSoundEvent("trumpet.wav");
         }
 
-        public float Volume
+        /// <summary>
+        /// Adjust overal volume of game sounds 0.0-1.0
+        /// </summary>
+        public double Volume
         {
             get
             {
-                return vol;
+                return rp.Ampl;
             }
             set
             {
-                vol = value;
+                double vol = value;
                 if (vol < 0f) vol = 0f;
                 if (vol > 1f) vol = 1f;
 
@@ -58,22 +62,51 @@ namespace Pixie1
         {
             base.OnUpdate(ref p);
 
-            rp.Time = SimTime; // gameTime.ElapsedGameTime.TotalSeconds;
+            rp.Time = SimTime;
             MusicEngine.GetInstance().Render(soundScript, rp);
 
         }
 
-        protected void Play(int effect, float volume)
+        /// <summary>
+        /// Play method to play an effect from SoundEffects enum at specified volume
+        /// </summary>
+        /// <param name="effect">index into effect sounds bank (from SoundEffects enum)</param>
+        /// <param name="volume">volume, typically 0-1 but can be higher to boost weak sounds</param>
+        public void PlaySound(int effect, double volume)
         {
             SoundEvent sev = new SoundEvent();
             sev.AddEvent(0f,soundsBank[effect]);
             sev.Amplitude = volume;
-            soundScript.AddEvent(SimTime + 0.020f, sev);
+            soundScript.AddEvent(SimTime + 0.010f, sev);
         }
 
-        public void PlaySound(int effect, float volumeMin, float volumeMax)
+        /// <summary>
+        /// Play methodd to play an effect at a random volume between limits
+        /// </summary>
+        /// <param name="effect"></param>
+        /// <param name="volumeMin">min volume</param>
+        /// <param name="volumeMax">max volume</param>
+        public void PlaySoundRandVol(int effect, double volumeMin, double volumeMax)
         {
-            Play(effect, RandomMath.RandomBetween(volumeMin, volumeMax));
+            PlaySound(effect, RandomMath.RandomBetween(volumeMin, volumeMax));
+        }
+
+        /// <summary>
+        /// play a sound, adapted by a distance to player
+        /// </summary>
+        /// <param name="volumeMinFar">min volume (when very far from player, almost outside HEARING_RANGE)</param>
+        /// <param name="volumeMaxClose">max volume (when very close to player, dist=0)</param>
+        /// <param name="distToPlayer"></param>
+        public void PlaySoundDist(int effect, double volume, double volumeMinFar, double volumeMaxClose, float distToPlayer)
+        {
+            float a = 1f;
+            if (distToPlayer > 0f)
+            {
+                if (distToPlayer > HEARING_RANGE)
+                    return;
+                a = 1f - (distToPlayer / HEARING_RANGE);
+            }
+            PlaySound(effect, volume * (volumeMinFar + (volumeMaxClose - volumeMinFar) * a) );
         }
 
         /// <summary>
@@ -85,36 +118,40 @@ namespace Pixie1
         public void PlayRandomCombatSound(float volumeMin, float volumeMax, float distToPlayer = 0f)
         {
             float a = 1f;
-            if (distToPlayer > 0f)
+            if (distToPlayer >= 0f)
             {
                 if (distToPlayer > HEARING_RANGE)
                     return;
                 a = 1f - (distToPlayer / HEARING_RANGE);
             }
-            int n = RandomMath.RandomIntBetween(1,6);
-            Play(n, RandomMath.RandomBetween(volumeMin * a, volumeMax * a));
+            else
+            {
+                return;
+            }
+            int n = RandomMath.RandomIntBetween((int) SoundEffects.COMBAT1, (int) SoundEffects.COMBAT7);
+            PlaySoundDist(n, RandomMath.RandomBetween(volumeMin, volumeMax), 0.0, 1.0, distToPlayer);
         }
 
-        public void PlayDiedSound(float vol)
+        public void PlayDiedSound(float volMultiplier = 1.0f, float distToPlayer = 0f)
         {
-            Play(7, vol);
+            PlaySoundDist( (int)SoundEffects.DIE, 0.85f * volMultiplier, 0.0, 1.0, distToPlayer);
         }
 
         public void PlayPickupSound()
         {
-            Play(8, 1.0f);
+            PlaySound((int)SoundEffects.PICKUP, 1.0f);
         }
         
         public void PlayUseToySound()
         {
-            Play(9, 1.0f);
+            PlaySound((int)SoundEffects.USE_TOY, 1.0f);
         }
 
         public void PlayAttackSignal()
         {
             if (SimTime < lastPlayAttackSignaltime + 8)
                 return;
-            Play(10, 1.0f);
+            PlaySound((int)SoundEffects.TRUMPET, 1.0f);
             lastPlayAttackSignaltime = SimTime;
         }
 

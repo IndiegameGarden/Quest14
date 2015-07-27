@@ -90,7 +90,7 @@ namespace Pixie1.Actors
         protected override void OnDies()
         {
             base.OnDies();
-            Level.Current.Sound.PlayDiedSound(0.24f);
+            Level.Current.Sound.PlayDiedSound(0.5f);
             DrawInfo.DrawColor = new Color(170, 80, 82);
             ComplexBehavior.Active = false; // disable any moves
         }

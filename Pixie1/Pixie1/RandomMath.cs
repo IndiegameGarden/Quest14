@@ -54,6 +54,11 @@ namespace Pixie1
             return minimum + (float)random.NextDouble() * (maximum - minimum);
         }
 
+        public static double RandomBetween(double minimum, double maximum)
+        {
+            return minimum + random.NextDouble() * (maximum - minimum);
+        }
+
         /// <summary>
         /// random int value
         /// </summary>

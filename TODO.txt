@@ -1,8 +1,11 @@
 TODO
-- 'died' sound not audible
-- unhealthy knights and reds get slower?
+- analog joysticks allow diagonals! bug
+- die sound should be friendlier for reds
+- volume of die sound should be less loud for Knights than Hero (bug?)
+- unhealthy knights and reds could get/walk slower?
 
 DONE
+Ok 2015-07-27 - 'died' sound not audible -> volume increased of sample.
 Ok 2015-05-31 - new icon
 OK 2015-05-31 - new toys: fear of foes = RedsConfusionToy
 OK 2015-05-31 - bugfix that companion never dies -> now works again, also color change.

@@ -74,7 +74,7 @@ namespace Pixie1.Actors
         protected override void OnDies()
         {
             base.OnDies();
-            Level.Current.Sound.PlayDiedSound(0.3f);
+            Level.Current.Sound.PlayDiedSound(0.9f);
             ColorFx.Active = false;
             DrawInfo.DrawColor = new Color(214, 245, 245);
             ComplexBehavior.Active = false;
