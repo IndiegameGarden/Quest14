@@ -7,11 +7,14 @@ using Pixie1.Actors;
 
 namespace Pixie1
 {
+    /**
+     * handles all keyboard and gamepad input the user gives to control Hero
+     */
     public class PixieKeyControl: ThingControl
     {
         float pressTime = 0f;
-        Vector2 userInputDirection, userInputDirectionPrevious;
-        bool isTriggerPressed = false;
+        Vector2 ctrlCur, ctrlPrev, ctrlPrevDifferent;
+        bool isUseToyPressed = false;
         bool isAttackPressed = false; // attack key
         bool wasAttackPressed = false; // prev state of isAttackPressed
         Hero pixie = null;
@@ -32,81 +35,95 @@ namespace Pixie1
         {
             base.OnUpdate(ref p);
 
-            float dx = 0f, dy = 0f;
-
+            // keep previous loop's control input
+            Vector2 ctrl = Vector2.Zero;
+            ctrlPrev = ctrlCur;
             KeyboardState kb = Keyboard.GetState();
             GamePadState gp = GamePad.GetState(PlayerIndex.One);
             Vector2 sticks = Vector2.Zero;
+            const float AST = 0.1f; // AST = Analog Stick Threshold
             if (gp.IsConnected)
-            {
-                sticks = gp.ThumbSticks.Left + gp.ThumbSticks.Right;
-            }
+                sticks = gp.ThumbSticks.Left + gp.ThumbSticks.Right;            
 
             if (kb.IsKeyDown(Keys.Up) || kb.IsKeyDown(Keys.W) || gp.IsButtonDown(Buttons.DPadUp)
-                || sticks.Y > 0f )
-                    dy += -1.0f;                
+                || (sticks.Y > AST && sticks.Y >= sticks.X) )
+                    ctrl.Y += -1.0f;                
             if (kb.IsKeyDown(Keys.Down) || kb.IsKeyDown(Keys.S) || gp.IsButtonDown(Buttons.DPadDown)
-                || sticks.Y < 0f )
-                    dy += 1.0f;
+                || (sticks.Y < -AST && sticks.Y <= sticks.X) )
+                    ctrl.Y += 1.0f;
             if (kb.IsKeyDown(Keys.Left) || kb.IsKeyDown(Keys.A) || gp.IsButtonDown(Buttons.DPadLeft)
-                || sticks.X < 0f)
-                    dx += -1.0f;
-            if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D) || gp.IsButtonDown(Buttons.DPadRight) ||
-                sticks.X > 0f)
-                    dx += 1.0f;
-
-            userInputDirectionPrevious = userInputDirection;
-            userInputDirection = new Vector2(dx, dy);
+                || (sticks.X < -AST && sticks.X <= sticks.Y) )
+                    ctrl.X += -1.0f;
+            if (kb.IsKeyDown(Keys.Right) || kb.IsKeyDown(Keys.D) || gp.IsButtonDown(Buttons.DPadRight)
+                || (sticks.X > AST && sticks.X >= sticks.Y) )
+                    ctrl.X += 1.0f;
 
             // handle case where 2nd key pressed Left/Right or Up/Down
-            if (userInputDirectionPrevious.Y != 0 && dy == userInputDirectionPrevious.Y && dx != 0)
-                dy = 0f;
-            if (userInputDirectionPrevious.X != 0 && dx == userInputDirectionPrevious.X && dy != 0)
+            if (IsDiag(ctrl) && ctrl.Y == ctrlPrevDifferent.Y )
+                ctrl.Y = 0f;
+            if (IsDiag(ctrl) && ctrl.X == ctrlPrevDifferent.X)
+                ctrl.X = 0f;
+
+            // test for diagonal input!
+            if (IsDiag(ctrl))
             {
-                dx = 0f;
-                pressTime = 0f;
+                ctrl -= ctrlPrevDifferent; // try to compensate - only new key mvt
+                if (IsDiag(ctrl))
+                {
+                    // if still diagonal, use X dir only.
+                    ctrl.Y = 0f;
+                }
             }
 
-            if (dx != 0f || dy != 0f)
+            // transfer found control input of user input persistent var
+            ctrlCur = ctrl;
+
+            if (ctrlCur != ctrlPrev)
+            {
+                ctrlPrevDifferent = ctrlPrev; // keep track of 'previous control that was different'
+            }
+
+            if (ctrl.X != 0f || ctrl.Y != 0f)
             {
                 if (pressTime == 0f)
-                    TargetMove = new Vector2(dx, dy);
+                    TargetMove = ctrlCur;
                 pressTime += p.Dt;  // keep amount of time a direction input has been given
             }
 
-            if (userInputDirection.LengthSquared() == 0f)
+            // reset key repeat counter if nothing given as input
+            if (ctrl.LengthSquared() == 0f)
             {
                 pressTime = 0f;
             }
 
             // trigger attack
-            wasAttackPressed = isAttackPressed;
-            isAttackPressed = kb.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A) || kb.IsKeyDown(Keys.RightControl);
+            wasAttackPressed = isAttackPressed; // keep old but pres state
+            isAttackPressed = kb.IsKeyDown(Keys.Space) || gp.IsButtonDown(Buttons.A) || kb.IsKeyDown(Keys.RightControl)
+                || gp.IsButtonDown(Buttons.RightTrigger);
             if (isAttackPressed && !wasAttackPressed)
             {
                 pixie.LeadAttack();
             }
 
             // help msg
-            if (kb.IsKeyDown(Keys.Z) || kb.IsKeyDown(Keys.C) || kb.IsKeyDown(Keys.F1) || kb.IsKeyDown(Keys.D1)
-                || kb.IsKeyDown(Keys.V) || kb.IsKeyDown(Keys.P) || kb.IsKeyDown(Keys.Enter))
+            if (kb.IsKeyDown(Keys.Q) || kb.IsKeyDown(Keys.F1)
+                || kb.IsKeyDown(Keys.P) || kb.IsKeyDown(Keys.Enter) || gp.IsButtonDown(Buttons.Start) )
             {
                 ShowKeysHelp();
             }
 
             // inventory msg
-            if (kb.IsKeyDown(Keys.I))
+            if (kb.IsKeyDown(Keys.I) || gp.IsButtonDown(Buttons.B))
             {
                 Level.Current.hero.ShowInventory();
             }
 
-            // trigger Toy
-            bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || kb.IsKeyDown(Keys.LeftControl) ||  
-                                    gp.IsButtonDown(Buttons.B);
+            // trigger Toy / magic item
+            bool isTriggerKeyPressed = kb.IsKeyDown(Keys.X) || gp.IsButtonDown(Buttons.Y);
             Toy t = ParentThing.ToyActive; 
-            if (!isTriggerPressed && isTriggerKeyPressed)
+            if (!isUseToyPressed && isTriggerKeyPressed)
             {
-                isTriggerPressed = true;
+                isUseToyPressed = true;
 
                 // use toy                
                 if (t != null && (!t.IsUsed && t.UsesLeft > 0))
@@ -122,7 +139,7 @@ namespace Pixie1
             }
             else if (!isTriggerKeyPressed)
             {
-                isTriggerPressed = false;
+                isUseToyPressed = false;
             }
 
             // send trigger state to Toy
@@ -131,12 +148,11 @@ namespace Pixie1
                 t.IsTriggered = isTriggerKeyPressed;
             }
 
-            // key rep
+            // key repetition
             if (pressTime > 0.2f / ParentThing.Velocity ) 
                 pressTime = 0f;
 
-            // make user's requested motion vector
-            
+            // make user's requested motion vector            
             if (TargetMove.LengthSquared() > 0f)
                 IsTargetMoveDefined = true;
 
@@ -153,6 +169,11 @@ namespace Pixie1
         protected void ShowKeysHelp()
         {
             Level.Current.HelpScroll.Show();
+        }
+
+        protected bool IsDiag(Vector2 v)
+        {
+            return (v.X != 0f && v.Y != 0f);
         }
     }
 

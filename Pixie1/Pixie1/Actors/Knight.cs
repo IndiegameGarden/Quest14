@@ -74,7 +74,8 @@ namespace Pixie1.Actors
         protected override void OnDies()
         {
             base.OnDies();
-            Level.Current.Sound.PlayDiedSound(0.9f);
+            var dist = (this.Position - Level.Current.hero.Position).Length();
+            Level.Current.Sound.PlayDiedSound(0.9f, dist);
             ColorFx.Active = false;
             DrawInfo.DrawColor = new Color(214, 245, 245);
             ComplexBehavior.Active = false;

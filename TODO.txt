@@ -1,10 +1,10 @@
 TODO
-- analog joysticks allow diagonals! bug
-- die sound should be friendlier for reds
-- volume of die sound should be less loud for Knights than Hero (bug?)
-- unhealthy knights and reds could get/walk slower?
+- scrolling not smooth on xps 15" screen and big screen?
 
 DONE
+Ok 2015-09-11 - analog joysticks allow diagonals! bug
+Ok 2015-09-11 - die sound should be friendlier for reds
+			  - volume of die sound should be less loud for Knights than Hero (bug?)
 Ok 2015-07-27 - 'died' sound not audible -> volume increased of sample.
 Ok 2015-05-31 - new icon
 OK 2015-05-31 - new toys: fear of foes = RedsConfusionToy
@@ -29,3 +29,6 @@ OK 2015-04-10 - add joystick controls to graphical panel
 OK 2015-04-10 - add key 'q' to show controls help -> reverted, too close to WASD
 OK 2015-03-17 - show keys help panel as a graphic
 OK 2015-03-15 - could add helpful top text when pressing keys (e.g. show valid keys / what happens)
+
+SKIPPED
+- unhealthy knights and reds could get/walk slower?
