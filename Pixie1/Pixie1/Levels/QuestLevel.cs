@@ -70,7 +70,7 @@ namespace Pixie1.Levels
             boss = new Boss();
             Add(boss);
 
-            for (int i = 0; i < 206; i++)
+            for (int i = 0; i < 412; i++)
             {
                 RedGuard bp = RedGuard.Create(); // Cloaky();
                 bp.PositionAndTarget = new Vector2(RandomMath.RandomBetween(123f,720f), RandomMath.RandomBetween(9f,290f) );
@@ -80,7 +80,7 @@ namespace Pixie1.Levels
                 FindWalkableGround(bp);
             }
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 36; i++)
             {
                 Servant s = Servant.Create();
                 s.PositionAndTarget = new Vector2(RandomMath.RandomBetween(140f, 720f), RandomMath.RandomBetween(9f, 290f));
