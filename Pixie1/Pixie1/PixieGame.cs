@@ -25,7 +25,9 @@ namespace Pixie1
         private static PixieGame instance = null;
         GraphicsDeviceManager graphics;
         int myWindowWidth;
-        int myWindowHeight; 
+        int myWindowHeight;
+        int myScreenWidth;
+        int myScreenHeight;
         PixieScreenlet mainScreenlet;
         MusicEngine musicEngine;
         Level level;
@@ -39,9 +41,14 @@ namespace Pixie1
             graphics.IsFullScreen = false;
             myWindowWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             myWindowHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            myScreenWidth = myWindowWidth;
+            myScreenHeight = myWindowHeight;
             Window.IsBorderless = true;
-            graphics.PreferredBackBufferHeight = myWindowHeight;
-            graphics.PreferredBackBufferWidth = myWindowWidth;
+            // cap the window size! Not screen
+            if (myWindowWidth > 1024) myWindowWidth = 1024;
+            if (myWindowHeight > 800) myWindowHeight = 800;
+            graphics.PreferredBackBufferHeight = myScreenHeight;
+            graphics.PreferredBackBufferWidth = myScreenWidth;
             Content.RootDirectory = "Content";
             IsFixedTimeStep = false;
         }
@@ -83,6 +90,7 @@ namespace Pixie1
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
             level = new QuestLevel();
             mainScreenlet.DrawInfo.DrawColor = new Color((int)2, (int)17, (int)2);
+            //mainScreenlet.Motion.Position = new Vector2(0.3f, 0f);
             mainScreenlet.Add(level);
 
             base.LoadContent();
