@@ -107,7 +107,7 @@ namespace Pixie1.Behaviors
                 ChaseTarget = null;
 
             // recheck for nearest chase target
-            if (ChaseTargetType != null)
+            if (ChaseTarget == null && ChaseTargetType != null)
             {
                 ChaseTarget = ParentThing.FindNearest(ChaseTargetType);
             }
@@ -116,11 +116,19 @@ namespace Pixie1.Behaviors
             {
                 Vector2 dif = ChaseTarget.Position - ParentThing.Target;
                 float dist = dif.Length();
-                if (dist <= ChaseRange && dist > SatisfiedRange)
+                if (dist <= ChaseRange)
                 {
-                    // indicate we're chasing
-                    IsTargetMoveDefined = !isPauseChase;
-                    AllowNextMove();
+                    if (dist > SatisfiedRange)
+                    {
+                        // indicate we're chasing
+                        IsTargetMoveDefined = !isPauseChase;
+                        AllowNextMove();
+                    }
+                }
+                else
+                {
+                    // too far away - loose target
+                    ChaseTarget = null;
                 }
             }
         }
