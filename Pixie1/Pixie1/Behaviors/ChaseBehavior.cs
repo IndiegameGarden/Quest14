@@ -33,16 +33,24 @@ namespace Pixie1.Behaviors
         /// </summary>
         public bool Avoidance = false;
 
+        /// <summary>
+        /// if true, the behavior is idle (dormant) when the actor is far away from
+        /// the Hero. This is to save on CPU resources.
+        /// </summary>
+        public bool isIdleWhenFarAway = false;
+
         protected bool isPauseChase = false;
+        protected const float FAR_AWAY_DISTANCE = 150.0f;
 
         public ChaseBehavior(Thing chaseTarget)
         {
             this.ChaseTarget = chaseTarget;
         }
 
-        public ChaseBehavior(Type chaseClass)
+        public ChaseBehavior(Type chaseClass, bool isIdleWhenFarAway = false)
         {
             this.ChaseTargetType = chaseClass;
+            this.IsIdleWhenFarAway = isIdleWhenFarAway;
         }
 
         protected override void OnNextMove()
@@ -105,6 +113,16 @@ namespace Pixie1.Behaviors
             // check for dead chase targets
             if (ChaseTarget != null && ChaseTarget.Delete)
                 ChaseTarget = null;
+
+            // check the idle when far mode: if active, check distance to hero
+            // and when far away from it don't bother to reget a new chase target.
+            // since 'FindNearest' is CPU intensive.
+            if (IsIdleWhenFarAway && ChaseTarget == null) {
+                Vector2 dif = Level.Current.hero.Position - ParentThing.Target;
+                float dist = dif.Length();
+                if (dist >= FAR_AWAY_DISTANCE)
+                    return;
+            }
 
             // recheck for nearest chase target
             if (ChaseTarget == null && ChaseTargetType != null)

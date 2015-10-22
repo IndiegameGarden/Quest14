@@ -37,7 +37,7 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(AvoidingKnights);
 
             // avoid hero - done by a 'reversed' chase
-            AvoidingHero = new ChaseBehavior(typeof(Hero));
+            AvoidingHero = new ChaseBehavior(Level.Current.hero);
             AvoidingHero.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             AvoidingHero.ChaseRange = RandomMath.RandomBetween(10f, 17f);
             AvoidingHero.ReverseBehavior();
