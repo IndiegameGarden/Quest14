@@ -45,8 +45,8 @@ namespace Pixie1
             myScreenHeight = myWindowHeight;
             Window.IsBorderless = true;
             // cap the window size! Not screen
-            if (myWindowWidth > 1024) myWindowWidth = 1024;
-            if (myWindowHeight > 800) myWindowHeight = 800;
+            if (myWindowWidth > 604) myWindowWidth = 604;
+            if (myWindowHeight > 584) myWindowHeight = 584;
             graphics.PreferredBackBufferHeight = myScreenHeight;
             graphics.PreferredBackBufferWidth = myScreenWidth;
             Content.RootDirectory = "Content";
@@ -90,8 +90,15 @@ namespace Pixie1
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
             level = new QuestLevel();
             mainScreenlet.DrawInfo.DrawColor = new Color((int)2, (int)17, (int)2);
-            mainScreenlet.PixelOffsetX = 130;
-            mainScreenlet.PixelOffsetY = 0;
+            // center the screenlet onto the PC screen
+            if (myWindowWidth < myScreenWidth)
+            {
+                mainScreenlet.PixelOffsetX = (myScreenWidth-myWindowWidth)/2;
+            }
+            if (myWindowHeight < myScreenHeight)
+            {
+                mainScreenlet.PixelOffsetY = (myScreenHeight - myWindowHeight) / 2;
+            }
             mainScreenlet.Add(level);
 
             base.LoadContent();
