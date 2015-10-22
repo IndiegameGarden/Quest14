@@ -57,7 +57,7 @@ namespace Pixie1.Actors
             };
             ComplexBehavior.Add(tb);
 
-            ChasingRedGuard = new ChaseBehavior(typeof(RedGuard));
+            ChasingRedGuard = new ChaseBehavior(typeof(RedGuard),true);
             ChasingRedGuard.ChaseRange = 20f;
             ChasingRedGuard.MoveSpeed = RandomMath.RandomBetween(1.1f, 1.5f);
             ComplexBehavior.Add(ChasingRedGuard);

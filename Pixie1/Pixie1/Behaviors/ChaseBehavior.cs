@@ -37,7 +37,7 @@ namespace Pixie1.Behaviors
         /// if true, the behavior is idle (dormant) when the actor is far away from
         /// the Hero. This is to save on CPU resources.
         /// </summary>
-        public bool isIdleWhenFarAway = false;
+        public bool IsIdleWhenFarAway = false;
 
         protected bool isPauseChase = false;
         protected const float FAR_AWAY_DISTANCE = 150.0f;
@@ -145,8 +145,11 @@ namespace Pixie1.Behaviors
                 }
                 else
                 {
-                    // too far away - loose target
-                    ChaseTarget = null;
+                    if (ChaseTargetType != null)
+                    {
+                        // too far away - loose target; find a new one on next update.
+                        ChaseTarget = null;
+                    }
                 }
             }
         }

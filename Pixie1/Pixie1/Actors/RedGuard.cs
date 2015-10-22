@@ -44,7 +44,7 @@ namespace Pixie1.Actors
             ComplexBehavior.Add(Combat);
 
             // chase knights that are very close
-            ChasingComp = new ChaseBehavior(typeof(Knight));
+            ChasingComp = new ChaseBehavior(typeof(Knight),true);
             ChasingComp.MoveSpeed = RandomMath.RandomBetween(0.43f, 0.65f);
             ChasingComp.ChaseRange = 2f; // RandomMath.RandomBetween(12f, 40f);
             ComplexBehavior.Add(ChasingComp);

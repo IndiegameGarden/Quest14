@@ -90,7 +90,8 @@ namespace Pixie1
             //mainScreenlet.Add(new FrameRateCounter(1.0f, 0f)); // TODO
             level = new QuestLevel();
             mainScreenlet.DrawInfo.DrawColor = new Color((int)2, (int)17, (int)2);
-            //mainScreenlet.Motion.Position = new Vector2(0.3f, 0f);
+            mainScreenlet.PixelOffsetX = 130;
+            mainScreenlet.PixelOffsetY = 0;
             mainScreenlet.Add(level);
 
             base.LoadContent();
