@@ -45,8 +45,8 @@ namespace Pixie1
             myScreenHeight = myWindowHeight;
             Window.IsBorderless = true;
             // cap the window size! Not screen
-            if (myWindowWidth > 604) myWindowWidth = 604;
-            if (myWindowHeight > 584) myWindowHeight = 584;
+            if (myWindowWidth > 1366) myWindowWidth = 1366;
+            if (myWindowHeight > 768) myWindowHeight = 768;
             graphics.PreferredBackBufferHeight = myScreenHeight;
             graphics.PreferredBackBufferWidth = myScreenWidth;
             Content.RootDirectory = "Content";

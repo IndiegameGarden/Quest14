@@ -1,7 +1,8 @@
 TODO
-- scrolling not smooth on big screen (1920x1200)?
+- noticable lag of some elements (woodblocks) when scrolling
 
 DONE
+Ok 2015-10-22 - scrolling not smooth on big screen (1920x1200) -> capped screen rez
 Ok 2015-09-11 - analog joysticks allow diagonals! bug
 Ok 2015-09-11 - die sound should be friendlier for reds
 			  - volume of die sound should be less loud for Knights than Hero (bug?)
