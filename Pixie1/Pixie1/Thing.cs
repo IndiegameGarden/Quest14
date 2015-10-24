@@ -40,7 +40,10 @@ namespace Pixie1
         /// <summary>
         /// centre of screen viewing pos in pixels for ALL PixieSpritelets
         /// </summary>
-        public static Vector2 ViewPos = Vector2.Zero;
+        public static Vector2 ViewPos
+        {
+            get { return Level.Current.Background.Position; }
+        }
 
         /// <summary>
         /// position in the level, in pixels, in sub-pixel resolution

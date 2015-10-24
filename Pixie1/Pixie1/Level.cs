@@ -346,13 +346,20 @@ namespace Pixie1
             return true;
         }
 
+        public override void Update(ref UpdateParams p)
+        {
+            // important: reflect the global viewpos (for sprites to use)
+            //Thing.ViewPos = Background.Position + Vector2.Multiply(Background.Motion.Velocity, p.Dt);
+            base.Update(ref p);
+        }
+
         protected override void OnUpdate(ref UpdateParams p)
         {
             this.StatusText.Duration = -1; // FIXME terrible hack to avoid auto-deletion
             base.OnUpdate(ref p);
 
             // important: reflect the global viewpos (for sprites to use)
-            Thing.ViewPos = Background.Position;
+            //Thing.ViewPos = Background.Position;
 
             // do some level tasks
             LevelKeyControl(ref p);
