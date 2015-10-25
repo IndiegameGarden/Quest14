@@ -1,8 +1,8 @@
 TODO
-
-- test on big screen with new resolution capping code.
+- hero can walk through blocks and reds if opposite push forces are acting.
 
 DONE
+Ok 2015-10-25 - test on big screen with new resolution capping code. -> fairly ok performance for most large resolutions.
 Ok 2015-10-24 - noticable lag of some elements (woodblocks) when scrolling -> fixed by making ViewPos a pointer to latest value
 Ok 2015-10-22 - scrolling not smooth on big screen (1920x1200) -> capped screen rez
 Ok 2015-09-11 - analog joysticks allow diagonals! bug
